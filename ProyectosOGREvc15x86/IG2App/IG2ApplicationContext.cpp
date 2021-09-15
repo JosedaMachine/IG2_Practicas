@@ -48,6 +48,10 @@ namespace OgreBites {
 	{
 		createRoot();
 
+
+		mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+
+
 		if (oneTimeConfig())
 			setup();
 	}
