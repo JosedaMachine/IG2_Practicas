@@ -49,7 +49,7 @@ namespace OgreBites {
 		createRoot();
 
 
-		mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+		//mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 
 
 		if (oneTimeConfig())

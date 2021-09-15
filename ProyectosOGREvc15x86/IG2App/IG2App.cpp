@@ -72,7 +72,7 @@ void IG2App::setupScene(void)
   
   // and tell it to render into the main window
   Viewport* vp = getRenderWindow()->addViewport(cam);
-  //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+  vp->setBackgroundColour(Ogre::ColourValue(0.7, 0.8, 0.9));
 
   //------------------------------------------------------------------------
 
@@ -97,6 +97,19 @@ void IG2App::setupScene(void)
 
   mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
   mSinbadNode->attachObject(ent);
+
+  Ogre::Entity* banio = mSM->createEntity("Columns.mesh");
+  Ogre::Entity* banio1 = mSM->createEntity("RomanBathLower.mesh");
+  Ogre::Entity* banio2 = mSM->createEntity("RomanBathUpper.mesh");
+
+  banios[0] = mSM->getRootSceneNode()->createChildSceneNode("columnasNodo");
+  banios[0]->attachObject(banio);
+
+  banios[1] = mSM->getRootSceneNode()->createChildSceneNode("lowerNodo");
+  banios[1]->attachObject(banio1);
+
+  banios[2] = mSM->getRootSceneNode()->createChildSceneNode("upperNodo");
+  banios[2]->attachObject(banio2);
 
   //mSinbadNode->setPosition(400, 100, -300);
   mSinbadNode->setScale(20, 20, 20);

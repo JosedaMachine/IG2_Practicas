@@ -26,6 +26,13 @@ protected:
   Ogre::SceneNode* mLightNode = nullptr;
   Ogre::SceneNode* mCamNode = nullptr;
   Ogre::SceneNode* mSinbadNode = nullptr;
+
+  //Baño dios que pereza no lo quiero hacer
+  Ogre::SceneNode* banios[3];
+  //Ogre::SceneNode* banioNode = nullptr;
+  //Ogre::SceneNode* banioNode1 = nullptr;
+  //Ogre::SceneNode* banioNode2 = nullptr;
+
   OgreBites::CameraMan* mCamMgr = nullptr;
  
 };
