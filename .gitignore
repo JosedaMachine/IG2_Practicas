@@ -223,3 +223,7 @@ IATETerminologyProvider/IATETerminologyProvider/pluginpackage.manifest_LOCAL_178
 *.lastbuildstate
 
 *.idb
+
+*.iobj
+
+*.ipdb
