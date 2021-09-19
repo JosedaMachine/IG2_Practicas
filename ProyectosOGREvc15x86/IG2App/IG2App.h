@@ -20,6 +20,10 @@ protected:
   virtual void setupScene();
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
+
+  //Metodos de pulsar
+
+  void giraReloj();
       
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
@@ -32,8 +36,9 @@ protected:
 
   //arrayDelReloj
   Ogre::SceneNode* mHourNode[12];
+  Ogre::SceneNode* maneciglias[3];
   Ogre::SceneNode* reloj;
-
+  float relojRot = 0;
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  

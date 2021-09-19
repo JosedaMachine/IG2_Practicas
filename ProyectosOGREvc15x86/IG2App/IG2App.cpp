@@ -13,11 +13,20 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
     getRoot()->queueEndRendering();
   }
-  //else if (evt.keysym.sym == SDLK_???)
+  else if (evt.keysym.sym == SDLK_s) {
+	  giraReloj();
+  }
   
 
   //ONgo bongo
   return true;
+}
+
+void IG2App::giraReloj()
+{
+	relojRot += 1;
+	Ogre::Vector3 sandokan(0, 0, relojRot);
+	reloj->rotate(&sandokan);
 }
 
 void IG2App::shutdown()
@@ -122,12 +131,14 @@ void IG2App::setupScene(void)
 	//-----------------------------------------------------------------------
 #pragma endregion
 	
+#pragma region Reloj
 	reloj = mSM->getRootSceneNode()->createChildSceneNode("Reloj");
 
 	float ang = 0;
 	float pro = 360.0 / 12;
 	float rad = 1000;
 
+	//las esferas del dragón
 	for (int i = 0; i < 12; i++) {
 		Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
 
@@ -151,6 +162,25 @@ void IG2App::setupScene(void)
 	for (int i = 0; i < 12; i = i + 2) {
 		mSM->getSceneNode("Hora" + std::to_string(i))->setScale(0.4, 0.4, 0.4);
 	}
+
+	//Como decia Melendi, las manecillas del reloj
+	for (int i = 0; i < 3; i++) {
+		Ogre::Entity* maneciglia = mSM->createEntity("cube.mesh");
+
+		maneciglias[i] = mSM->getRootSceneNode()->createChildSceneNode("Maneciglia" + std::to_string(i));
+		maneciglias[i]->attachObject(maneciglia);
+
+	}
+
+	maneciglias[0]->setScale(0.3, 8, 0.3);
+	maneciglias[0]->setPosition(0, 400, 0);
+
+	maneciglias[1]->setScale(8, 0.6, 0.6);
+	maneciglias[1]->setPosition(350, 0, 0);
+
+	maneciglias[2]->setScale(0.8, -4, 0.6);
+	maneciglias[2]->setPosition(0, -200, 0);
+#pragma endregion
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
