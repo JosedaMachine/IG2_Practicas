@@ -23,7 +23,6 @@ protected:
 
   //Metodos de pulsar
 
-  void giraReloj();
       
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
@@ -38,7 +37,7 @@ protected:
   Ogre::SceneNode* mHourNode[12];
   Ogre::SceneNode* maneciglias[3];
   Ogre::SceneNode* reloj;
-  float relojRot = 0;
+  Ogre::SceneNode* centroEsferas;
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  
