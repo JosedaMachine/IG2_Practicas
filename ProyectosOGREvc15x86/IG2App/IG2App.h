@@ -29,9 +29,11 @@ protected:
 
   //Baño dios que pereza no lo quiero hacer
   Ogre::SceneNode* banios[3];
-  //Ogre::SceneNode* banioNode = nullptr;
-  //Ogre::SceneNode* banioNode1 = nullptr;
-  //Ogre::SceneNode* banioNode2 = nullptr;
+
+  //arrayDelReloj
+  Ogre::SceneNode* mHourNode[12];
+  Ogre::SceneNode* reloj;
+
 
   OgreBites::CameraMan* mCamMgr = nullptr;
  
