@@ -22,7 +22,9 @@ protected:
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
 
   //Metodos de pulsar
+  void BallClock(float rad);
 
+  void setCamNLight();
       
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
@@ -35,7 +37,7 @@ protected:
 
   //arrayDelReloj
   Ogre::SceneNode* mHourNode[12];
-  Ogre::SceneNode* maneciglias[3];
+  Ogre::SceneNode* manecillas[3];
   Ogre::SceneNode* reloj;
   Ogre::SceneNode* centroEsferas;
 
