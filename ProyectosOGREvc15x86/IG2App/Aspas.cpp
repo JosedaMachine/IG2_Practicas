@@ -1,4 +1,6 @@
 #include "Aspas.h"
+#include <OgreEntity.h>
+
 
 Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name) {
 	mNode = mSM->getRootSceneNode()->createChildSceneNode(name);

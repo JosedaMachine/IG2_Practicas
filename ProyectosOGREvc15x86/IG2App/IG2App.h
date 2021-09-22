@@ -4,8 +4,6 @@
 #include "IG2ApplicationContext.h"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include <OgreTrays.h>
-#include <OgreCameraMan.h>
 #include "Aspas.h"
 
 

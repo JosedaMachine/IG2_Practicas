@@ -4,6 +4,7 @@
 #include "IG2ApplicationContext.h"
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+
 class Aspa
 {
 public:
