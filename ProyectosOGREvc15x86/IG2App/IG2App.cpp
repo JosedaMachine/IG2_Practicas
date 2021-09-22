@@ -154,3 +154,11 @@ void IG2App::setupScene(void) {
 
   //------------------------------------------------------------------------
 }
+
+Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name){
+	mNode = mSM->getRootSceneNode()->createChildSceneNode(name);
+}
+
+Aspa::~Aspa()
+{
+}

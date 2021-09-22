@@ -32,7 +32,7 @@ protected:
   Ogre::SceneNode* mCamNode = nullptr;
   Ogre::SceneNode* mSinbadNode = nullptr;
 
-  //Baño dios que pereza no lo quiero hacer
+  //Baï¿½o dios que pereza no lo quiero hacer
   Ogre::SceneNode* banios[3];
 
   //arrayDelReloj
@@ -45,27 +45,18 @@ protected:
  
 };
 
-
-#pragma region items
-
 class Aspa
 {
 public:
-	Aspa();
+	Aspa(Ogre::SceneManager* mSM, const std::string& name);
 	~Aspa();
 
 private:
+	Ogre::SceneManager* mSM = nullptr;
+
+	Ogre::SceneNode* mNode = nullptr;
+	Ogre::SceneNode* tableroNode = nullptr;
+	Ogre::SceneNode* adornoNode = nullptr;
 
 };
-
-Aspa::Aspa()
-{
-}
-
-Aspa::~Aspa()
-{
-}
-
-#pragma endregion
-
 #endif
