@@ -45,4 +45,27 @@ protected:
  
 };
 
+
+#pragma region items
+
+class Aspa
+{
+public:
+	Aspa();
+	~Aspa();
+
+private:
+
+};
+
+Aspa::Aspa()
+{
+}
+
+Aspa::~Aspa()
+{
+}
+
+#pragma endregion
+
 #endif
