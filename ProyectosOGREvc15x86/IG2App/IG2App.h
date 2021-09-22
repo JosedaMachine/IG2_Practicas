@@ -6,6 +6,7 @@
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include "Aspas.h"
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -45,18 +46,5 @@ protected:
  
 };
 
-class Aspa
-{
-public:
-	Aspa(Ogre::SceneManager* mSM, const std::string& name);
-	~Aspa();
 
-private:
-	Ogre::SceneManager* mSM = nullptr;
-
-	Ogre::SceneNode* mNode = nullptr;
-	Ogre::SceneNode* tableroNode = nullptr;
-	Ogre::SceneNode* adornoNode = nullptr;
-
-};
 #endif

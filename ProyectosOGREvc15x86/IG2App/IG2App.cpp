@@ -143,7 +143,11 @@ void IG2App::setupScene(void) {
 
 	setCamNLight();
   // finally something to render
-	BallClock(1000);
+	//BallClock(1000);
+
+	std::string joseda = "Joseda";
+
+	Aspa* ah = new Aspa(mSM, joseda);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
@@ -155,10 +159,4 @@ void IG2App::setupScene(void) {
   //------------------------------------------------------------------------
 }
 
-Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name){
-	mNode = mSM->getRootSceneNode()->createChildSceneNode(name);
-}
 
-Aspa::~Aspa()
-{
-}
