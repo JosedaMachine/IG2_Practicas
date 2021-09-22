@@ -15,6 +15,7 @@ public:
 		return mNode;
 	}
 
+
 private:
 	Ogre::SceneManager* mSM = nullptr;
 

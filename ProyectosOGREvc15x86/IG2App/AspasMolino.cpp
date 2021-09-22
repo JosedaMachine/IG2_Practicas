@@ -10,7 +10,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 
 	aspasNode = mNode->createChildSceneNode();
 
-	int rad = 100;
+	int rad = 1500;
 	float ang = 0;
 	float pro = 360.0 / 12;
 
@@ -23,7 +23,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 
 		float angle = Ogre::Math::DegreesToRadians(ang);
 		//Pos original en la x + seno del angulo por el radio
-		arrayAspas[i]->setPosition(Ogre::Math::Sin(angle) * rad, Ogre::Math::Cos(angle) * rad, 0);
+		arrayAspas[i]->getNode()->setPosition(Ogre::Math::Sin(angle) * rad, Ogre::Math::Cos(angle) * rad, 0);
 		ang += pro;
 
 	}

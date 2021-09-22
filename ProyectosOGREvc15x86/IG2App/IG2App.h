@@ -5,8 +5,7 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "Aspas.h"
-
-
+#include "AspasMolino.h"
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
 public:

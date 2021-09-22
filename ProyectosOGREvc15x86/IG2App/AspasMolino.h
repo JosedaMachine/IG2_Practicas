@@ -4,6 +4,7 @@
 #include <OgreSceneNode.h>
 
 #include "Aspas.h"
+
 //#include <vector>
 
 //#define const numAspas 12;

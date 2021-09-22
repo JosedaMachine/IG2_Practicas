@@ -147,7 +147,7 @@ void IG2App::setupScene(void) {
 
 	std::string joseda = "Joseda";
 
-	Aspa* ah = new Aspa(mSM, joseda);
+	AspasMolino* aspas = new AspasMolino(mSM);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
