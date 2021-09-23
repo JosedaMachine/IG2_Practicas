@@ -149,6 +149,8 @@ void IG2App::setupScene(void) {
 
 	AspasMolino* aspas = new AspasMolino(mSM);
 
+	//Aspa* aspa = new Aspa(mSM, joseda);
+
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
 	mCamMgr->setStyle(OgreBites::CS_ORBIT);  

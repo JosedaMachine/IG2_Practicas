@@ -19,6 +19,9 @@ Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name) {
 	adornoNode->setScale(10, 20, 10);
 
 	adornoNode->setPosition(400, 0, 40);
+
+	//Esto hace que no adquiera la rotación de su padre
+	adornoNode->setInheritOrientation(false);
 }
 
 Aspa::~Aspa()
