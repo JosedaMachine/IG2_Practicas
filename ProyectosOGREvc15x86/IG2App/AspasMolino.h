@@ -15,6 +15,9 @@ public:
 
 	~AspasMolino();
 
+	Ogre::SceneNode* getMainNode() const { return mNode; }
+
+private:
 	Ogre::SceneManager* mSM = nullptr;
 	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cilindroCentralNode = nullptr;
@@ -22,7 +25,5 @@ public:
 
 	int numAspas;
 	std::vector<Aspa*> arrayAspas;
-
-
 };
 

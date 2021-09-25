@@ -7,28 +7,35 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 	arrayAspas.reserve(numAspas);
 
 	mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//aspasNode = mNode->createChildSceneNode();
 
-	aspasNode = mNode->createChildSceneNode();
 
-	int rad = 1500;
-	float ang = 0;
-	float pro = 360.0 / 12;
+	int radi = 50;
+	cilindroCentralNode = mNode->createChildSceneNode();
+	Ogre::Entity* tablero = mSM->createEntity("Barrel.mesh");
+	cilindroCentralNode->attachObject(tablero);
+	cilindroCentralNode->pitch(Ogre::Degree(90.));
+	cilindroCentralNode->setScale(radi, 20, radi);
 
-	//las esferas del dragón
-	for (int i = 0; i < 12; i++) {
+	int radio = 1000;
+	float ang = 90;
+	float proportion = 360.0 / numAspas;
 
-		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i) );
-
-		Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
-
+	////las esferas del dragón
+	for (int i = 0; i < numAspas; i++) {
+		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i));
 		float angle = Ogre::Math::DegreesToRadians(ang);
-		//Pos original en la x + seno del angulo por el radio
-		arrayAspas[i]->getNode()->setPosition(Ogre::Math::Sin(angle) * rad, Ogre::Math::Cos(angle) * rad, 0);
-		ang += pro;
-
+		arrayAspas[i]->getMainNode()->roll(Ogre::Degree(ang));
+		arrayAspas[i]->getOrnamentNode()->roll(Ogre::Degree(-ang));
+		arrayAspas[i]->getMainNode()->setPosition(Ogre::Math::Cos(angle) * radio, Ogre::Math::Sin(angle) * radio, 0);
+		ang += proportion;
 	}
 }
 
-AspasMolino::~AspasMolino()
-{
+AspasMolino::~AspasMolino() {
+	for (Aspa* asp : arrayAspas){
+		delete asp;
+	}
+
+	delete cilindroCentralNode;
 }

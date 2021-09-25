@@ -11,10 +11,9 @@ public:
 	Aspa(Ogre::SceneManager* mSM, const std::string& name);
 	~Aspa();
 
-	Ogre::SceneNode* getNode() const {
-		return mNode;
-	}
-
+	Ogre::SceneNode* getMainNode() const { return mNode; }
+	Ogre::SceneNode* getTabNode() const { return tableroNode; }
+	Ogre::SceneNode* getOrnamentNode() const { return adornoNode; }
 
 private:
 	Ogre::SceneManager* mSM = nullptr;

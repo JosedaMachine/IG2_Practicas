@@ -13,7 +13,9 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
     getRoot()->queueEndRendering();
   }
   else if (evt.keysym.sym == SDLK_g) {
-	  reloj->roll(Ogre::Degree(2));
+	  //reloj->roll(Ogre::Degree(2));
+	  aspas->getMainNode()->roll(Ogre::Degree(2));
+
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  centroEsferas->roll(Ogre::Degree(2));
@@ -115,6 +117,8 @@ void IG2App::shutdown() {
 
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
+
+  delete aspas;
   
   // do not forget to call the base 
   IG2ApplicationContext::shutdown();
@@ -147,7 +151,7 @@ void IG2App::setupScene(void) {
 
 	std::string joseda = "Joseda";
 
-	AspasMolino* aspas = new AspasMolino(mSM);
+	aspas = new AspasMolino(mSM, 12);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
