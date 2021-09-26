@@ -28,3 +28,15 @@ Molino::Molino(Ogre::SceneManager* man)
 
 	esf->setPosition(0, 800, 0);
 }
+
+bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
+{
+	if (evt.keysym.sym == SDLK_g) {
+		aspas->keyPressed(evt);
+	}
+	else if (evt.keysym.sym == SDLK_c) {
+		
+	}
+
+	return true;
+}

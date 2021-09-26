@@ -51,8 +51,6 @@ bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
 	if (evt.keysym.sym == SDLK_g) mNode->roll(Ogre::Degree(2));
 
 
-
-
 	return true;
 }
 

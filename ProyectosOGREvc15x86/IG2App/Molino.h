@@ -8,7 +8,7 @@ class Molino : public OgreBites::InputListener
 {
 public:
 	Molino(Ogre::SceneManager* man);
-
+	bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
 private:
 	Ogre::SceneManager* mSM = nullptr;
