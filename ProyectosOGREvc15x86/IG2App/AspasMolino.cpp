@@ -49,7 +49,7 @@ Ogre::SceneNode* AspasMolino::getMain()
 bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_g) mNode->roll(Ogre::Degree(2));
-
+	else if (evt.keysym.sym == SDLK_c)cilindroCentralNode->translate(0, -2, 0, Ogre::Node::TS_LOCAL);
 
 	return true;
 }

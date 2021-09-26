@@ -12,9 +12,6 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   if (evt.keysym.sym == SDLK_ESCAPE){
     getRoot()->queueEndRendering();
   }
-  else if (evt.keysym.sym == SDLK_h) {
-	  centroEsferas->roll(Ogre::Degree(2));
-  }
   //ONgo bongo Buga Buga Bo 
   return true;
 }

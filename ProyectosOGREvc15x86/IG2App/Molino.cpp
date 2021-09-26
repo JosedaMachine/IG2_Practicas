@@ -31,10 +31,10 @@ Molino::Molino(Ogre::SceneManager* man)
 
 bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_g) {
+	if (evt.keysym.sym == SDLK_g || evt.keysym.sym == SDLK_c) {
 		aspas->keyPressed(evt);
 	}
-	else if (evt.keysym.sym == SDLK_c) {
+	else if (evt.keysym.sym == SDLK_h) {
 		
 	}
 
