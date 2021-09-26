@@ -6,7 +6,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 : mSM(mSM), numAspas(numAspas_){
 	arrayAspas.reserve(numAspas);
 
-	mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	mNode = new Ogre::SceneNode(mSM);
 
 	aspasNode = mNode->createChildSceneNode();
 
@@ -27,6 +27,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 
 		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i) );
 
+		arrayAspas[i]->setFather(mNode);
 		//Pos original en la x + seno del angulo por el radio
 		arrayAspas[i]->getNode()->roll(Ogre::Degree(pro * i));
 
@@ -43,5 +44,20 @@ AspasMolino::~AspasMolino()
 Ogre::SceneNode* AspasMolino::getMain()
 {
 	return mNode;
+}
+
+bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
+{
+	if (evt.keysym.sym == SDLK_g) mNode->roll(Ogre::Degree(2));
+
+
+
+
+	return true;
+}
+
+void AspasMolino::setFather(Ogre::SceneNode* f)
+{
+	f->addChild(mNode);
 }
 

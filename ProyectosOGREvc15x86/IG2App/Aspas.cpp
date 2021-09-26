@@ -3,7 +3,8 @@
 
 
 Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name) {
-	mNode = mSM->getRootSceneNode()->createChildSceneNode(name);
+	//mNode = mSM->getRootSceneNode()->createChildSceneNode(name);
+	mNode = new Ogre::SceneNode(mSM);
 	tableroNode = mNode->createChildSceneNode();
 
 	Ogre::Entity* tablero = mSM->createEntity("cube.mesh");
@@ -29,4 +30,9 @@ Aspa::~Aspa()
 	delete tableroNode;
 	delete adornoNode;
 	delete mNode;
+}
+
+void Aspa::setFather(Ogre::SceneNode* f)
+{
+	f->addChild(mNode);
 }

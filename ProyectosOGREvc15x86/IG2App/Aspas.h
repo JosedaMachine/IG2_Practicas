@@ -15,6 +15,7 @@ public:
 		return mNode;
 	}
 
+	void setFather(Ogre::SceneNode* f);
 
 private:
 	Ogre::SceneManager* mSM = nullptr;
