@@ -39,8 +39,9 @@ protected:
   Ogre::SceneNode* reloj;
   Ogre::SceneNode* centroEsferas;
 
+  AspasMolino* as = nullptr;
+
   OgreBites::CameraMan* mCamMgr = nullptr;
- 
 };
 
 
