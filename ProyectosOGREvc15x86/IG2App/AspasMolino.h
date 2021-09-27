@@ -11,10 +11,11 @@
 
 class AspasMolino {
 public:
-	AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_ = 12);
+	AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_ = 12, Ogre::SceneNode* parentNode = nullptr);
 
 	~AspasMolino();
 
+	void FixOrnamentRot(const float& rotation);
 	Ogre::SceneNode* getMainNode() const { return mNode; }
 
 private:

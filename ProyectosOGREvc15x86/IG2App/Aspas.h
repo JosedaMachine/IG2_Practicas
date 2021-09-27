@@ -3,12 +3,13 @@
 #include <OgreSceneNode.h>
 #include "IG2ApplicationContext.h"
 #include <OgreTrays.h>
+#include <OgreEntity.h>
 #include <OgreCameraMan.h>
 
 class Aspa
 {
 public:
-	Aspa(Ogre::SceneManager* mSM, const std::string& name);
+	Aspa(Ogre::SceneManager* mSM, const std::string& name, Ogre::SceneNode* nodeParent = nullptr);
 	~Aspa();
 
 	Ogre::SceneNode* getMainNode() const { return mNode; }

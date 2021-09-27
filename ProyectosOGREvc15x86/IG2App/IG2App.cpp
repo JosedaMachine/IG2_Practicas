@@ -14,7 +14,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   }
   else if (evt.keysym.sym == SDLK_g) {
 	  //reloj->roll(Ogre::Degree(2));
-	  aspas->getMainNode()->roll(Ogre::Degree(2));
+	  float rot = 1.;
+	  molino->rotateBlades(rot);
 
   }
   else if (evt.keysym.sym == SDLK_h) {
@@ -108,7 +109,6 @@ void IG2App::setCamNLight() {
 	//lightNode->setPosition(0, 0, 1000);
 }
 
-
 void IG2App::shutdown() {
   mShaderGenerator->removeSceneManager(mSM);  
   mSM->removeRenderQueueListener(mOverlaySystem);  
@@ -144,14 +144,11 @@ void IG2App::setup(void) {
 }
 
 void IG2App::setupScene(void) {
-
 	setCamNLight();
-  // finally something to render
 	//BallClock(1000);
 
-	std::string joseda = "Joseda";
-
-	aspas = new AspasMolino(mSM, 12);
+	//aspas = new AspasMolino(mSM, 12);
+	molino = new Molino(mSM);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

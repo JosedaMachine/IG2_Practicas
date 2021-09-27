@@ -4,8 +4,11 @@
 #include "IG2ApplicationContext.h"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+
 #include "Aspas.h"
 #include "AspasMolino.h"
+#include "Molino.h"
+
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
 public:
@@ -40,7 +43,7 @@ protected:
   Ogre::SceneNode* centroEsferas;
 
   AspasMolino* aspas;
-
+  Molino* molino;
   OgreBites::CameraMan* mCamMgr = nullptr;
  
 };

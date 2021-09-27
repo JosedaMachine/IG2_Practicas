@@ -1,14 +1,14 @@
 #include "AspasMolino.h"
-#include <OgreEntity.h>
 
 
-AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
+AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_, Ogre::SceneNode* parentNode)
 : mSM(mSM), numAspas(numAspas_){
 	arrayAspas.reserve(numAspas);
 
-	mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	if(!parentNode)
+		mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	else mNode = parentNode->createChildSceneNode();
 	//aspasNode = mNode->createChildSceneNode();
-
 
 	int radi = 50;
 	cilindroCentralNode = mNode->createChildSceneNode();
@@ -17,13 +17,13 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 	cilindroCentralNode->pitch(Ogre::Degree(90.));
 	cilindroCentralNode->setScale(radi, 20, radi);
 
-	int radio = 1000;
+	int radio = 500;
 	float ang = 90;
 	float proportion = 360.0 / numAspas;
 
 	////las esferas del dragón
 	for (int i = 0; i < numAspas; i++) {
-		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i));
+		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i), mNode);
 		float angle = Ogre::Math::DegreesToRadians(ang);
 		arrayAspas[i]->getMainNode()->roll(Ogre::Degree(ang));
 		arrayAspas[i]->getOrnamentNode()->roll(Ogre::Degree(-ang));
@@ -37,5 +37,12 @@ AspasMolino::~AspasMolino() {
 		delete asp;
 	}
 
-	delete cilindroCentralNode;
+	//if(cilindroCentralNode)
+	//	delete cilindroCentralNode;
+}
+
+void AspasMolino::FixOrnamentRot(const float& rotation) {
+	for (int i = 0; i < numAspas; i++) {
+		arrayAspas[i]->getOrnamentNode()->roll(Ogre::Degree(-rotation));
+	}
 }
