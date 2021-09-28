@@ -19,5 +19,7 @@ private:
 
 	Ogre::SceneNode* esf = nullptr;
 	Ogre::SceneNode* cil = nullptr;
+
+	Ogre::SceneNode* nodoRotation = nullptr;
 };
 
