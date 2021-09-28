@@ -8,6 +8,10 @@
 #include "Aspas.h"
 #include "AspasMolino.h"
 #include "Molino.h"
+#include "RotorDron.h"
+#include "BrazoDron.h"
+
+#include "EntityIG.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -42,10 +46,12 @@ protected:
   Ogre::SceneNode* reloj;
   Ogre::SceneNode* centroEsferas;
 
-  AspasMolino* aspas;
-  Molino* molino;
-  OgreBites::CameraMan* mCamMgr = nullptr;
+  AspasMolino* aspas = nullptr;
+  Molino* molino = nullptr;
  
+  OgreBites::CameraMan* mCamMgr = nullptr;
+
+  std::vector<EntityIG*> entidades;
 };
 
 

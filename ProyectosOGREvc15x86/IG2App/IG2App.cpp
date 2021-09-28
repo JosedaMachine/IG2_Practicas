@@ -2,27 +2,23 @@
 
 #include <OgreEntity.h>
 #include <OgreInput.h>
-#include <SDL_keycode.h>
 #include <OgreMeshManager.h>
+
+#include "CheckML.h"
 
 using namespace Ogre;
 
-bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
-{
-  if (evt.keysym.sym == SDLK_ESCAPE){
-    getRoot()->queueEndRendering();
-  }
-  else if (evt.keysym.sym == SDLK_g) {
-	  //reloj->roll(Ogre::Degree(2));
-	  float rot = 1.;
-	  molino->rotateBlades(rot);
+bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
+  
+	for (EntityIG* ent : entidades) ent->keyPressed(evt);
+  
+	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
 
-  }
-  else if (evt.keysym.sym == SDLK_h) {
-	  centroEsferas->roll(Ogre::Degree(2));
-  }
-  //ONgo bongo Buga Buga Bo 
-  return true;
+	//G //reloj->roll(Ogre::Degree(2));
+	//H if (centroEsferas) centroEsferas->roll(Ogre::Degree(2));
+
+	//ONgo bongo Buga Buga Bo 
+	return true;
 }
 
 void IG2App::BallClock(float rad) {
@@ -118,8 +114,12 @@ void IG2App::shutdown() {
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
 
-  delete aspas;
-  
+  for(EntityIG* ent : entidades) {
+	  delete ent;
+  }
+
+  entidades.clear();
+
   // do not forget to call the base 
   IG2ApplicationContext::shutdown();
 }
@@ -144,11 +144,17 @@ void IG2App::setup(void) {
 }
 
 void IG2App::setupScene(void) {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
+
 	setCamNLight();
 	//BallClock(1000);
 
 	//aspas = new AspasMolino(mSM, 12);
-	molino = new Molino(mSM);
+	//molino = new Molino(mSM);
+	//entidades.push_back(new Molino(mSM));
+	//entidades.push_back(new RotorDron(mSM, 6));
+	entidades.push_back(new BrazoDron(mSM, 6));
+
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

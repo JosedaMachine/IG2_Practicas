@@ -9,18 +9,24 @@
 class Aspa
 {
 public:
-	Aspa(Ogre::SceneManager* mSM, const std::string& name, Ogre::SceneNode* nodeParent = nullptr);
+	Aspa(Ogre::SceneManager* mSM, const std::string& name, Ogre::SceneNode* nodeParent = nullptr, bool showOrnament = true);
 	~Aspa();
 
 	Ogre::SceneNode* getMainNode() const { return mNode; }
 	Ogre::SceneNode* getTabNode() const { return tableroNode; }
 	Ogre::SceneNode* getOrnamentNode() const { return adornoNode; }
+	bool hasOrnament() const { return showOrnament_; }
+
 
 private:
-	Ogre::SceneManager* mSM = nullptr;
+	//Tener o no adorno en las aspas
+	bool showOrnament_;
 
+	Ogre::SceneManager* mSM = nullptr;
 	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* tableroNode = nullptr;
 	Ogre::SceneNode* adornoNode = nullptr;
+
 };
+
 

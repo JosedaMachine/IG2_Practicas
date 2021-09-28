@@ -1,22 +1,23 @@
 #pragma once
 
 #include <OgreSceneManager.h>
-#include <OgreSceneNode.h>
+#include <OgreSceneNode.h>a
 
 #include "Aspas.h"
 
-//#include <vector>
+#include "EntityIG.h"
 
-//#define const numAspas 12;
-
-class AspasMolino {
+class AspasMolino : public EntityIG {
 public:
-	AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_ = 12, Ogre::SceneNode* parentNode = nullptr);
+	AspasMolino(Ogre::SceneManager* mSM, bool hasOrnament, const int& numAspas_ = 12, Ogre::SceneNode* parentNode = nullptr);
 
 	~AspasMolino();
 
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+
 	void FixOrnamentRot(const float& rotation);
 	Ogre::SceneNode* getMainNode() const { return mNode; }
+	Ogre::SceneNode* getAspasNode() const { return aspasNode; }
 
 private:
 	Ogre::SceneManager* mSM = nullptr;
@@ -27,4 +28,7 @@ private:
 	int numAspas;
 	std::vector<Aspa*> arrayAspas;
 };
+
+
+using Helices = AspasMolino;
 

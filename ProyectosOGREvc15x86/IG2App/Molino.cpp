@@ -4,9 +4,11 @@ Molino::Molino(Ogre::SceneManager* mSM): mSM(mSM){
 	mNode = mSM->getRootSceneNode()->createChildSceneNode();
 
 	//Aspas
-	blades = new AspasMolino(mSM, 12, mNode);
+	radioAspasMolino = 220;
+	aspas = mNode->createChildSceneNode();
+	blades = new AspasMolino(mSM, true, 12, aspas);
 	blades->getMainNode()->setScale(0.3, 0.3, 0.3);
-	blades->getMainNode()->translate(0, 150, 220);
+	blades->getMainNode()->translate(0, 150, radioAspasMolino);
 
 	////CuerpoMolino
 	float radio = 80;
@@ -29,9 +31,22 @@ Molino::~Molino() {
 	if(blades) delete blades;
 }
 
-void Molino::rotateBlades(const float& degrees) {
-	if (blades) {
-		blades->getMainNode()->roll(Ogre::Degree(degrees));
-		blades->FixOrnamentRot(degrees);
+bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt){
+	blades->keyPressed(evt);
+
+	if (evt.keysym.sym == SDLK_h) {
+		//rotar1(1.);
+		rotar2(1.);
 	}
+	return true;
+}
+
+void Molino::rotar1(const float& angle) {
+	aspas->yaw(Ogre::Degree(angle));
+}
+
+void Molino::rotar2(const float& angle) {
+	blades->getMainNode()->translate(0, 0, -radioAspasMolino, Ogre::Node::TS_LOCAL);
+	blades->getMainNode()->yaw(Ogre::Degree(angle));
+	blades->getMainNode()->translate(0, 0, radioAspasMolino, Ogre::Node::TS_LOCAL);
 }

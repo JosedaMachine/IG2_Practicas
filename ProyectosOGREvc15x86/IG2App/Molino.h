@@ -2,21 +2,27 @@
 #include <OgreSceneNode.h>
 
 #include "AspasMolino.h"
+#include "EntityIG.h"
 
 #pragma once
-class Molino
+class Molino : public EntityIG
 {
 public:
 	Molino(Ogre::SceneManager*mSM);
 	~Molino();
 
-	void rotateBlades(const float& degrees);
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
+	void rotar1(const float& angle);
+	void rotar2(const float& angle);
+	
 private:
 	Ogre::SceneManager* mSM = nullptr;
 	Ogre::SceneNode* mNode = nullptr;
-	Ogre::SceneNode* tap, *body;
+	Ogre::SceneNode* tap, *body, *aspas;
 	AspasMolino* blades = nullptr;
+
+	int radioAspasMolino;
 };
 
 
