@@ -153,8 +153,8 @@ void IG2App::setupScene(void) {
 	//molino = new Molino(mSM);
 	//entidades.push_back(new Molino(mSM));
 	//entidades.push_back(new RotorDron(mSM, 6));
-	entidades.push_back(new BrazoDron(mSM, 6));
-
+	//entidades.push_back(new BrazoDron(mSM, 6));
+	entidades.push_back(new Dron(mSM, 8, 12));
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

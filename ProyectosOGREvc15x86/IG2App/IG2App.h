@@ -8,8 +8,7 @@
 #include "Aspas.h"
 #include "AspasMolino.h"
 #include "Molino.h"
-#include "RotorDron.h"
-#include "BrazoDron.h"
+#include "Dron.h"
 
 #include "EntityIG.h"
 

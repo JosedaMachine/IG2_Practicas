@@ -1,9 +1,11 @@
 #include "BrazoDron.h"
 
 
-BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const int& numAspas): mSM(mSM_), numAspas_(numAspas) {
-    mNode = mSM->getRootSceneNode()->createChildSceneNode();
-
+BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const int& numAspas, Ogre::SceneNode* parent): mSM(mSM_), numAspas_(numAspas) {
+    if (!parent)
+        mNode = mSM->getRootSceneNode()->createChildSceneNode();
+    else mNode = parent->createChildSceneNode();
+    
     float radio = 50;
     cilindro = mNode->createChildSceneNode();
     Ogre::Entity* cilindro_ = mSM->createEntity("Barrel.mesh");
@@ -17,7 +19,6 @@ BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const int& numAspas): mSM(mSM_), 
     float scale = 0.4;
     rotorNode->setScale(scale, scale, scale);
     rotorNode->translate(400, 0, 0);
-
 }
 
 BrazoDron::~BrazoDron()  {

@@ -5,8 +5,8 @@ Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name, Ogre::SceneNode* no
 	showOrnament_ = showOrnament;
 
 	if (!nodeParent)
-		mNode = mSM->getRootSceneNode()->createChildSceneNode(name);
-	else mNode = nodeParent->createChildSceneNode(name);;
+		mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	else mNode = nodeParent->createChildSceneNode();
 
 	tableroNode = mNode->createChildSceneNode();
 
