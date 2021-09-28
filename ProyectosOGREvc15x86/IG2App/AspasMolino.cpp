@@ -2,7 +2,7 @@
 #include <OgreEntity.h>
 
 
-AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
+AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_, bool adornos)
 : mSM(mSM), numAspas(numAspas_){
 	arrayAspas.reserve(numAspas);
 
@@ -25,7 +25,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_)
 	//las esferas del dragón
 	for (int i = 0; i < numAspas; i++) {
 
-		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i) );
+		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i), adornos );
 
 		arrayAspas[i]->setFather(mNode);
 		//Pos original en la x + seno del angulo por el radio

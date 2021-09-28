@@ -140,10 +140,10 @@ void IG2App::setupScene(void) {
 	//BallClock(1000);
 
 	std::string joseda = "Joseda";
+	
+	rot = new RotorDron(mSM);
 
-	molino = new Molino(mSM);
-	addInputListener(molino);
-	//Aspa* aspa = new Aspa(mSM, joseda);
+	addInputListener(rot);
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

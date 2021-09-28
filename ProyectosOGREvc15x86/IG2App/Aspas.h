@@ -8,7 +8,7 @@
 class Aspa
 {
 public:
-	Aspa(Ogre::SceneManager* mSM, const std::string& name);
+	Aspa(Ogre::SceneManager* mSM, const std::string& name, bool adorn = true);
 	~Aspa();
 
 	Ogre::SceneNode* getNode() const {

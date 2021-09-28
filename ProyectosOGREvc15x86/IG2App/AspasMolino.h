@@ -12,7 +12,7 @@
 
 class AspasMolino : public OgreBites::InputListener {
 public:
-	AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_ = 12);
+	AspasMolino(Ogre::SceneManager* mSM, const int& numAspas_ = 12, bool adornos = true);
 
 	~AspasMolino();
 

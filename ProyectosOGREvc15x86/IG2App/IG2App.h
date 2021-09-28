@@ -4,6 +4,8 @@
 #include "IG2ApplicationContext.h"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+
+#include "RotorDron.h"
 #include "Aspas.h"
 #include "AspasMolino.h"
 #include "Molino.h"
@@ -43,7 +45,7 @@ protected:
 
   AspasMolino* as = nullptr;
 
-  Molino* molino = nullptr;
+  RotorDron* rot = nullptr;
 
   OgreBites::CameraMan* mCamMgr = nullptr;
 };
