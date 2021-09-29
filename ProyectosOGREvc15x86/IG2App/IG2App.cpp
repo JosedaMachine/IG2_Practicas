@@ -14,8 +14,10 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
   
 	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
 
-	//G //reloj->roll(Ogre::Degree(2));
-	//H if (centroEsferas) centroEsferas->roll(Ogre::Degree(2));
+	//G 
+	else if (evt.keysym.sym == SDLK_g) reloj->roll(Ogre::Degree(2));
+	else if (evt.keysym.sym == SDLK_h) if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
+	//H if 
 
 	//ONgo bongo Buga Buga Bo 
 	return true;
@@ -147,21 +149,21 @@ void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 
 	setCamNLight();
-	//BallClock(1000);
+	BallClock(1000);
 
 	//aspas = new AspasMolino(mSM, 12);
 	//molino = new Molino(mSM);
 	//entidades.push_back(new Molino(mSM));
 	//entidades.push_back(new RotorDron(mSM, 6));
 	//entidades.push_back(new BrazoDron(mSM, 6));
-	Dron* dron = new Dron(mSM, 8, 12);
-	entidades.push_back(dron);
-	float scale = 0.5;
-	dron->getMainNode()->translate(700, 500, 400);
-	dron->getMainNode()->setScale(scale, scale, scale);
+	//Dron* dron = new Dron(mSM, 8, 12);
+	//entidades.push_back(dron);
+	//float scale = 0.5;
+	//dron->getMainNode()->translate(700, 500, 400);
+	//dron->getMainNode()->setScale(scale, scale, scale);
 
 
-	entidades.push_back(new Molino(mSM));
+	//entidades.push_back(new Molino(mSM));
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
