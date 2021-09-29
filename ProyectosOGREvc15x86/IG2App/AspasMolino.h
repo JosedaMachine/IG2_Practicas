@@ -19,6 +19,7 @@ public:
 	Ogre::SceneNode* getMainNode() const { return mNode; }
 	Ogre::SceneNode* getAspasNode() const { return aspasNode; }
 
+	void setClockWise(const bool& state);
 private:
 	Ogre::SceneManager* mSM = nullptr;
 	Ogre::SceneNode* mNode = nullptr;
@@ -26,6 +27,8 @@ private:
 	Ogre::SceneNode* aspasNode = nullptr;
 
 	int numAspas;
+	float degrees = 3.;
+	bool clockWise = true;
 	std::vector<Aspa*> arrayAspas;
 };
 

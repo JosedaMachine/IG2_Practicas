@@ -1,7 +1,7 @@
 #include "BrazoDron.h"
 
 
-BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const int& numAspas, Ogre::SceneNode* parent): mSM(mSM_), numAspas_(numAspas) {
+BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const bool& clockWise, const int& numAspas, Ogre::SceneNode* parent): mSM(mSM_), numAspas_(numAspas) {
     if (!parent)
         mNode = mSM->getRootSceneNode()->createChildSceneNode();
     else mNode = parent->createChildSceneNode();
@@ -14,7 +14,7 @@ BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const int& numAspas, Ogre::SceneN
     cilindro->setScale(radio, radio * 3, radio);
 
     rotorNode = mNode->createChildSceneNode();
-    rotor = new RotorDron(mSM, numAspas_, rotorNode);
+    rotor = new RotorDron(mSM, clockWise, numAspas_, rotorNode);
 
     float scale = 0.4;
     rotorNode->setScale(scale, scale, scale);

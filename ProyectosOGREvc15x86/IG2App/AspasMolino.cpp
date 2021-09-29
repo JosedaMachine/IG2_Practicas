@@ -23,7 +23,7 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, bool hasOrnament, const int& n
 	aspasNode = mNode->createChildSceneNode();
 
 	for (int i = 0; i < numAspas; i++) {
-		arrayAspas[i] = new Aspa(mSM, "Aspa" + std::to_string(i), aspasNode, hasOrnament);
+		arrayAspas[i] = new Aspa(mSM, aspasNode, hasOrnament);
 		float angle = Ogre::Math::DegreesToRadians(ang);
 		arrayAspas[i]->getMainNode()->roll(Ogre::Degree(ang));
 
@@ -43,7 +43,6 @@ AspasMolino::~AspasMolino() {
 
 bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt){
 	if (evt.keysym.sym == SDLK_g) {
-		float degrees = 1.;
 		aspasNode->roll(Ogre::Degree(degrees));
 		FixOrnamentRot(degrees);
 	}
@@ -60,4 +59,9 @@ void AspasMolino::FixOrnamentRot(const float& rotation) {
 			arrayAspas[i]->getOrnamentNode()->roll(Ogre::Degree(-rotation));
 		}
 	}
+}
+
+void AspasMolino::setClockWise(const bool& state) {
+	clockWise = state;
+	if (!clockWise) degrees *= -1;
 }

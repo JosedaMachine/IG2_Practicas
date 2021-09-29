@@ -11,6 +11,8 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
+	Ogre::SceneNode* getMainNode() const { return mNode; }
+
 private:
 
 	int numArms_, numAspas_;

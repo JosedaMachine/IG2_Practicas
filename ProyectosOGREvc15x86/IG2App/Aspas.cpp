@@ -1,6 +1,6 @@
 #include "Aspas.h"
 
-Aspa::Aspa(Ogre::SceneManager* mSM, const std::string& name, Ogre::SceneNode* nodeParent, bool showOrnament) {
+Aspa::Aspa(Ogre::SceneManager* mSM, Ogre::SceneNode* nodeParent, bool showOrnament) {
 	
 	showOrnament_ = showOrnament;
 

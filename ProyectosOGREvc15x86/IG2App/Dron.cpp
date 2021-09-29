@@ -1,9 +1,6 @@
 #include "Dron.h"
 
 Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas): mSM(mSM_), numArms_(numArms), numAspas_(numAspas) {
-
-    armNodes.reserve(numArms_);
-
     mNode = mSM->getRootSceneNode()->createChildSceneNode();
 
     sphere = mNode->createChildSceneNode();
@@ -18,8 +15,14 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas): m
     float radio = 400;
 
     for (size_t i = 0; i < numArms_ ; i++) {
-        armNodes[i].first = mNode->createChildSceneNode();
-        armNodes[i].second = new BrazoDron(mSM, numAspas, armNodes[i].first);
+
+        Ogre::SceneNode* node = mNode->createChildSceneNode();
+        
+        bool clockWise = true;
+        if (i % 2) clockWise = false;
+        
+        BrazoDron* brazo = new BrazoDron(mSM,clockWise, numAspas, node);
+        armNodes.push_back({ node, brazo });
 
         float angle = Ogre::Math::DegreesToRadians(iniAngel);
         armNodes[i].first->yaw(Ogre::Degree(-iniAngel));
@@ -31,9 +34,8 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas): m
 
 
 Dron::~Dron() {
-    for (ArmNodes arm : armNodes) {
+    for (ArmNodes arm : armNodes)
         delete arm.second;
-    }
 
     armNodes.clear();
 }
@@ -42,5 +44,5 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt){
     for (ArmNodes arm : armNodes)
         arm.second->keyPressed(evt);
     
-    return false;
+    return true;
 }
