@@ -48,9 +48,10 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 
 		if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
 	}
+	else if(evt.keysym.sym == SDLK_j)if (ficticioDroneNode) ficticioDroneNode->yaw(Ogre::Degree(2));
 	//H if 
 
-	//ONgo bongo Buga Buga Bo 
+	//! ONgo bongo Buga Buga Bo 
 	return true;
 }
 
