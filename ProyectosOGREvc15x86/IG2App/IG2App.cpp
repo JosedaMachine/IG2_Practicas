@@ -43,7 +43,11 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 
 	//G 
 	else if (evt.keysym.sym == SDLK_g && reloj != nullptr) reloj->roll(Ogre::Degree(2));
-	else if (evt.keysym.sym == SDLK_h) if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
+	else if (evt.keysym.sym == SDLK_h) {
+		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
+
+		if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
+	}
 	//H if 
 
 	//ONgo bongo Buga Buga Bo 
