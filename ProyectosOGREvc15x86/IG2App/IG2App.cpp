@@ -7,6 +7,33 @@
 #include "CheckML.h"
 
 using namespace Ogre;
+//! Guacamole
+//? Guacamole
+//x Guacamole
+//TODO: Guacamole
+//!? Guacamole
+
+void IG2App::sceneTwo() {
+	//Planeta
+	Ogre::SceneNode* planeta;
+	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
+
+	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+
+	planeta->attachObject(sphere);
+
+	planeta->setScale(32, 32, 32);
+
+	Dron* d = new Dron(mSM,12,12,ficticioDroneNode);
+
+	d->getMainNode()->scale(0.5, 0.5, 0.5);
+
+	d->getMainNode()->setPosition(0, 3600, 0);
+
+	entidades.push_back(d);
+}
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
   
@@ -15,7 +42,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
 
 	//G 
-	else if (evt.keysym.sym == SDLK_g) reloj->roll(Ogre::Degree(2));
+	else if (evt.keysym.sym == SDLK_g && reloj != nullptr) reloj->roll(Ogre::Degree(2));
 	else if (evt.keysym.sym == SDLK_h) if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
 	//H if 
 
@@ -116,9 +143,9 @@ void IG2App::shutdown() {
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
 
-  for(EntityIG* ent : entidades) {
-	  delete ent;
-  }
+  //for(EntityIG* ent : entidades) {
+	 // delete ent;
+  //}
 
   entidades.clear();
 
@@ -149,8 +176,12 @@ void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 
 	setCamNLight();
-	BallClock(1000);
 
+	//Reloj
+	//BallClock(1000);
+
+
+	//Dron
 	//aspas = new AspasMolino(mSM, 12);
 	//molino = new Molino(mSM);
 	//entidades.push_back(new Molino(mSM));
@@ -162,6 +193,8 @@ void IG2App::setupScene(void) {
 	//dron->getMainNode()->translate(700, 500, 400);
 	//dron->getMainNode()->setScale(scale, scale, scale);
 
+	//Planeta:
+	sceneTwo();
 
 	//entidades.push_back(new Molino(mSM));
 
@@ -174,5 +207,3 @@ void IG2App::setupScene(void) {
 
   //------------------------------------------------------------------------
 }
-
-

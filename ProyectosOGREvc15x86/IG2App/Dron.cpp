@@ -1,7 +1,8 @@
 #include "Dron.h"
 
-Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas): mSM(mSM_), numArms_(numArms), numAspas_(numAspas) {
-    mNode = mSM->getRootSceneNode()->createChildSceneNode();
+Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Ogre::SceneNode* father = nullptr): mSM(mSM_), numArms_(numArms), numAspas_(numAspas) {
+	if (!father)mNode = mSM->getRootSceneNode()->createChildSceneNode();
+	else mNode = father->createChildSceneNode();
 
     sphere = mNode->createChildSceneNode();
     Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");

@@ -27,6 +27,7 @@ protected:
 
   //Metodos de pulsar
   void BallClock(float rad);
+  void sceneTwo();
 
   void setCamNLight();
       
@@ -51,6 +52,8 @@ protected:
   OgreBites::CameraMan* mCamMgr = nullptr;
 
   std::vector<EntityIG*> entidades;
+
+  Ogre::SceneNode* ficticioDroneNode = nullptr;
 };
 
 
