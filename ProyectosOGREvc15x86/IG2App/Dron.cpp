@@ -1,6 +1,6 @@
 #include "Dron.h"
 
-Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Ogre::SceneNode* father = nullptr): mSM(mSM_), numArms_(numArms), numAspas_(numAspas) {
+Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Ogre::SceneNode* father): mSM(mSM_), numArms_(numArms), numAspas_(numAspas) {
 	if (!father)mNode = mSM->getRootSceneNode()->createChildSceneNode();
 	else mNode = father->createChildSceneNode();
 
@@ -15,6 +15,8 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Og
     float iniAngel = 0;
     float radio = 400;
 
+    bool isDirection = true;
+
     for (size_t i = 0; i < numArms_ ; i++) {
 
         Ogre::SceneNode* node = mNode->createChildSceneNode();
@@ -28,7 +30,8 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Og
         float angle = Ogre::Math::DegreesToRadians(iniAngel);
         armNodes[i].first->yaw(Ogre::Degree(-iniAngel));
         
-        armNodes[i].first->setPosition(Ogre::Math::Cos(angle) * radio, 0 , Ogre::Math::Sin(angle) * radio);
+        armNodes[i].first->setPosition(Ogre::Math::Cos(angle) * radio * (isDirection ? 1.5 : 1), 0, Ogre::Math::Sin(angle) * radio);
+        if(isDirection) isDirection = false;
         iniAngel += proportion;
     }
 }

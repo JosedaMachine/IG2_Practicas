@@ -11,7 +11,8 @@ BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const bool& clockWise, const int&
     Ogre::Entity* cilindro_ = mSM->createEntity("Barrel.mesh");
     cilindro->attachObject(cilindro_);
     cilindro->roll(Ogre::Degree(90.));
-    cilindro->setScale(radio, radio * 3, radio);
+    float factor = 0.55;
+    cilindro->setScale(radio * 0.55, radio * 3, radio * 0.55);
 
     rotorNode = mNode->createChildSceneNode();
     rotor = new RotorDron(mSM, clockWise, numAspas_, rotorNode);
