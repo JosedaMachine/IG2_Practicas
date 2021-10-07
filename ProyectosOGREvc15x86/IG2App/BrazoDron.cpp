@@ -20,6 +20,7 @@ BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const bool& clockWise, const int&
     float scale = 0.4;
     rotorNode->setScale(scale, scale, scale);
     rotorNode->translate(400, 0, 0);
+
 }
 
 BrazoDron::~BrazoDron()  {

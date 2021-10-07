@@ -15,8 +15,6 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Og
     float iniAngel = 0;
     float radio = 400;
 
-    bool isDirection = true;
-
     for (size_t i = 0; i < numArms_ ; i++) {
 
         Ogre::SceneNode* node = mNode->createChildSceneNode();
@@ -30,10 +28,13 @@ Dron::Dron(Ogre::SceneManager* mSM_, const int& numArms, const int& numAspas, Og
         float angle = Ogre::Math::DegreesToRadians(iniAngel);
         armNodes[i].first->yaw(Ogre::Degree(-iniAngel));
         
-        armNodes[i].first->setPosition(Ogre::Math::Cos(angle) * radio * (isDirection ? 1.5 : 1), 0, Ogre::Math::Sin(angle) * radio);
-        if(isDirection) isDirection = false;
+
+        //? Aqui saco el brazo en el eje X, para que no te deo algo feo
+        armNodes[i].first->setPosition(Ogre::Math::Cos(angle) * radio * ( i == numArms/2 ? 1.5 : 1), 0, Ogre::Math::Sin(angle) * radio);
         iniAngel += proportion;
     }
+
+    mNode->yaw(Ogre::Degree(90.));
 }
 
 

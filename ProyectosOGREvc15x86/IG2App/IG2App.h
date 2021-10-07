@@ -29,6 +29,9 @@ protected:
   void BallClock(float rad);
   void sceneTwo();
 
+  void ficticio();
+  void EL_TRUCO();
+
   void setCamNLight();
       
   Ogre::SceneManager* mSM = nullptr;
@@ -48,6 +51,7 @@ protected:
 
   AspasMolino* aspas = nullptr;
   Molino* molino = nullptr;
+  Dron* dron = nullptr;
  
   OgreBites::CameraMan* mCamMgr = nullptr;
 

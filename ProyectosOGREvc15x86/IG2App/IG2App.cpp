@@ -13,6 +13,33 @@ using namespace Ogre;
 //TODO: Guacamole
 //!? Guacamole
 
+bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
+  
+	for (EntityIG* ent : entidades) ent->keyPressed(evt);
+  
+	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
+
+	//G 
+	else if (evt.keysym.sym == SDLK_g && reloj != nullptr) reloj->roll(Ogre::Degree(2));
+	else if (evt.keysym.sym == SDLK_h) {
+		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
+
+		//ficticio();
+		EL_TRUCO();
+	}
+	else if (evt.keysym.sym == SDLK_j) {
+
+		dron->getMainNode()->yaw(Ogre::Degree(2));
+		//if (ficticioDroneNode) ficticioDroneNode->yaw(Ogre::Degree(2));
+	}
+
+	//H if 
+
+	//! ONgo bongo Buga Buga Bo 
+	return true;
+}
+
+
 void IG2App::sceneTwo() {
 	//Planeta
 	Ogre::SceneNode* planeta;
@@ -26,33 +53,26 @@ void IG2App::sceneTwo() {
 
 	planeta->setScale(32, 32, 32);
 
-	Dron* d = new Dron(mSM,12,12,ficticioDroneNode);
+	dron = new Dron(mSM, 6, 12, ficticioDroneNode);
 
-	d->getMainNode()->scale(0.5, 0.5, 0.5);
+	dron->getMainNode()->scale(0.5, 0.5, 0.5);
 
-	d->getMainNode()->setPosition(0, 3600, 0);
+	dron->getMainNode()->setPosition(0, 3600, 0);
 
-	entidades.push_back(d);
+	entidades.push_back(dron);
 }
 
-bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
-  
-	for (EntityIG* ent : entidades) ent->keyPressed(evt);
-  
-	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
+void IG2App::ficticio(){
+	if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
+}
 
-	//G 
-	else if (evt.keysym.sym == SDLK_g && reloj != nullptr) reloj->roll(Ogre::Degree(2));
-	else if (evt.keysym.sym == SDLK_h) {
-		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
+void IG2App::EL_TRUCO(){
+	Ogre::SceneNode* mainNode = dron->getMainNode();
 
-		if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
-	}
-	else if(evt.keysym.sym == SDLK_j)if (ficticioDroneNode) ficticioDroneNode->yaw(Ogre::Degree(2));
-	//H if 
+	mainNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
+	mainNode->roll(Ogre::Degree(2.));
+	mainNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
 
-	//! ONgo bongo Buga Buga Bo 
-	return true;
 }
 
 void IG2App::BallClock(float rad) {
