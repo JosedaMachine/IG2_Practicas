@@ -48,8 +48,11 @@
     <ClInclude Include="CheckML.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Avion.h">
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
     <ClInclude Include="Dron.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,8 +83,11 @@
     <ClCompile Include="EntityIG.cpp">
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
+    <ClCompile Include="Avion.cpp">
+      <Filter>Archivos de código fuente\Entidades</Filter>
+    </ClCompile>
     <ClCompile Include="Dron.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

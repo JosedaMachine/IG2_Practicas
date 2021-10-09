@@ -5,10 +5,12 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 
+//Entitdades
 #include "Aspas.h"
 #include "AspasMolino.h"
 #include "Molino.h"
 #include "Dron.h"
+#include "Avion.h"
 
 #include "EntityIG.h"
 
@@ -23,11 +25,16 @@ protected:
   virtual void shutdown();
   virtual void setupScene();
 
+  void creaPlano();
+
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
 
   //Metodos de pulsar
   void BallClock(float rad);
   void sceneTwo();
+
+  //Scene de pruebas
+  void testZone();
 
   void ficticio();
   void EL_TRUCO();
@@ -58,6 +65,10 @@ protected:
   std::vector<EntityIG*> entidades;
 
   Ogre::SceneNode* ficticioDroneNode = nullptr;
+
+  //Plano
+  Ogre::SceneNode* plano = nullptr;
+
 };
 
 

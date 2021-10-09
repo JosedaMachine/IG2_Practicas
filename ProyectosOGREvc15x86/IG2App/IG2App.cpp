@@ -62,6 +62,14 @@ void IG2App::sceneTwo() {
 	entidades.push_back(dron);
 }
 
+void IG2App::testZone()
+{
+	//Avion
+
+
+	entidades.push_back(new Avion(mSM));
+}
+
 void IG2App::ficticio(){
 	if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
 }
@@ -202,6 +210,8 @@ void IG2App::setupScene(void) {
 
 	setCamNLight();
 
+	creaPlano();
+
 	//Reloj
 	//BallClock(1000);
 
@@ -219,9 +229,10 @@ void IG2App::setupScene(void) {
 	//dron->getMainNode()->setScale(scale, scale, scale);
 
 	//Planeta:
-	sceneTwo();
+	//sceneTwo();
 
-	//entidades.push_back(new Molino(mSM));
+	//Pruebas
+	testZone();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
@@ -231,4 +242,16 @@ void IG2App::setupScene(void) {
   //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
   //------------------------------------------------------------------------
+}
+
+void IG2App::creaPlano()
+{
+
+	MeshManager::getSingleton().createPlane("mPlane1080x800", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, 0), 1080, 800, 100, 80, true,
+		1, 1.0, 1.0, Vector3::UNIT_Z);
+
+	plano = mSM->getRootSceneNode()->createChildSceneNode();
+
+	plano->attachObject(mSM->createEntity("mPlane1080x800"));
 }
