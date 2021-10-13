@@ -1,4 +1,5 @@
 #include "Dron.h"
+#include <iostream>
 
 Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): numArms_(numArms), numAspas_(numAspas), EntityIG(mNode_) {
     sphere = mNode->createChildSceneNode();
@@ -18,7 +19,6 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
         
         bool clockWise = true;
         if (i % 2) clockWise = false;
-
 
         //BrazoDron* brazo = new BrazoDron(mSM,clockWise, numAspas, node); //Lo de antes
         BrazoDron* brazo = new BrazoDron(node,clockWise, numAspas);

@@ -18,6 +18,7 @@ public:
 		appListeners.push_back(entidad);
 	};
 
+	Ogre::SceneNode* getMainNode() const { return mNode; }
 
 protected:
 	Ogre::SceneNode* mNode;

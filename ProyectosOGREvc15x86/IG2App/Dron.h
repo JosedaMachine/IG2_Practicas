@@ -11,16 +11,12 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
-	Ogre::SceneNode* getMainNode() const { return mNode; }
-
+	
 	
 private:
 
 	int numArms_, numAspas_;
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* sphere = nullptr;
-	Ogre::SceneManager* mSM = nullptr;
 	std::vector<ArmNodes> armNodes;
-
 };
 

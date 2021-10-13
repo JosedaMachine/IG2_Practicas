@@ -5,6 +5,7 @@
 #include <OgreMeshManager.h>
 
 #include "CheckML.h"
+#include <iostream>
 
 using namespace Ogre;
 //! Guacamole
@@ -15,6 +16,8 @@ using namespace Ogre;
 //! Ahora a las entidades les pasamos : mSM->getRootSceneNode()->createChildSceneNode()
 //! porque heredan de entityIg y este solo recibe un nodo. Si queremos que sea hijo de P, le pasamos el nodo 
 //! de P
+//! 
+//TODO: Comprobar que los eventos de teclado funcionan en todas las entidades 
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
@@ -25,38 +28,6 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 
 	//! ONgo bongo Buga Buga Bo 
 	return true;
-}
-
-
-void IG2App::sceneTwo() {
-	//Planeta
-	Ogre::SceneNode* planeta;
-	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
-
-	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
-
-	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
-
-	planeta->attachObject(sphere);
-
-	planeta->setScale(32, 32, 32);
-
-	dron = new Dron(ficticioDroneNode, 6, 12);
-
-	addInputListener(dron);
-
-	dron->getMainNode()->scale(0.5, 0.5, 0.5);
-
-	dron->getMainNode()->setPosition(0, 3600, 0);
-
-	entidades.push_back(dron);
-}
-
-void IG2App::sceneThree() {
-	//Avion
-	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
-	addInputListener(a);
-	entidades.push_back(a);
 }
 
 void IG2App::BallClock(float rad) {
@@ -195,18 +166,9 @@ void IG2App::setup(void) {
 
 void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
-
 	setCamNLight();
 
-	creaPlano();
-
-
-
-	//Planeta:
-	//sceneTwo();
-
-	//Pruebas
-	sceneThree();
+	sceneFour();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
@@ -214,19 +176,58 @@ void IG2App::setupScene(void) {
 
 	//mCamMgr->setTarget(mSinbadNode);  
 	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
-
-	//------------------------------------------------------------------------
 }
 
-void IG2App::creaPlano()
-{
-	MeshManager::getSingleton().createPlane("mPlane1080x800", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Plane(Vector3::UNIT_Y, 0), 1080, 800, 100, 80, true,
-		1, 1.0, 1.0, Vector3::UNIT_Z);
+void IG2App::sceneFour() {
+	//! PLANETA
+	Ogre::SceneNode* planeta;
+	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	planeta->attachObject(sphere);
+	planeta->setScale(32, 32, 32);
 
+	//! DRON
+	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
+	dron = new Dron(ficticioDroneNode, 6, 12);
+	addInputListener(dron);
+	dron->getMainNode()->scale(0.5, 0.5, 0.5);
+	dron->getMainNode()->setPosition(0, 3600, 0);
+	entidades.push_back(dron);
 
-
-	plano = mSM->getRootSceneNode()->createChildSceneNode();
-
-	plano->attachObject(mSM->createEntity("mPlane1080x800"));
+	//! AVION
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	a->getMainNode()->setPosition(1000, 3600, 0);
+	addInputListener(a);
+	entidades.push_back(a);
+	
+	//! PLANO
+	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), "mPlane1080x800", {1080 , 800}, {100, 80});
+	p->getMainNode()->pitch(Ogre::Degree(90.));
+	p->getMainNode()->scale(10, 10, 10);
+	p->getMainNode()->setPosition(0, 0, -3600);
 }
+
+void IG2App::sceneThree() {
+	//Avion
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	addInputListener(a);
+	entidades.push_back(a);
+}
+
+void IG2App::sceneTwo() {
+	//Planeta
+	Ogre::SceneNode* planeta;
+	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
+	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	planeta->attachObject(sphere);
+	planeta->setScale(32, 32, 32);
+	dron = new Dron(ficticioDroneNode, 6, 12);
+	
+	addInputListener(dron);
+	dron->getMainNode()->scale(0.5, 0.5, 0.5);
+	dron->getMainNode()->setPosition(0, 3600, 0);
+	entidades.push_back(dron);
+}
+
+

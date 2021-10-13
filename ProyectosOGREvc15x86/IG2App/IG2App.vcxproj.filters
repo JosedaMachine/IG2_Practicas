@@ -54,6 +54,9 @@
     <ClInclude Include="Dron.h">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
+    <ClInclude Include="Plano.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IG2ApplicationContext.cpp">
@@ -88,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="Dron.cpp">
       <Filter>Archivos de código fuente\Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="Plano.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

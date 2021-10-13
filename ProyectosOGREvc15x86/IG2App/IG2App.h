@@ -11,6 +11,7 @@
 #include "Molino.h"
 #include "Dron.h"
 #include "Avion.h"
+#include "Plano.h"
 
 #include "EntityIG.h"
 
@@ -25,7 +26,7 @@ protected:
   virtual void shutdown();
   virtual void setupScene();
 
-  void creaPlano();
+  void sceneFour();
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
 
