@@ -18,6 +18,23 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 
 	pilotoNinja();
 
+	crearLuz(); 
+}
+
+void Avion::crearLuz()
+{
+	light = mNode->createChildSceneNode();
+
+	Ogre::Light* luz = mSM->createLight();
+
+	luz->setType(Ogre::Light::LT_SPOTLIGHT);
+	luz->setDirection(0, 1, 0);
+	luz->setPosition(Ogre::Vector3(0, 3600, 0));
+	luz->setSpotlightInnerAngle(Ogre::Degree(16.0f));
+	luz->setSpotlightOuterAngle(Ogre::Degree(15.0f));
+	luz->setSpotlightFalloff(0.0f);
+
+	light->attachObject(luz);
 }
 
 void Avion::helices() {

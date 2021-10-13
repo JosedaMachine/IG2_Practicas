@@ -187,12 +187,12 @@ void IG2App::sceneFour() {
 	planeta->setScale(32, 32, 32);
 
 	//! DRON
-	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
-	dron = new Dron(ficticioDroneNode, 6, 12);
-	addInputListener(dron);
-	dron->getMainNode()->scale(0.5, 0.5, 0.5);
-	dron->getMainNode()->setPosition(0, 3600, 0);
-	entidades.push_back(dron);
+	//ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//dron = new Dron(ficticioDroneNode, 6, 12);
+	//addInputListener(dron);
+	//dron->getMainNode()->scale(0.5, 0.5, 0.5);
+	//dron->getMainNode()->setPosition(0, 3700, 0);
+	//entidades.push_back(dron);
 
 	//! AVION
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());

@@ -9,6 +9,8 @@ class Avion: public EntityIG
 public:
 	Avion(Ogre::SceneNode * mNode_);
 
+	void crearLuz();
+
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 private:
 
@@ -18,6 +20,8 @@ private:
 	Ogre::SceneNode* fernteNode = nullptr;
 	Ogre::SceneNode* pilotoNode = nullptr;
 	std::vector<AspasMolino*> heliceNodes;
+
+	Ogre::SceneNode* light = nullptr;
 
 	void alaIzquierda();
 	void alaDerecha();
