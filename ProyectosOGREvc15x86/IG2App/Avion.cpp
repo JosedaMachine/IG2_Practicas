@@ -4,7 +4,6 @@
 Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	cuerpoNode = mNode->createChildSceneNode();
 	
-	std::cout << "\n\nhasta aqui funka\n\n";
 	Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
 	cuerpoNode->attachObject(cuerpo);
 	helices();
@@ -23,6 +22,7 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 
 void Avion::crearLuz()
 {
+	std::cout << "\n\nME CAGO EN MI PUTA MADRE 100 PUTAS VECES ODIO IG\n\n";
 	light = mNode->createChildSceneNode();
 
 	Ogre::Light* luz = mSM->createLight();
