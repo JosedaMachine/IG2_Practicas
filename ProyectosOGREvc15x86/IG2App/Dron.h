@@ -18,5 +18,8 @@ private:
 	int numArms_, numAspas_;
 	Ogre::SceneNode* sphere = nullptr;
 	std::vector<ArmNodes> armNodes;
+
+
+	Ogre::SceneNode* light = nullptr;
 };
 

@@ -34,6 +34,18 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
     }
 
     mNode->yaw(Ogre::Degree(90.));
+
+	light = mNode->createChildSceneNode();
+
+	Ogre::Light* luz = mSM->createLight();
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDirection(0, -1, 0);
+	luz->setPosition(Ogre::Vector3(0,36089750,0));
+	luz->setSpotlightInnerAngle(Ogre::Degree(500000.0f));
+	luz->setSpotlightOuterAngle(Ogre::Degree(15.0f));
+	luz->setSpotlightFalloff(0.0f);
+
+	light->attachObject(luz);
 }
 
 
