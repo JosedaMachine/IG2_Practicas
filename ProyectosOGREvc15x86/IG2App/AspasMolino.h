@@ -9,7 +9,7 @@
 
 class AspasMolino : public EntityIG {
 public:
-	AspasMolino(Ogre::SceneManager* mSM, bool hasOrnament, const int& numAspas_ = 12, Ogre::SceneNode* parentNode = nullptr);
+	AspasMolino(Ogre::SceneNode * mNode_, bool hasOrnament, const int& numAspas_ = 12);
 
 	~AspasMolino();
 
@@ -21,8 +21,6 @@ public:
 
 	void setClockWise(const bool& state);
 private:
-	Ogre::SceneManager* mSM = nullptr;
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cilindroCentralNode = nullptr;
 	Ogre::SceneNode* aspasNode = nullptr;
 

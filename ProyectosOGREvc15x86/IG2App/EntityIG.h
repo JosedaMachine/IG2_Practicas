@@ -3,16 +3,27 @@
 #include "IG2ApplicationContext.h"
 #include <SDL_keycode.h>
 
-class EntityIG : public OgreBites::InputListener
-{
+#include <OgreSceneManager.h>
+#include <OgreSceneNode.h>
+
+class EntityIG : public OgreBites::InputListener {
 
 public:
-	EntityIG();
-	
+	EntityIG(Ogre::SceneNode* node);
 	~EntityIG();
+	
+	static std::vector<EntityIG*> appListeners; //Para mandar eventos. Van por otro lado
 
-	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) = 0;
+	static void addListener(EntityIG* entidad) {
+		appListeners.push_back(entidad);
+	};
 
-private:
+
+protected:
+	Ogre::SceneNode* mNode;
+	Ogre::SceneManager* mSM;
+
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) { return false; };
+
 };
 

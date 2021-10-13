@@ -8,7 +8,7 @@
 class Molino : public EntityIG
 {
 public:
-	Molino(Ogre::SceneManager*mSM);
+	Molino(Ogre::SceneNode * mNode_);
 	~Molino();
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);

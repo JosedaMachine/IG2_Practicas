@@ -1,43 +1,46 @@
 #include "Avion.h"
 
-
-Avion::Avion(Ogre::SceneManager* mSM_, Ogre::SceneNode* father): mSM(mSM_) {
-	if (!father)mNode = mSM->getRootSceneNode()->createChildSceneNode();
-	else mNode = father->createChildSceneNode();
-
+#include <iostream>
+Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	cuerpoNode = mNode->createChildSceneNode();
+	
+	std::cout << "\n\nhasta aqui funka\n\n";
 	Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
 	cuerpoNode->attachObject(cuerpo);
+	helices();
+
 
 	alaIzquierda();
 
 	alaDerecha();
-
+	
 	frente();
 
 	pilotoNinja();
 
-	helices();
 }
 
-void Avion::helices()
-{
-	AspasMolino* a1 = new AspasMolino(mSM, false, 6, mNode);
+void Avion::helices() {
+
+	Ogre::SceneNode* aspa1 = mNode->createChildSceneNode();
+	AspasMolino* a1 = new AspasMolino(aspa1, false, 6);
 	a1->getMainNode()->scale(0.15, 0.15, 0.15);
 	a1->getMainNode()->translate(Ogre::Vector3(300, 0, 30));
 
-	heliceNodes.push_back(a1);
+	//heliceNodes.push_back(a1);
 
-	AspasMolino* a2 = new AspasMolino(mSM, false, 6, mNode);
+	Ogre::SceneNode* aspa2 = mNode->createChildSceneNode();
+	AspasMolino* a2 = new AspasMolino(aspa2, false, 6);
+
+	
 	a2->getMainNode()->scale(0.15, 0.15, 0.15);
 	a2->getMainNode()->translate(Ogre::Vector3(-300, 0, 30));
 
-	heliceNodes.push_back(a2);
+	//heliceNodes.push_back(a2);
 }
 
 
-void Avion::pilotoNinja()
-{
+void Avion::pilotoNinja() {
 	pilotoNode = mNode->createChildSceneNode();
 	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
 	pilotoNode->attachObject(ninja);
@@ -76,8 +79,7 @@ void Avion::alaIzquierda()
 	alaINode->scale(90, 10, 5);
 }
 
-bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
-{
+bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_g) {
 		for (auto h : heliceNodes) {
 			h->keyPressed(evt);

@@ -12,28 +12,16 @@ using namespace Ogre;
 //x Guacamole
 //TODO: Guacamole
 //!? Guacamole
+//! Ahora a las entidades les pasamos : mSM->getRootSceneNode()->createChildSceneNode()
+//! porque heredan de entityIg y este solo recibe un nodo. Si queremos que sea hijo de P, le pasamos el nodo 
+//! de P
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
-  
-	for (EntityIG* ent : entidades) ent->keyPressed(evt);
-  
 	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
-
-	//G 
 	else if (evt.keysym.sym == SDLK_g && reloj != nullptr) reloj->roll(Ogre::Degree(2));
 	else if (evt.keysym.sym == SDLK_h) {
 		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
-
-		//ficticio();
-		EL_TRUCO();
 	}
-	else if (evt.keysym.sym == SDLK_j) {
-
-		dron->getMainNode()->yaw(Ogre::Degree(2));
-		//if (ficticioDroneNode) ficticioDroneNode->yaw(Ogre::Degree(2));
-	}
-
-	//H if 
 
 	//! ONgo bongo Buga Buga Bo 
 	return true;
@@ -53,7 +41,9 @@ void IG2App::sceneTwo() {
 
 	planeta->setScale(32, 32, 32);
 
-	dron = new Dron(mSM, 6, 12, ficticioDroneNode);
+	dron = new Dron(ficticioDroneNode, 6, 12);
+
+	addInputListener(dron);
 
 	dron->getMainNode()->scale(0.5, 0.5, 0.5);
 
@@ -62,25 +52,11 @@ void IG2App::sceneTwo() {
 	entidades.push_back(dron);
 }
 
-void IG2App::testZone()
-{
+void IG2App::sceneThree() {
 	//Avion
-
-
-	entidades.push_back(new Avion(mSM));
-}
-
-void IG2App::ficticio(){
-	if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
-}
-
-void IG2App::EL_TRUCO(){
-	Ogre::SceneNode* mainNode = dron->getMainNode();
-
-	mainNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
-	mainNode->roll(Ogre::Degree(2.));
-	mainNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
-
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	addInputListener(a);
+	entidades.push_back(a);
 }
 
 void IG2App::BallClock(float rad) {
@@ -132,6 +108,23 @@ void IG2App::BallClock(float rad) {
 
 }
 
+void IG2App::sceneOne() {
+	//Reloj
+	BallClock(1000);
+	//Dron
+
+	aspas = new AspasMolino(mSM->getRootSceneNode()->createChildSceneNode(), 12);
+	molino = new Molino(mSM->getRootSceneNode()->createChildSceneNode());
+	entidades.push_back(new Molino(mSM->getRootSceneNode()->createChildSceneNode()));
+	entidades.push_back(new RotorDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
+	entidades.push_back(new BrazoDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
+	Dron* dron = new Dron(mSM->getRootSceneNode()->createChildSceneNode(), 8, 12);
+	entidades.push_back(dron);
+	float scale = 0.5;
+	dron->getMainNode()->translate(700, 500, 400);
+	dron->getMainNode()->setScale(scale, scale, scale);
+}
+
 void IG2App::setCamNLight() {
 	// create the camera
 	Camera* cam = mSM->createCamera("Cam");
@@ -152,7 +145,6 @@ void IG2App::setCamNLight() {
 	vp->setBackgroundColour(Ogre::ColourValue(0.7, 0.8, 0.9));
 
 	//------------------------------------------------------------------------
-
 	// without light we would just get a black screen 
 
 	Light* luz = mSM->createLight("Luz");
@@ -168,41 +160,37 @@ void IG2App::setCamNLight() {
 }
 
 void IG2App::shutdown() {
-  mShaderGenerator->removeSceneManager(mSM);  
-  mSM->removeRenderQueueListener(mOverlaySystem);  
-					
-  mRoot->destroySceneManager(mSM);  
+	mShaderGenerator->removeSceneManager(mSM);
+	mSM->removeRenderQueueListener(mOverlaySystem);
 
-  delete mTrayMgr;  mTrayMgr = nullptr;
-  delete mCamMgr; mCamMgr = nullptr;
+	mRoot->destroySceneManager(mSM);
 
-  //for(EntityIG* ent : entidades) {
-	 // delete ent;
-  //}
+	delete mTrayMgr;  mTrayMgr = nullptr;
+	delete mCamMgr; mCamMgr = nullptr;
 
-  entidades.clear();
+	entidades.clear();
 
-  // do not forget to call the base 
-  IG2ApplicationContext::shutdown();
+	// do not forget to call the base 
+	IG2ApplicationContext::shutdown();
 }
 
 void IG2App::setup(void) {
-  // do not forget to call the base first
-  IG2ApplicationContext::setup();
+	// do not forget to call the base first
+	IG2ApplicationContext::setup();
 
-  mSM = mRoot->createSceneManager();  
+	mSM = mRoot->createSceneManager();
 
-  // register our scene with the RTSS
-  mShaderGenerator->addSceneManager(mSM);
+	// register our scene with the RTSS
+	mShaderGenerator->addSceneManager(mSM);
 
-  mSM->addRenderQueueListener(mOverlaySystem);
+	mSM->addRenderQueueListener(mOverlaySystem);
 
-  mTrayMgr = new OgreBites::TrayManager("TrayGUISystem", mWindow.render);  
-  mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-  addInputListener(mTrayMgr);
+	mTrayMgr = new OgreBites::TrayManager("TrayGUISystem", mWindow.render);
+	mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
+	addInputListener(mTrayMgr);
 
-  addInputListener(this);   
-  setupScene();
+	addInputListener(this);
+	setupScene();
 }
 
 void IG2App::setupScene(void) {
@@ -212,44 +200,31 @@ void IG2App::setupScene(void) {
 
 	creaPlano();
 
-	//Reloj
-	//BallClock(1000);
 
-
-	//Dron
-	//aspas = new AspasMolino(mSM, 12);
-	//molino = new Molino(mSM);
-	//entidades.push_back(new Molino(mSM));
-	//entidades.push_back(new RotorDron(mSM, 6));
-	//entidades.push_back(new BrazoDron(mSM, 6));
-	//Dron* dron = new Dron(mSM, 8, 12);
-	//entidades.push_back(dron);
-	//float scale = 0.5;
-	//dron->getMainNode()->translate(700, 500, 400);
-	//dron->getMainNode()->setScale(scale, scale, scale);
 
 	//Planeta:
 	//sceneTwo();
 
 	//Pruebas
-	testZone();
+	sceneThree();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
-	mCamMgr->setStyle(OgreBites::CS_ORBIT);  
-  
-  //mCamMgr->setTarget(mSinbadNode);  
-  //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
+	mCamMgr->setStyle(OgreBites::CS_ORBIT);
 
-  //------------------------------------------------------------------------
+	//mCamMgr->setTarget(mSinbadNode);  
+	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
+
+	//------------------------------------------------------------------------
 }
 
 void IG2App::creaPlano()
 {
-
 	MeshManager::getSingleton().createPlane("mPlane1080x800", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		Plane(Vector3::UNIT_Y, 0), 1080, 800, 100, 80, true,
 		1, 1.0, 1.0, Vector3::UNIT_Z);
+
+
 
 	plano = mSM->getRootSceneNode()->createChildSceneNode();
 

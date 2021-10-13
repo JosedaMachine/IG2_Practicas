@@ -31,14 +31,14 @@ protected:
 
   //Metodos de pulsar
   void BallClock(float rad);
+
+  void sceneOne();
+
   void sceneTwo();
 
   //Scene de pruebas
-  void testZone();
-
-  void ficticio();
-  void EL_TRUCO();
-
+  void sceneThree();
+  
   void setCamNLight();
       
   Ogre::SceneManager* mSM = nullptr;

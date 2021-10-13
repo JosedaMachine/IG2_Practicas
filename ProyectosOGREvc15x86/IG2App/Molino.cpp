@@ -1,12 +1,12 @@
 #include "Molino.h"
 
-Molino::Molino(Ogre::SceneManager* mSM): mSM(mSM){
+Molino::Molino(Ogre::SceneNode * mNode_): EntityIG(mNode_){
 	mNode = mSM->getRootSceneNode()->createChildSceneNode();
 
 	//Aspas
 	radioAspasMolino = 220;
 	aspas = mNode->createChildSceneNode();
-	blades = new AspasMolino(mSM, true, 12, aspas);
+	blades = new AspasMolino(aspas, true, 12);
 	blades->getMainNode()->setScale(0.3, 0.3, 0.3);
 	blades->getMainNode()->translate(0, 150, radioAspasMolino);
 

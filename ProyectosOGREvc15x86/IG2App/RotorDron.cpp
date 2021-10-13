@@ -1,5 +1,5 @@
 #include "RotorDron.h"
-RotorDron::RotorDron(Ogre::SceneManager* mSM, const bool& clockWise, const int& numHelices, Ogre::SceneNode* parent): numHelices_(numHelices) {
+RotorDron::RotorDron(Ogre::SceneNode * parent, const bool& clockWise, const int& numHelices): numHelices_(numHelices), EntityIG(parent) {
 
 	if (!parent)
 		mNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -23,7 +23,7 @@ RotorDron::RotorDron(Ogre::SceneManager* mSM, const bool& clockWise, const int& 
 
 	helicesNode = mNode->createChildSceneNode();
 
-	aspasM = new Helices(mSM, false, numHelices, helicesNode);
+	aspasM = new Helices(helicesNode, false, numHelices);
 	aspasM->setClockWise(clockWise);
 
 

@@ -1,13 +1,9 @@
 #include "AspasMolino.h"
 
-
-AspasMolino::AspasMolino(Ogre::SceneManager* mSM, bool hasOrnament, const int& numAspas_, Ogre::SceneNode* parentNode)
-: mSM(mSM), numAspas(numAspas_){
+#include <iostream>
+AspasMolino::AspasMolino(Ogre::SceneNode * mNode_, bool hasOrnament, const int& numAspas_)
+: numAspas(numAspas_), EntityIG(mNode_) {
 	arrayAspas.reserve(numAspas);
-
-	if(!parentNode)
-		mNode = mSM->getRootSceneNode()->createChildSceneNode();
-	else mNode = parentNode->createChildSceneNode();
 
 	int radi = 50;
 	cilindroCentralNode = mNode->createChildSceneNode();
@@ -42,11 +38,14 @@ AspasMolino::~AspasMolino() {
 }
 
 bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt){
+	std::cout << "funka Andres\n";
 	if (evt.keysym.sym == SDLK_g) {
+	std::cout << "funka Andres2\n";
 		aspasNode->roll(Ogre::Degree(degrees));
 		FixOrnamentRot(degrees);
 	}
 	else if (evt.keysym.sym == SDLK_c) {
+	std::cout << "funka Andres5\n";
 		cilindroCentralNode->translate(0, 0, -100);
 	}
 

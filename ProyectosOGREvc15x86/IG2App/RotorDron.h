@@ -11,7 +11,7 @@
 class RotorDron : public EntityIG {
 
 public:
-	RotorDron(Ogre::SceneManager* mSM, const bool& clockWise, const int& numHelices = 6, Ogre::SceneNode* parent = nullptr);
+	RotorDron(Ogre::SceneNode * parent, const bool& clockWise, const int& numHelices = 6);
 
 	~RotorDron();
 

@@ -1,11 +1,11 @@
 #include "BrazoDron.h"
 
 
-BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const bool& clockWise, const int& numAspas, Ogre::SceneNode* parent): mSM(mSM_), numAspas_(numAspas) {
-    if (!parent)
-        mNode = mSM->getRootSceneNode()->createChildSceneNode();
-    else mNode = parent->createChildSceneNode();
-    
+BrazoDron::BrazoDron(Ogre::SceneNode* mNode_ ,  const bool& clockWise, const int& numAspas/*, Ogre::SceneNode* parent*/): EntityIG(mNode_), numAspas_(numAspas){
+    //! if (!parent)
+    //!     mNode = mSM->getRootSceneNode()->createChildSceneNode();
+    //! else mNode = parent->createChildSceneNode();
+
     float radio = 50;
     cilindro = mNode->createChildSceneNode();
     Ogre::Entity* cilindro_ = mSM->createEntity("Barrel.mesh");
@@ -15,12 +15,11 @@ BrazoDron::BrazoDron(Ogre::SceneManager* mSM_, const bool& clockWise, const int&
     cilindro->setScale(radio * 0.55, radio * 3, radio * 0.55);
 
     rotorNode = mNode->createChildSceneNode();
-    rotor = new RotorDron(mSM, clockWise, numAspas_, rotorNode);
+    rotor = new RotorDron(rotorNode, clockWise, numAspas_);
 
     float scale = 0.4;
     rotorNode->setScale(scale, scale, scale);
     rotorNode->translate(400, 0, 0);
-
 }
 
 BrazoDron::~BrazoDron()  {
