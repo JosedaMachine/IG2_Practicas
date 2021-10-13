@@ -38,14 +38,11 @@ AspasMolino::~AspasMolino() {
 }
 
 bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt){
-	std::cout << "funka Andres\n";
 	if (evt.keysym.sym == SDLK_g) {
-	std::cout << "funka Andres2\n";
 		aspasNode->roll(Ogre::Degree(degrees));
 		FixOrnamentRot(degrees);
 	}
 	else if (evt.keysym.sym == SDLK_c) {
-	std::cout << "funka Andres5\n";
 		cilindroCentralNode->translate(0, 0, -100);
 	}
 

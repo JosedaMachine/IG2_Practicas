@@ -10,7 +10,7 @@ Molino::Molino(Ogre::SceneNode * mNode_): EntityIG(mNode_){
 	blades->getMainNode()->setScale(0.3, 0.3, 0.3);
 	blades->getMainNode()->translate(0, 150, radioAspasMolino);
 
-	////CuerpoMolino
+	//CuerpoMolino
 	float radio = 80;
 	float altura = 80;
 	body = mNode->createChildSceneNode();

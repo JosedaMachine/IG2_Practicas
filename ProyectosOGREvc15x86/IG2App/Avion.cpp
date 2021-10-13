@@ -27,7 +27,7 @@ void Avion::helices() {
 	a1->getMainNode()->scale(0.15, 0.15, 0.15);
 	a1->getMainNode()->translate(Ogre::Vector3(300, 0, 30));
 
-	//heliceNodes.push_back(a1);
+	heliceNodes.push_back(a1);
 
 	Ogre::SceneNode* aspa2 = mNode->createChildSceneNode();
 	AspasMolino* a2 = new AspasMolino(aspa2, false, 6);
@@ -36,7 +36,7 @@ void Avion::helices() {
 	a2->getMainNode()->scale(0.15, 0.15, 0.15);
 	a2->getMainNode()->translate(Ogre::Vector3(-300, 0, 30));
 
-	//heliceNodes.push_back(a2);
+	heliceNodes.push_back(a2);
 }
 
 
