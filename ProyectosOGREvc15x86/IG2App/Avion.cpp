@@ -4,12 +4,11 @@
 Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	cuerpoNode = mNode->createChildSceneNode();
 	
-
 	myTimer = Ogre::Timer();
 	myTimer.reset();
 
 	Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
-	cuerpo->setMaterialName("materials/Red");
+	cuerpo->setMaterialName("Practica1/Red");
 	cuerpoNode->attachObject(cuerpo);
 
 	helices();
@@ -65,6 +64,7 @@ void Avion::helices() {
 void Avion::NinjaPilot() {
 	pilotoNode = mNode->createChildSceneNode();
 	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
+	ninja->setMaterialName("Practica1/Yellow");
 	pilotoNode->attachObject(ninja);
 
 	pilotoNode->yaw(Ogre::Degree(90.0));
@@ -74,6 +74,7 @@ void Avion::Front()
 {
 	fernteNode = mNode->createChildSceneNode();
 	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
+	frente->setMaterialName("Practica1/Brown");
 	fernteNode->attachObject(frente);
 
 	fernteNode->translate(-100, 0, 0);
@@ -95,6 +96,7 @@ void Avion::ToLeft()
 {
 	alaINode = mNode->createChildSceneNode();
 	Ogre::Entity* alaIzquierda = mSM->createEntity("cube.mesh");
+	alaIzquierda->setMaterialName("Practica1/Wings");
 	alaINode->attachObject(alaIzquierda);
 
 	alaINode->translate(Ogre::Vector3(30, 0., -200));

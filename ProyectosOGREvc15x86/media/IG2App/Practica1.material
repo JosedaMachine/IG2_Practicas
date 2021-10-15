@@ -1,44 +1,43 @@
-material Practica1/Red
+material materials/Red
 {
     technique
     {
         pass
         {
-            diffuse 1 0 0
+            difusse 1 0 0
         }
     }
 }
 
-material Practica1/Brown
+material materials/Brown
 {
     technique
     {
         pass
         {
-            diffuse 0.89 0.58 0.11
+            difusse 0.89 0.58 0.11
         }
     }
 }
 
-material Practica1/Yellow
+material materials/Yellow
 {
     technique
     {
         pass
         {
-            diffuse 1 0.5 0
+            difusse 1 0.5 0
         }
     }
 }
 
-material Practica1/Wings
+material materials/Wings
 {
     technique
     {
         pass
         {
-            diffuse 1 1 1
-            
+            difusse 1 1 1
             texture_unit
             {
                 texture checker.png
@@ -47,13 +46,13 @@ material Practica1/Wings
     }
 }
 
-material Practica1/blade
+material materials/blade
 {
     technique
     {
         pass
         {
-            diffuse 1 1 1
+            difusse 1 1 1
 
             texture_unit
             {
