@@ -100,14 +100,14 @@ void IG2App::setCamNLight() {
 	// create the camera
 	Camera* cam = mSM->createCamera("Cam");
 	cam->setNearClipDistance(1);
-	cam->setFarClipDistance(10000);
+	cam->setFarClipDistance(50000);
 	cam->setAutoAspectRatio(true);
 	//cam->setPolygonMode(Ogre::PM_WIREFRAME); 
 
 	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
 	mCamNode->attachObject(cam);
 
-	mCamNode->setPosition(0, 0, 1000);
+	mCamNode->setPosition(0, 0, 7000);
 	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
 	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
 
@@ -187,16 +187,16 @@ void IG2App::sceneFour() {
 	planeta->setScale(32, 32, 32);
 
 	//! DRON
-	//ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
-	//dron = new Dron(ficticioDroneNode, 6, 12);
-	//addInputListener(dron);
-	//dron->getMainNode()->scale(0.5, 0.5, 0.5);
-	//dron->getMainNode()->setPosition(0, 3700, 0);
-	//entidades.push_back(dron);
+	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
+	dron = new Dron(ficticioDroneNode, 6, 12);
+	addInputListener(dron);
+	dron->getMainNode()->scale(0.5, 0.5, 0.5);
+	dron->getMainNode()->setPosition(0, 3700, 0);
+	entidades.push_back(dron);
 
 	//! AVION
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
-	a->getMainNode()->setPosition(1000, 3600, 0);
+	a->getMainNode()->setPosition(0, 3700, 0);
 	addInputListener(a);
 	entidades.push_back(a);
 	

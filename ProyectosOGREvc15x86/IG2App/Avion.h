@@ -11,6 +11,11 @@ public:
 
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+
+	virtual void frameRendered(Ogre::FrameEvent const& evt);
+
+	void EL_TRUCO(float const& degrees);
+
 private:
 
 	Ogre::SceneNode* cuerpoNode = nullptr;
@@ -22,11 +27,18 @@ private:
 
 	Ogre::SceneNode* light = nullptr;
 
-	void alaIzquierda();
-	void alaDerecha();
-	void frente();
-	void pilotoNinja();
+	bool isStopped;
+	int clockWise;
+	float gradesToAdd;
+	unsigned int maxTime = 2000, timeLimit = 0;
+	Ogre::Timer myTimer, myTimerStopped;
+
+	//!? JEJE LES CAMBIE EL NOMBRE Y ENCIMA COMENTO EN MORADO PARA QUE TE JODA MAS
+	void ToLeft();
+	void ToRight();
+	void Front();
+	void NinjaPilot();
 	void helices();
-	void crearLuz();
+	void createLight();
 };
 

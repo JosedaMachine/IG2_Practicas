@@ -39,8 +39,7 @@ AspasMolino::~AspasMolino() {
 
 bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt){
 	if (evt.keysym.sym == SDLK_g) {
-		aspasNode->roll(Ogre::Degree(degrees));
-		FixOrnamentRot(degrees);
+		rotate();
 	}
 	else if (evt.keysym.sym == SDLK_c) {
 		cilindroCentralNode->translate(0, 0, -100);
@@ -60,4 +59,9 @@ void AspasMolino::FixOrnamentRot(const float& rotation) {
 void AspasMolino::setClockWise(const bool& state) {
 	clockWise = state;
 	if (!clockWise) degrees *= -1;
+}
+
+void AspasMolino::rotate(){
+	aspasNode->roll(Ogre::Degree(degrees));
+	FixOrnamentRot(degrees);
 }

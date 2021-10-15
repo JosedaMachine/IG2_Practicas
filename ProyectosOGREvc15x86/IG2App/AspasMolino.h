@@ -20,6 +20,8 @@ public:
 	Ogre::SceneNode* getAspasNode() const { return aspasNode; }
 
 	void setClockWise(const bool& state);
+
+	void rotate();
 private:
 	Ogre::SceneNode* cilindroCentralNode = nullptr;
 	Ogre::SceneNode* aspasNode = nullptr;

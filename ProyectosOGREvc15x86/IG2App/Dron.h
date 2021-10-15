@@ -14,6 +14,10 @@ public:
 
 	virtual void frameRendered(Ogre::FrameEvent const& evt);
 	
+	void EL_TRUCO(float const & degrees);
+
+	void FICTICIO();
+
 private:
 
 	int numArms_, numAspas_;
@@ -21,6 +25,8 @@ private:
 	std::vector<ArmNodes> armNodes;
 
 	bool isStopped;
+	int clockWise;
+	float gradesToAdd;
 	unsigned int maxTime = 2000, timeLimit = 0;
 	Ogre::Timer myTimer, myTimerStopped;
 

@@ -7,6 +7,7 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
     sphere->attachObject(cuerpo);
 
     myTimer = Ogre::Timer();
+    myTimer.reset();
 
     float scale = 3;
     sphere->setScale(scale, scale, scale);
@@ -54,7 +55,7 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
 
 	light->attachObject(luz);
 
-    timeLimit = Ogre::Math::RangeRandom(0, maxTime);
+    
 
     isStopped = false;
 }
@@ -76,32 +77,43 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt){
     else if (evt.keysym.sym == SDLK_h) {
 
         //El truco
-        mNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
-        mNode->roll(Ogre::Degree(2.));
-        mNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
+        EL_TRUCO(2.);
 
         //Ficticio
-        //if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
+        
     }
     
     return true;
 }
 
 void Dron::frameRendered(Ogre::FrameEvent const& evt){
-    if (myTimer.getMilliseconds() > maxTime && isStopped) {
+    if (myTimer.getMilliseconds() > maxTime && !isStopped) {
         isStopped = true;
-        myTimer.reset();
+        myTimerStopped.reset();
+        clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+
+        timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
+        gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+
+    }
+    else if (!isStopped) EL_TRUCO(0.5f);
+
+    if (isStopped) {
+        mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
         if (myTimerStopped.getMilliseconds() > timeLimit) {
-            //Girar yo que se
-            int clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
-            mNode->yaw(Ogre::Degree(2 * clockWise));
             isStopped = false;
             myTimerStopped.reset();
+            myTimer.reset();
         }
     }
-    else {
-        mNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
-        mNode->roll(Ogre::Degree(2.));
-        mNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
-    }
+}
+
+void Dron::EL_TRUCO(float const & degrees) {
+    mNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
+    mNode->roll(Ogre::Degree(degrees));
+    mNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
+}
+
+void Dron::FICTICIO() {
+    //if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
 }
