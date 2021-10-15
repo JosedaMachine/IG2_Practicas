@@ -83,21 +83,21 @@ void Avion::Front()
 void Avion::ToRight()
 {
 	alaDNode = mNode->createChildSceneNode();
-	Ogre::Entity* alaDzquierda = mSM->createEntity("Barrel.mesh");
+	Ogre::Entity* alaDzquierda = mSM->createEntity("cube.mesh");
 	alaDNode->attachObject(alaDzquierda);
 
-	alaDNode->translate(Ogre::Vector3(0, 0., 160));
-	alaDNode->scale(5, 10, 90);
+	alaDNode->translate(Ogre::Vector3(30, 0., 200));
+	alaDNode->scale(1.2, 0.2, 4);
 }
 
 void Avion::ToLeft()
 {
 	alaINode = mNode->createChildSceneNode();
-	Ogre::Entity* alaIzquierda = mSM->createEntity("Barrel.mesh");
+	Ogre::Entity* alaIzquierda = mSM->createEntity("cube.mesh");
 	alaINode->attachObject(alaIzquierda);
 
-	alaINode->translate(Ogre::Vector3(0, 0., - 160));
-	alaINode->scale(5, 10, 90);
+	alaINode->translate(Ogre::Vector3(30, 0., -200));
+	alaINode->scale(1.2, 0.2, 4);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
@@ -111,30 +111,30 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Avion::frameRendered(Ogre::FrameEvent const& evt) {
-	if (myTimer.getMilliseconds() > maxTime && !isStopped) {
-		isStopped = true;
-		myTimerStopped.reset();
-		clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+	//if (myTimer.getMilliseconds() > maxTime && !isStopped) {
+	//	isStopped = true;
+	//	myTimerStopped.reset();
+	//	clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
 
-		timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
-		gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+	//	timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
+	//	gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
 
-	}
-	else if (!isStopped) {
-		EL_TRUCO(0.5f);
-		for (auto h : heliceNodes) {
-			h->rotate();
-		}
-	}
+	//}
+	//else if (!isStopped) {
+	//	EL_TRUCO(0.5f);
+	//	for (auto h : heliceNodes) {
+	//		h->rotate();
+	//	}
+	//}
 
-	if (isStopped) {
-		mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
-		if (myTimerStopped.getMilliseconds() > timeLimit) {
-			isStopped = false;
-			myTimerStopped.reset();
-			myTimer.reset();
-		}
-	}
+	//if (isStopped) {
+	//	mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
+	//	if (myTimerStopped.getMilliseconds() > timeLimit) {
+	//		isStopped = false;
+	//		myTimerStopped.reset();
+	//		myTimer.reset();
+	//	}
+	//}
 }
 
 void Avion::EL_TRUCO(float const& degrees){
