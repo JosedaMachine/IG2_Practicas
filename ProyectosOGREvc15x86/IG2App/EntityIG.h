@@ -12,14 +12,15 @@ public:
 	EntityIG(Ogre::SceneNode* node);
 	~EntityIG();
 	
+	Ogre::SceneNode* getMainNode() const { return mNode; }
+	
+	virtual void frameRendered(Ogre::FrameEvent const& evt) {};
+	
 	static std::vector<EntityIG*> appListeners; //Para mandar eventos. Van por otro lado
 
 	static void addListener(EntityIG* entidad) {
 		appListeners.push_back(entidad);
 	};
-
-	Ogre::SceneNode* getMainNode() const { return mNode; }
-
 protected:
 	Ogre::SceneNode* mNode;
 	Ogre::SceneManager* mSM;

@@ -6,6 +6,8 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
     Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
     sphere->attachObject(cuerpo);
 
+    myTimer = Ogre::Timer();
+
     float scale = 3;
     sphere->setScale(scale, scale, scale);
 
@@ -51,6 +53,10 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
 	luz->setSpotlightFalloff(0.1f);
 
 	light->attachObject(luz);
+
+    timeLimit = Ogre::Math::RangeRandom(0, maxTime);
+
+    isStopped = false;
 }
 
 
@@ -79,4 +85,23 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt){
     }
     
     return true;
+}
+
+void Dron::frameRendered(Ogre::FrameEvent const& evt){
+    if (myTimer.getMilliseconds() > maxTime && isStopped) {
+        isStopped = true;
+        myTimer.reset();
+        if (myTimerStopped.getMilliseconds() > timeLimit) {
+            //Girar yo que se
+            int clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+            mNode->yaw(Ogre::Degree(2 * clockWise));
+            isStopped = false;
+            myTimerStopped.reset();
+        }
+    }
+    else {
+        mNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
+        mNode->roll(Ogre::Degree(2.));
+        mNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
+    }
 }
