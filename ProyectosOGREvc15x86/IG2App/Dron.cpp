@@ -55,9 +55,8 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
 
 	light->attachObject(luz);
 
-    
-
     isStopped = false;
+    manualyStopped = false;
 }
 
 
@@ -87,25 +86,39 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt){
 }
 
 void Dron::frameRendered(Ogre::FrameEvent const& evt){
-    if (myTimer.getMilliseconds() > maxTime && !isStopped) {
-        isStopped = true;
-        myTimerStopped.reset();
-        clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+	if (!manualyStopped) {
 
-        timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
-        gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+		if (myTimer.getMilliseconds() > maxTime && !isStopped) {
+			isStopped = true;
+			myTimerStopped.reset();
+			clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
 
-    }
-    else if (!isStopped) EL_TRUCO(0.5f);
+			timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
+			gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
 
-    if (isStopped) {
-        mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
-        if (myTimerStopped.getMilliseconds() > timeLimit) {
-            isStopped = false;
-            myTimerStopped.reset();
-            myTimer.reset();
-        }
-    }
+		}
+		else if (!isStopped) {
+			EL_TRUCO(0.5f);
+			
+			for (auto a : armNodes) {
+				a.second->rotateAspas();
+			}
+		}
+
+		if (isStopped) {
+			mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
+			if (myTimerStopped.getMilliseconds() > timeLimit) {
+				isStopped = false;
+				myTimerStopped.reset();
+				myTimer.reset();
+			}
+		}
+	}
+	else {
+		for (auto a : armNodes) {
+			a.second->rotateAspas();
+		}
+	}
 }
 
 void Dron::EL_TRUCO(float const & degrees) {
@@ -116,4 +129,16 @@ void Dron::EL_TRUCO(float const & degrees) {
 
 void Dron::FICTICIO() {
     //if (ficticioDroneNode) ficticioDroneNode->pitch(Ogre::Degree(2));
+}
+
+void Dron::receiveEvent(Message mes, EntityIG* entidad)
+{
+	switch (mes.m)
+	{
+	case R:
+		manualyStopped = true;
+		break;
+	default:
+		break;
+	}
 }

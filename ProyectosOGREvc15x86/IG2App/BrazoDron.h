@@ -10,6 +10,8 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
+	void rotateAspas();
+
 private:
 	/*Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneManager* mSM = nullptr;*/

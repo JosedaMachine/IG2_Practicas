@@ -17,6 +17,7 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
+	void rotate();
 private:
 	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* helicesNode = nullptr;

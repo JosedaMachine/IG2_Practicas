@@ -31,3 +31,8 @@ bool BrazoDron::keyPressed(const OgreBites::KeyboardEvent& evt){
 
     return true;
 }
+
+void BrazoDron::rotateAspas()
+{
+	rotor->rotate();
+}

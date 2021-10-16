@@ -195,7 +195,6 @@ void IG2App::sceneFour() {
 	dron->getMainNode()->scale(0.5, 0.5, 0.5);
 	dron->getMainNode()->setPosition(0, 3700, 0);
 	entidades.push_back(dron);
-
 	EntityIG::addListener(dron);
 
 	//! AVION
@@ -204,6 +203,7 @@ void IG2App::sceneFour() {
 	addInputListener(a);
 	entidades.push_back(a);
 	
+	EntityIG::addListener(a);
 	//! PLANO
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), "mPlane1080x800", {1080 , 800}, {100, 80});
 	p->getMainNode()->pitch(Ogre::Degree(90.));

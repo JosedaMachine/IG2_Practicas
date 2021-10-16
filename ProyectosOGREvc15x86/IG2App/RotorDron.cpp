@@ -39,6 +39,11 @@ bool RotorDron::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	return true;
 }
 
+void RotorDron::rotate()
+{
+	aspasM->rotate();
+}
+
 RotorDron::~RotorDron() {
 
 	delete mNode;

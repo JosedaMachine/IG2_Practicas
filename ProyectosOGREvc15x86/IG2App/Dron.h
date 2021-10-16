@@ -1,7 +1,7 @@
 #pragma once
 #include "BrazoDron.h"
 
-
+//Eres un friki de mucho cuidado
 using ArmNodes = std::pair<Ogre::SceneNode*, BrazoDron*> ;
 
 class Dron : public EntityIG
@@ -18,13 +18,15 @@ public:
 
 	void FICTICIO();
 
+	virtual void receiveEvent(Message mes, EntityIG* entidad = nullptr);
+
 private:
 
 	int numArms_, numAspas_;
 	Ogre::SceneNode* sphere = nullptr;
 	std::vector<ArmNodes> armNodes;
 
-	bool isStopped;
+	bool isStopped, manualyStopped;
 	int clockWise;
 	float gradesToAdd;
 	unsigned int maxTime = 2000, timeLimit = 0;
