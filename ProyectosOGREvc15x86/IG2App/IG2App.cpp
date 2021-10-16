@@ -26,7 +26,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
 	}
 	else if (evt.keysym.sym == SDLK_r) {
-		EntityIG::sendEvent(Message(Messages::R))
+		entidades[0]->sendEvent(Message(Messages::R));
 	}
 	//! ONgo bongo Buga Buga Bo 
 	return true;
@@ -196,6 +196,8 @@ void IG2App::sceneFour() {
 	dron->getMainNode()->setPosition(0, 3700, 0);
 	entidades.push_back(dron);
 
+	EntityIG::addListener(dron);
+
 	//! AVION
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
 	a->getMainNode()->setPosition(0, 3700, 0);
@@ -231,5 +233,3 @@ void IG2App::sceneTwo() {
 	dron->getMainNode()->setPosition(0, 3600, 0);
 	entidades.push_back(dron);
 }
-
-
