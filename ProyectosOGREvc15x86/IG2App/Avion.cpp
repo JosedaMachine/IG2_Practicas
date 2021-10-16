@@ -1,9 +1,10 @@
 #include "Avion.h"
 
 #include <iostream>
+#include <OgreEntity.h>
 Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	cuerpoNode = mNode->createChildSceneNode();
-	
+	manuallyStopped = false;
 	myTimer = Ogre::Timer();
 	myTimer.reset();
 
@@ -37,6 +38,22 @@ void Avion::createLight()
 	luz->setSpotlightFalloff(0.1f);
 
 	light->attachObject(luz);
+}
+
+void Avion::receiveEvent(Message mes,EntityIG* entidad)
+{
+	switch (mes.m)
+	{
+	case R:
+		manuallyStopped = true;
+
+		cuerpo->setMaterialName("Practica1/Red");
+		alaD->setMaterialName("Practica1/Red");
+		alaI->setMaterialName("Practica1/Red");
+		break;
+	default:
+		break;
+	}
 }
 
 void Avion::helices() {
@@ -85,8 +102,9 @@ void Avion::Front()
 void Avion::ToRight()
 {
 	alaDNode = mNode->createChildSceneNode();
-	Ogre::Entity* alaDzquierda = mSM->createEntity("cube.mesh");
-	alaDNode->attachObject(alaDzquierda);
+	Ogre::Entity* alaDerecha = mSM->createEntity("cube.mesh");
+	alaDerecha->setMaterialName("Practica1/Wings");
+	alaDNode->attachObject(alaDerecha);
 
 	alaDNode->translate(Ogre::Vector3(30, 0., 200));
 	alaDNode->scale(1.2, 0.2, 4);
@@ -98,7 +116,7 @@ void Avion::ToLeft()
 	Ogre::Entity* alaIzquierda = mSM->createEntity("cube.mesh");
 	alaIzquierda->setMaterialName("Practica1/Wings");
 	alaINode->attachObject(alaIzquierda);
-
+	
 	alaINode->translate(Ogre::Vector3(30, 0., -200));
 	alaINode->scale(1.2, 0.2, 4);
 }
@@ -114,30 +132,38 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Avion::frameRendered(Ogre::FrameEvent const& evt) {
-	//if (myTimer.getMilliseconds() > maxTime && !isStopped) {
-	//	isStopped = true;
-	//	myTimerStopped.reset();
-	//	clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+	if (!manuallyStopped) {
 
-	//	timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
-	//	gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+		if (myTimer.getMilliseconds() > maxTime && !isStopped) {
+			isStopped = true;
+			myTimerStopped.reset();
+			clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
 
-	//}
-	//else if (!isStopped) {
-	//	EL_TRUCO(0.5f);
-	//	for (auto h : heliceNodes) {
-	//		h->rotate();
-	//	}
-	//}
+			timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
+			gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
 
-	//if (isStopped) {
-	//	mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
-	//	if (myTimerStopped.getMilliseconds() > timeLimit) {
-	//		isStopped = false;
-	//		myTimerStopped.reset();
-	//		myTimer.reset();
-	//	}
-	//}
+		}
+		else if (!isStopped) {
+			EL_TRUCO(0.5f);
+			for (auto h : heliceNodes) {
+				h->rotate();
+			}
+		}
+
+		if (isStopped) {
+			mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
+			if (myTimerStopped.getMilliseconds() > timeLimit) {
+				isStopped = false;
+				myTimerStopped.reset();
+				myTimer.reset();
+			}
+		}
+	}
+	else {
+		for (auto h : heliceNodes) {
+			h->rotate();
+		}
+	}
 }
 
 void Avion::EL_TRUCO(float const& degrees){

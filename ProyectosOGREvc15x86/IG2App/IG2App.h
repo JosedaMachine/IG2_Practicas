@@ -14,7 +14,6 @@
 #include "Plano.h"
 
 #include "EntityIG.h"
-
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
 public:

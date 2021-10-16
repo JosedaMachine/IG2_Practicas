@@ -25,7 +25,9 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	else if (evt.keysym.sym == SDLK_h) {
 		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
 	}
-
+	else if (evt.keysym.sym == SDLK_r) {
+		EntityIG::sendEvent(Message(Messages::R))
+	}
 	//! ONgo bongo Buga Buga Bo 
 	return true;
 }

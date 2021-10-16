@@ -17,6 +17,10 @@ public:
 	void EL_TRUCO(float const& degrees);
 
 private:
+	//No se como se hace, asique hay que preguntar el proximo dia
+	Ogre::Entity* cuerpo;
+	Ogre::Entity* alaD;
+	Ogre::Entity* alaI;
 
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
@@ -26,8 +30,8 @@ private:
 	std::vector<AspasMolino*> heliceNodes;
 
 	Ogre::SceneNode* light = nullptr;
-
-	bool isStopped;
+					//Para pararlo con la R
+	bool isStopped, manuallyStopped;
 	int clockWise;
 	float gradesToAdd;
 	unsigned int maxTime = 2000, timeLimit = 0;
@@ -40,5 +44,7 @@ private:
 	void NinjaPilot();
 	void helices();
 	void createLight();
+protected:
+	virtual void receiveEvent(Message mes,EntityIG* entidad);
 };
 

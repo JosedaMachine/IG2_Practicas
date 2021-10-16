@@ -5,6 +5,7 @@
 
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+#include "Messages.h"
 
 class EntityIG : public OgreBites::InputListener {
 
@@ -21,11 +22,13 @@ public:
 	static void addListener(EntityIG* entidad) {
 		appListeners.push_back(entidad);
 	};
+	
+	void sendEvent(Message mes,EntityIG* entidad = nullptr);
+	virtual void receiveEvent(Message mes, EntityIG* entidad = nullptr) {};
 protected:
 	Ogre::SceneNode* mNode;
 	Ogre::SceneManager* mSM;
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) { return false; };
-
 };
 
