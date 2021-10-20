@@ -9,6 +9,7 @@ RotorDron::RotorDron(Ogre::SceneNode * parent, const bool& clockWise, const int&
 	float radi = 5;
 	esferaNode = mNode->createChildSceneNode();
 	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
+	esfera->setMaterialName("Practica1/Brown");
 	esferaNode->attachObject(esfera);
 	esferaNode->setScale(radi, radi, radi);
 	

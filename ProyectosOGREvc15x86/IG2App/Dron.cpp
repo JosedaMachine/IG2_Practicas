@@ -4,6 +4,7 @@
 Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): numArms_(numArms), numAspas_(numAspas), EntityIG(mNode_) {
     sphere = mNode->createChildSceneNode();
     Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
+	cuerpo->setMaterialName("Practica1/Red");
     sphere->attachObject(cuerpo);
 
     myTimer = Ogre::Timer();

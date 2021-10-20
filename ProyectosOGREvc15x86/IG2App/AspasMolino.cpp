@@ -8,7 +8,7 @@ AspasMolino::AspasMolino(Ogre::SceneNode * mNode_, bool hasOrnament, const int& 
 	int radi = 50;
 	cilindroCentralNode = mNode->createChildSceneNode();
 	Ogre::Entity* tablero = mSM->createEntity("Barrel.mesh");
-	tablero->setMaterialName("Practica1/Brown");
+	tablero->setMaterialName("Practica1/blade");
 	cilindroCentralNode->attachObject(tablero);
 	cilindroCentralNode->pitch(Ogre::Degree(90.));
 	cilindroCentralNode->setScale(radi, 20, radi);

@@ -11,7 +11,7 @@ Aspa::Aspa(Ogre::SceneManager* mSM, Ogre::SceneNode* nodeParent, bool showOrname
 	tableroNode = mNode->createChildSceneNode();
 
 	Ogre::Entity* tablero = mSM->createEntity("cube.mesh");
-	tablero->setMaterialName("Practica1/blade");
+	tablero->setMaterialName("Practica1/DarkBrown");
 	tableroNode->attachObject(tablero);
 
 	float scaleX = 10;

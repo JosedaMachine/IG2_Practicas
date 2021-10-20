@@ -10,6 +10,7 @@ BrazoDron::BrazoDron(Ogre::SceneNode* mNode_ ,  const bool& clockWise, const int
     cilindro = mNode->createChildSceneNode();
     Ogre::Entity* cilindro_ = mSM->createEntity("Barrel.mesh");
     cilindro->attachObject(cilindro_);
+    cilindro_->setMaterialName("Practica1/armDron");
     cilindro->roll(Ogre::Degree(90.));
     float factor = 0.55;
     cilindro->setScale(radio * 0.55, radio * 3, radio * 0.55);

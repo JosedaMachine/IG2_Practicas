@@ -20,6 +20,17 @@ material Practica1/Brown
     }
 }
 
+material Practica1/DarkBrown
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.40 0.26 0.13
+        }
+    }
+}
+
 material Practica1/Naboo
 {
     technique
@@ -69,6 +80,22 @@ material Practica1/blade
             texture_unit
             {
                 texture WoodPallet.png
+            }
+        }
+    }
+}
+
+material Practica1/armDron
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 1
+
+            texture_unit
+            {
+                texture BumpyMetal.jpg
             }
         }
     }
