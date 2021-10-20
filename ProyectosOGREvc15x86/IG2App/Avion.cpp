@@ -9,7 +9,8 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	myTimer.reset();
 
 	Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
-	cuerpo->setMaterialName("Practica1/Red");
+	cuerpoAux = cuerpo;
+	//cuerpo->setMaterialName("Practica1/Red");
 	cuerpoNode->attachObject(cuerpo);
 
 	helices();
@@ -47,9 +48,9 @@ void Avion::receiveEvent(Message mes,EntityIG* entidad)
 	case R:
 		manuallyStopped = !manuallyStopped;
 
-	/*	cuerpoAux->setMaterialName("Practica1/Red");
+		cuerpoAux->setMaterialName("Practica1/Red");
 		alaDAux->setMaterialName("Practica1/Red");
-		alaIAux->setMaterialName("Practica1/Red");*/
+		alaIAux->setMaterialName("Practica1/Red");
 		break;
 	default:
 		break;
@@ -103,6 +104,7 @@ void Avion::ToRight()
 {
 	alaDNode = mNode->createChildSceneNode();
 	Ogre::Entity* alaDerecha = mSM->createEntity("cube.mesh");
+	alaDAux = alaDerecha;
 	alaDerecha->setMaterialName("Practica1/Wings");
 	alaDNode->attachObject(alaDerecha);
 
@@ -114,6 +116,7 @@ void Avion::ToLeft()
 {
 	alaINode = mNode->createChildSceneNode();
 	Ogre::Entity* alaIzquierda = mSM->createEntity("cube.mesh");
+	alaIAux = alaIzquierda;
 	alaIzquierda->setMaterialName("Practica1/Wings");
 	alaINode->attachObject(alaIzquierda);
 	
