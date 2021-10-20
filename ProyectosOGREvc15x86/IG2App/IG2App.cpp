@@ -80,6 +80,10 @@ void IG2App::BallClock(float rad) {
 	manecillas[2]->setPosition(0, 400, 0);
 
 }
+void IG2App::sceneFive(){
+	Ogre::SceneNode* shrek  = mSM->getRootSceneNode()->createChildSceneNode();
+	Sinbad* conBad = new Sinbad(shrek);
+}
 
 void IG2App::sceneOne() {
 	//Reloj
@@ -170,7 +174,8 @@ void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	setCamNLight();
 
-	sceneFour();
+	//sceneFour();
+	sceneFive();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);

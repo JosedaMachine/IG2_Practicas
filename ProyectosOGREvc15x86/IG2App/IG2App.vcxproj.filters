@@ -54,10 +54,13 @@
     <ClInclude Include="Dron.h">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
-    <ClInclude Include="Plano.h">
+    <ClInclude Include="Messages.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Messages.h">
+    <ClInclude Include="Plano.h">
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
+    <ClInclude Include="Sinbad.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -96,6 +99,9 @@
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
     <ClCompile Include="Plano.cpp">
+      <Filter>Archivos de código fuente\Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="Sinbad.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

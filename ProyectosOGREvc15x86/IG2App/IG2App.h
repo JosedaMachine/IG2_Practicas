@@ -12,6 +12,7 @@
 #include "Dron.h"
 #include "Avion.h"
 #include "Plano.h"
+#include "Sinbad.h"
 
 #include "EntityIG.h"
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -25,12 +26,15 @@ protected:
   virtual void shutdown();
   virtual void setupScene();
 
-  void sceneFour();
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
 
   //Metodos de pulsar
   void BallClock(float rad);
+  
+  void sceneFive();
+
+  void sceneFour();
 
   void sceneOne();
 
