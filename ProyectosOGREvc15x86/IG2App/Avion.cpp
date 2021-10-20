@@ -45,11 +45,11 @@ void Avion::receiveEvent(Message mes,EntityIG* entidad)
 	switch (mes.m)
 	{
 	case R:
-		manuallyStopped = true;
+		manuallyStopped = !manuallyStopped;
 
-		//cuerpo->setMaterialName("Practica1/Red");
-		//alaD->setMaterialName("Practica1/Red");
-		//alaI->setMaterialName("Practica1/Red");
+	/*	cuerpoAux->setMaterialName("Practica1/Red");
+		alaDAux->setMaterialName("Practica1/Red");
+		alaIAux->setMaterialName("Practica1/Red");*/
 		break;
 	default:
 		break;

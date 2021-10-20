@@ -136,7 +136,7 @@ void Dron::receiveEvent(Message mes, EntityIG* entidad)
 	switch (mes.m)
 	{
 	case R:
-		manualyStopped = true;
+		manualyStopped = !manualyStopped;
 		break;
 	default:
 		break;

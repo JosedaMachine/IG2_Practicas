@@ -18,9 +18,9 @@ public:
 
 private:
 	//No se como se hace, asique hay que preguntar el proximo dia
-	Ogre::Entity* cuerpo;
-	Ogre::Entity* alaD;
-	Ogre::Entity* alaI;
+	Ogre::Entity* cuerpoAux;
+	Ogre::Entity* alaDAux;
+	Ogre::Entity* alaIAux;
 
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
