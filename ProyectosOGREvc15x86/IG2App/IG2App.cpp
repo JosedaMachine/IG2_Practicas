@@ -185,6 +185,7 @@ void IG2App::sceneFour() {
 	Ogre::SceneNode* planeta;
 	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
 	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	sphere->setMaterialName("Practica1/Naboo");
 	planeta->attachObject(sphere);
 	planeta->setScale(32, 32, 32);
 

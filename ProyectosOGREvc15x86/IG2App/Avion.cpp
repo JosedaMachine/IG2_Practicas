@@ -41,6 +41,14 @@ void Avion::createLight()
 	light->attachObject(luz);
 }
 
+void Avion::restablishTextures()
+{
+	//material por defecto
+	cuerpoAux->setMaterialName("BaseWhite");
+	alaIAux->setMaterialName("Practica1/Wings");
+	alaDAux->setMaterialName("Practica1/Wings");
+}
+
 void Avion::receiveEvent(Message mes,EntityIG* entidad)
 {
 	switch (mes.m)
@@ -48,9 +56,13 @@ void Avion::receiveEvent(Message mes,EntityIG* entidad)
 	case R:
 		manuallyStopped = !manuallyStopped;
 
-		cuerpoAux->setMaterialName("Practica1/Red");
-		alaDAux->setMaterialName("Practica1/Red");
-		alaIAux->setMaterialName("Practica1/Red");
+		if (manuallyStopped) {
+			cuerpoAux->setMaterialName("Practica1/Red");
+			alaDAux->setMaterialName("Practica1/Red");
+			alaIAux->setMaterialName("Practica1/Red");
+		}
+		else restablishTextures();
+
 		break;
 	default:
 		break;
@@ -77,7 +89,6 @@ void Avion::helices() {
 
 	heliceNodes.push_back(a2);
 }
-
 
 void Avion::NinjaPilot() {
 	pilotoNode = mNode->createChildSceneNode();

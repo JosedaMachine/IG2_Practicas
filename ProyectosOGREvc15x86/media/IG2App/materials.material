@@ -20,6 +20,17 @@ material Practica1/Brown
     }
 }
 
+material Practica1/Naboo
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.62 0.84 0.82
+        }
+    }
+}
+
 material Practica1/Yellow
 {
     technique

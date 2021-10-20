@@ -44,6 +44,9 @@ private:
 	void NinjaPilot();
 	void helices();
 	void createLight();
+
+	void restablishTextures();
+	
 protected:
 	virtual void receiveEvent(Message mes,EntityIG* entidad);
 };
