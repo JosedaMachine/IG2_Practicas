@@ -7,8 +7,8 @@ using ArmNodes = std::pair<Ogre::SceneNode*, BrazoDron*> ;
 class Dron : public EntityIG
 {
 public:
-	Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas);
-	~Dron();
+	Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas, bool hasLight = true);
+	virtual ~Dron();
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
@@ -20,8 +20,11 @@ public:
 
 	virtual void receiveEvent(Message mes, EntityIG* entidad = nullptr);
 
+	Ogre::Entity* getCuerpoDron() const;
+
 private:
 
+	Ogre::Entity* cuerpoSphere;
 	int numArms_, numAspas_;
 	Ogre::SceneNode* sphere = nullptr;
 	std::vector<ArmNodes> armNodes;

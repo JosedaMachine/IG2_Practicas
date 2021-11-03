@@ -42,6 +42,17 @@ material Practica1/Naboo
     }
 }
 
+material Practica1/TrueYellow
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 0.1
+        }
+    }
+}
+
 material Practica1/Yellow
 {
     technique
@@ -80,6 +91,23 @@ material Practica1/blade
             texture_unit
             {
                 texture WoodPallet.png
+            }
+        }
+    }
+}
+
+material Practica1/happyCursed
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 1
+
+            texture_unit
+            {
+                texture spotlight_image.png
+                env_map spherical
             }
         }
     }

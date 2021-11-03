@@ -11,7 +11,7 @@ class EntityIG : public OgreBites::InputListener {
 
 public:
 	EntityIG(Ogre::SceneNode* node);
-	~EntityIG();
+	virtual ~EntityIG();
 	
 	Ogre::SceneNode* getMainNode() const { return mNode; }
 	

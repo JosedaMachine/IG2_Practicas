@@ -60,8 +60,11 @@
     <ClInclude Include="Plano.h">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
+    <ClInclude Include="Enjambre.h">
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
     <ClInclude Include="Sinbad.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,8 +104,11 @@
     <ClCompile Include="Plano.cpp">
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
+    <ClCompile Include="Enjambre.cpp">
+      <Filter>Archivos de código fuente\Entidades</Filter>
+    </ClCompile>
     <ClCompile Include="Sinbad.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

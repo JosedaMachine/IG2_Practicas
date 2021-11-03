@@ -6,7 +6,7 @@ class BrazoDron : public EntityIG
 {
 public:
 	BrazoDron(Ogre::SceneNode* mNode_, const bool& clockWise, const int& numAspas = 6/*, Ogre::SceneNode* parent = nullptr*/);
-	~BrazoDron();
+	virtual ~BrazoDron();
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 

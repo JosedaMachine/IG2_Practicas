@@ -27,7 +27,8 @@ Aspa::Aspa(Ogre::SceneManager* mSM, Ogre::SceneNode* nodeParent, bool showOrname
 }
 
 Aspa::~Aspa() {
-	delete tableroNode;
+	/*delete tableroNode;
 	delete adornoNode;
-	delete mNode;
+	delete mNode;*/
+
 }

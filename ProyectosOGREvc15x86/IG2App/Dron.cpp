@@ -1,11 +1,11 @@
 #include "Dron.h"
 #include <iostream>
 
-Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): numArms_(numArms), numAspas_(numAspas), EntityIG(mNode_) {
+Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas, bool hasLight): numArms_(numArms), numAspas_(numAspas), EntityIG(mNode_) {
     sphere = mNode->createChildSceneNode();
-    Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
-	cuerpo->setMaterialName("Practica1/Red");
-    sphere->attachObject(cuerpo);
+    cuerpoSphere = mSM->createEntity("sphere.mesh");
+	cuerpoSphere->setMaterialName("Practica1/Red");
+    sphere->attachObject(cuerpoSphere);
 
     myTimer = Ogre::Timer();
     myTimer.reset();
@@ -39,22 +39,20 @@ Dron::Dron(Ogre::SceneNode * mNode_, const int& numArms, const int& numAspas): n
 
     mNode->yaw(Ogre::Degree(90.));
 
-	light = mNode->createChildSceneNode();
 
-	//? Preguntar por que las luces nos van al reves(a ser posible
-	//? a guacamole)
+	if (hasLight) {
+		light = mNode->createChildSceneNode();
+		Ogre::Light* luz = mSM->createLight();
+		luz->setType(Ogre::Light::LT_SPOTLIGHT);
+		luz->setDirection(0, -1, 0);
+		luz->setSpotlightInnerAngle(Ogre::Degree(16.0f));
+		luz->setSpotlightOuterAngle(Ogre::Degree(15.0f));
 
-	Ogre::Light* luz = mSM->createLight();
-	luz->setType(Ogre::Light::LT_SPOTLIGHT);
-	luz->setDirection(0, -1, 0);
-	luz->setSpotlightInnerAngle(Ogre::Degree(16.0f));
-	luz->setSpotlightOuterAngle(Ogre::Degree(15.0f));
-
-	//! La forma que se expande hacia los lados(Dice oscar)
-	//! Que le ha preguntado al tip
-	luz->setSpotlightFalloff(0.1f);
-
-	light->attachObject(luz);
+		//! La forma que se expande hacia los lados(Dice oscar)
+		//! Que le ha preguntado al tip
+		luz->setSpotlightFalloff(0.1f);
+		light->attachObject(luz);
+	}
 
     isStopped = false;
     manualyStopped = false;
@@ -142,4 +140,8 @@ void Dron::receiveEvent(Message mes, EntityIG* entidad)
 	default:
 		break;
 	}
+}
+
+Ogre::Entity* Dron::getCuerpoDron() const{
+	return cuerpoSphere;
 }

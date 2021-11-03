@@ -80,10 +80,7 @@ void IG2App::BallClock(float rad) {
 	manecillas[2]->setPosition(0, 400, 0);
 
 }
-void IG2App::sceneFive(){
-	Ogre::SceneNode* shrek  = mSM->getRootSceneNode()->createChildSceneNode();
-	Sinbad* conBad = new Sinbad(shrek);
-}
+
 
 void IG2App::sceneOne() {
 	//Reloj
@@ -185,6 +182,12 @@ void IG2App::setupScene(void) {
 	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 }
 
+
+void IG2App::sceneFive() {
+	Ogre::SceneNode* shrek = mSM->getRootSceneNode()->createChildSceneNode();
+	Sinbad* conBad = new Sinbad(shrek);
+}
+
 void IG2App::sceneFour() {
 	//! PLANETA
 	Ogre::SceneNode* planeta;
@@ -194,7 +197,20 @@ void IG2App::sceneFour() {
 	planeta->attachObject(sphere);
 	planeta->setScale(32, 32, 32);
 
-	//! DRON
+	//! AVION
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	a->getMainNode()->setPosition(0, 3700, 0);
+	addInputListener(a);
+	entidades.push_back(a);
+
+	//! Enjambre
+	Ogre::SceneNode* swarm = mSM->getRootSceneNode()->createChildSceneNode();
+	Enjambre* enj = new Enjambre(swarm, a->getMainNode());
+	addInputListener(enj);
+	
+	entidades.push_back(enj);
+
+	////! DRON
 	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
 	dron = new Dron(ficticioDroneNode, 6, 12);
 	addInputListener(dron);
@@ -202,12 +218,6 @@ void IG2App::sceneFour() {
 	dron->getMainNode()->setPosition(0, 3700, 0);
 	entidades.push_back(dron);
 	EntityIG::addListener(dron);
-
-	//! AVION
-	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
-	a->getMainNode()->setPosition(0, 3700, 0);
-	addInputListener(a);
-	entidades.push_back(a);
 	
 	EntityIG::addListener(a);
 	//! PLANO

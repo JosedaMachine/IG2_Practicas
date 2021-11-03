@@ -46,6 +46,4 @@ void RotorDron::rotate()
 }
 
 RotorDron::~RotorDron() {
-
-	delete mNode;
 }

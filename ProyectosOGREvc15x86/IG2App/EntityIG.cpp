@@ -8,6 +8,7 @@ EntityIG::EntityIG(Ogre::SceneNode* node): mNode(node), mSM(mNode->getCreator())
 }
 
 EntityIG::~EntityIG() {
+	delete mNode;
 }
 
 void EntityIG::sendEvent(Message mes, EntityIG* entidad)
