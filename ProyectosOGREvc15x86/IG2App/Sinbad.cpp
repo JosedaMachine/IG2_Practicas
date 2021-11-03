@@ -6,17 +6,17 @@ Sinbad::Sinbad(Ogre::SceneNode* _node) : EntityIG(_node){
 	Ogre::Entity* cuerpo = mSM->createEntity("Sinbad.mesh");
 	mNode->attachObject(cuerpo);
 
-	/*runBase = cuerpo->getAnimationState("RunBase");
+	runBase = cuerpo->getAnimationState("RunBase");
 	runBase->setEnabled(true);
-	runBase->setLoop(true);*/
+	runBase->setLoop(true);
 
 	dance = cuerpo->getAnimationState("Dance");
 	dance->setEnabled(true);
 	dance->setLoop(true);
 
-	/*runTop = cuerpo->getAnimationState("RunTop");
+	runTop = cuerpo->getAnimationState("RunTop");
 	runTop->setEnabled(true);
-	runTop->setLoop(true);*/
+	runTop->setLoop(true);
 
 	getAnimationNames(cuerpo);
 
@@ -24,8 +24,6 @@ Sinbad::Sinbad(Ogre::SceneNode* _node) : EntityIG(_node){
 	myTimer = Ogre::Timer();
 	myTimer.reset();
 	isStopped = false;
-
-	//mNode->yaw(Ogre::Degree(90.f));
 }
 
 Sinbad::~Sinbad() {
@@ -44,9 +42,9 @@ void Sinbad::getAnimationNames(Ogre::Entity* ent){
 }
 
 void Sinbad::frameRendered(Ogre::FrameEvent const& evt) {
-	//runBase->addTime(evt.timeSinceLastFrame);
-	//runTop->addTime(evt.timeSinceLastFrame);
-	dance->addTime(evt.timeSinceLastFrame);
+	runBase->addTime(evt.timeSinceLastFrame);
+	runTop->addTime(evt.timeSinceLastFrame);
+	//dance->addTime(evt.timeSinceLastFrame);
 
 	gira();
 }
@@ -58,17 +56,16 @@ void Sinbad::gira(){
 		clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
 
 		timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
-		gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+		gradesToAdd = (180.0 / ((float)timeLimit) ) * 20.0f;
 
 	}
 	else if (!isStopped) {
-		EL_TRUCO(0.5f);
+		EL_TRUCO(0.7f);
 	}
 
 	if (isStopped) {
 		std::cout << gradesToAdd << "\n";
 		std::cout << clockWise << "\n";
-		//? No gira del todo bien a saber por que
 		mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
 		if (myTimerStopped.getMilliseconds() > timeLimit) {
 			isStopped = false;
@@ -80,6 +77,6 @@ void Sinbad::gira(){
 
 void Sinbad::EL_TRUCO(float const& degrees) {
 	mNode->translate(0.0, -3490, 0.0, Ogre::Node::TS_LOCAL);
-	mNode->roll(Ogre::Degree(degrees));
+	mNode->pitch(Ogre::Degree(degrees));
 	mNode->translate(0.0, 3490, 0.0, Ogre::Node::TS_LOCAL);
 }
