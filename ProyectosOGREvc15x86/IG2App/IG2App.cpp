@@ -184,8 +184,21 @@ void IG2App::setupScene(void) {
 
 
 void IG2App::sceneFive() {
-	Ogre::SceneNode* shrek = mSM->getRootSceneNode()->createChildSceneNode();
-	Sinbad* conBad = new Sinbad(shrek);
+	//! PLANETA
+	Ogre::SceneNode* planeta;
+	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	sphere->setMaterialName("Practica1/Naboo");
+	planeta->attachObject(sphere);
+	planeta->setScale(32, 32, 32);
+
+	Sinbad* conBad = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
+	
+	float size = 60;
+	conBad->getMainNode()->setScale(size, size, size);
+	conBad->getMainNode()->setPosition(0, 3490, 0);
+
+	addInputListener(conBad);
 }
 
 void IG2App::sceneFour() {
