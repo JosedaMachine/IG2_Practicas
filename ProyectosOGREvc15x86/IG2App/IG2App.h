@@ -14,6 +14,7 @@
 #include "Plano.h"
 #include "Sinbad.h"
 #include "Enjambre.h"
+#include "Bomba.h"
 
 #include "EntityIG.h"
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -32,6 +33,8 @@ protected:
 
   //Metodos de pulsar
   void BallClock(float rad);
+  
+  void sceneSix();
   
   void sceneFive();
 

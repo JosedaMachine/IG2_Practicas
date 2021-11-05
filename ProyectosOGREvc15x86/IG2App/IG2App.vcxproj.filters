@@ -66,6 +66,9 @@
     <ClInclude Include="Sinbad.h">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
+    <ClInclude Include="Bomba.h">
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IG2ApplicationContext.cpp">
@@ -108,6 +111,9 @@
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
     <ClCompile Include="Sinbad.cpp">
+      <Filter>Archivos de código fuente\Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomba.cpp">
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
   </ItemGroup>

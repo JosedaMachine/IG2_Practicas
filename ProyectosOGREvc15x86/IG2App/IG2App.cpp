@@ -81,6 +81,14 @@ void IG2App::BallClock(float rad) {
 
 }
 
+void IG2App::sceneSix(){
+	//! BOMBA
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
+	//a->getMainNode()->setPosition(0, 3700, 0);
+	addInputListener(b);
+	entidades.push_back(b);
+}
+
 
 void IG2App::sceneOne() {
 	//Reloj
@@ -129,7 +137,7 @@ void IG2App::setCamNLight() {
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
 
-	mLightNode->setDirection(Ogre::Vector3(0, 0, -1));  //vec3.normalise();
+	mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
 	//lightNode->setPosition(0, 0, 1000);
 }
 
@@ -172,7 +180,8 @@ void IG2App::setupScene(void) {
 	setCamNLight();
 
 	//sceneFour();
-	sceneFive();
+	//sceneFive();
+	sceneSix();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
