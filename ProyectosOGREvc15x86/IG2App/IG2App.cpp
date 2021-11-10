@@ -85,8 +85,15 @@ void IG2App::sceneSix(){
 	//! BOMBA
 	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
 	//a->getMainNode()->setPosition(0, 3700, 0);
+	//Hay que hacer otro nodo fuera
+	b->getMainNode()->setScale(Vector3(1000.0));
 	addInputListener(b);
 	entidades.push_back(b);
+
+	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), 
+		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
+
+	entidades.push_back(p);
 }
 
 
@@ -118,7 +125,7 @@ void IG2App::setCamNLight() {
 	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
 	mCamNode->attachObject(cam);
 
-	mCamNode->setPosition(0, 0, 7000);
+	mCamNode->setPosition(0, 0, 160);
 	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
 	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
 

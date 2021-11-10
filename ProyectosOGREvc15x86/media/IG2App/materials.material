@@ -128,3 +128,19 @@ material Practica1/armDron
         }
     }
 }
+
+material Practica1/Jaja
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 1
+
+            texture_unit
+            {
+                texture Water02.jpg
+            }
+        }
+    }
+}
