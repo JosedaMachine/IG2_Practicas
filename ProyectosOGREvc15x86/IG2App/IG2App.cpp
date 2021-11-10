@@ -86,7 +86,7 @@ void IG2App::sceneSix(){
 	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
 	//a->getMainNode()->setPosition(0, 3700, 0);
 	//Hay que hacer otro nodo fuera
-	b->getMainNode()->setScale(Vector3(1000.0));
+	b->getMainNode()->setScale(Vector3(10.0));
 	addInputListener(b);
 	entidades.push_back(b);
 

@@ -8,6 +8,7 @@ public:
 
 private:
 	Ogre::AnimationState* animationState;
+	Ogre::SceneNode* animationNode;
 
 	// Heredado vía EntityIG
 	virtual void frameRendered(Ogre::FrameEvent const& evt) override;

@@ -6,12 +6,14 @@
 Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
     Ogre::Entity* bomba = mSM->createEntity("Barrel.mesh");
     bomba->setMaterialName("Practica1/Wings");
-    mNode->attachObject(bomba);
+
+	animationNode = mNode->createChildSceneNode();
+    animationNode->attachObject(bomba);
 
 	float duracion = 1;
 	Ogre::Animation* animation = mSM->createAnimation("animVV", duracion);
 	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
-	track->setAssociatedNode(mNode);
+	track->setAssociatedNode(animationNode);
 	Ogre::Vector3 keyframePos(-10., 0., 100.);
 	Ogre::Real durPaso = duracion / 4.0;  // uniformes
 	Ogre::TransformKeyFrame* kf;              // 5 keyFrames: origen(0), arriba, origen, abajo, origen(4)
