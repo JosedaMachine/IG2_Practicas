@@ -90,10 +90,42 @@ void IG2App::sceneSix(){
 	addInputListener(b);
 	entidades.push_back(b);
 
+	//! Plano Jaja
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), 
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
 
+	p->setMaterial("Practica1/Jaja");
+
 	entidades.push_back(p);
+
+	//! Plano Amarillo
+	Plano* pAmarillo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_3", { 300 , 300 }, { 100, 80 });
+
+	pAmarillo->setMaterial("Practica1/Yellow");
+
+	pAmarillo->getMainNode()->translate(Vector3(-250,10,250));
+
+	entidades.push_back(pAmarillo);
+
+	//! Plano Rojo
+	Plano* pRojo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_4", { 300 , 300 }, { 100, 80 });
+
+	pRojo->setMaterial("Practica1/Red");
+
+	pRojo->getMainNode()->translate(Vector3(250, 10, -250));
+
+	entidades.push_back(pRojo);
+
+	//! Sinbad
+	Sinbad* elOgroMaloliente = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
+
+	elOgroMaloliente->arma();
+
+	elOgroMaloliente->getMainNode()->scale(Vector3(10, 10, 10));
+
+	elOgroMaloliente->getMainNode()->translate(Vector3(-250, 62, 250));
 }
 
 

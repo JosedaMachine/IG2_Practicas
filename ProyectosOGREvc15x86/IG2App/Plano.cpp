@@ -10,9 +10,8 @@ Plano::Plano(Ogre::SceneNode* mNode_, std::string const& name, std::pair<int, in
 		Plane(Vector3::UNIT_Y, 0), size.first, size.second, cuts.first, cuts.second, true,
 		1, 1.0, 1.0, Vector3::UNIT_Z);
 
-	Entity* e = mSM->createEntity(name);
+	e = mSM->createEntity(name);
 
-	e->setMaterialName("Practica1/Jaja");
 	mNode->attachObject(e);
 
 }

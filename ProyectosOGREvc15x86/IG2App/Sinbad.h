@@ -9,6 +9,7 @@ class Sinbad : public EntityIG
 public:
 	Sinbad(Ogre::SceneNode* _node);
 	virtual ~Sinbad();
+	void arma();
 
 private:
 	// Heredado vía EntityIG
@@ -20,7 +21,6 @@ private:
 	void gira();
 
 	void arma(bool has);
-	void arma();
 	void cambiaEspada();
 
 	bool isStopped, hasSwords, isDancing;
