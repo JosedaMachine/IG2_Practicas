@@ -14,7 +14,7 @@ public:
 	virtual ~Plano() {};
 
 	void setMaterial(std::string name) { e->setMaterialName(name); }
-
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) override;
 private:
 	Entity* e;
 };

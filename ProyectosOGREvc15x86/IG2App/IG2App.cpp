@@ -103,7 +103,7 @@ void IG2App::sceneSix(){
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
 
 	p->setMaterial("Practica1/Jaja");
-
+	addInputListener(p);
 	entidades.push_back(p);
 
 	//! Plano Amarillo

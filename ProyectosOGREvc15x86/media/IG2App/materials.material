@@ -145,3 +145,19 @@ material Practica1/Jaja
         }
     }
 }
+
+material Practica1/LaPiedraJhonson
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 1
+
+            texture_unit
+            {
+                texture floor_specular.PNG
+            }
+        }
+    }
+}
