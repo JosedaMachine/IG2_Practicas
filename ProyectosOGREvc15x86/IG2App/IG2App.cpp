@@ -39,7 +39,7 @@ void IG2App::BallClock(float rad) {
 	float ang = 0;
 	float pro = 360.0 / 12;
 
-	//las esferas del dragón
+	//las esferas del dragï¿½n
 	for (int i = 0; i < 12; i++) {
 		Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
 
@@ -51,12 +51,12 @@ void IG2App::BallClock(float rad) {
 		mHourNode[i]->setPosition(Ogre::Math::Sin(angle) * rad, Ogre::Math::Cos(angle) * rad, 0);
 		ang += pro;
 
-		//Hacer más pequeñas las pares
-		//No lo hago así porque Antonio dice que es de feos
+		//Hacer mï¿½s pequeï¿½as las pares
+		//No lo hago asï¿½ porque Antonio dice que es de feos
 		//if(i%2 == 0) mHourNode[i]->setScale(0.5, 0.5, 0.5);
 	}
 
-	//Hacerlas más pequeñas
+	//Hacerlas mï¿½s pequeï¿½as
 	for (int i = 0; i < 12; i = i + 2)
 		mSM->getSceneNode("Hora" + std::to_string(i))->setScale(0.4, 0.4, 0.4);
 
@@ -68,7 +68,7 @@ void IG2App::BallClock(float rad) {
 		manecillas[i]->attachObject(manecilla);
 	}
 
-	//Configurar para que de igual el tamaño, se ponga bien
+	//Configurar para que de igual el tamaï¿½o, se ponga bien
 	manecillas[0]->setScale(0.3, 8, 0.3);
 	manecillas[0]->setPosition(-350, -200, 0);
 	manecillas[0]->roll(Ogre::Degree(-60));
@@ -90,7 +90,15 @@ void IG2App::sceneSix(){
 	addInputListener(b);
 	entidades.push_back(b);
 
-	//! Plano Jaja
+	//! ESFERA
+	Ogre::SceneNode* planeta;
+	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	sphere->setMaterialName("Practica1/happyCursed");
+	planeta->attachObject(sphere);
+	planeta->setScale(32, 32, 32);
+
+	//! PLANO
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), 
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
 
