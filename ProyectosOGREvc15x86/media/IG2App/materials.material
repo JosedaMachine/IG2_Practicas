@@ -156,7 +156,7 @@ material Practica1/LaPiedraJhonson
 
             texture_unit
             {
-                texture floor_specular.PNG
+                texture BeachStones.jpg
             }
         }
     }
