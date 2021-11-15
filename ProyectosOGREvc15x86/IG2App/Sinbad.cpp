@@ -87,6 +87,11 @@ void Sinbad::gira(){
 	}
 }
 
+void Sinbad::setRoute(Vector3 const& intial, Vector3 const& final){
+	initalPoint = intial;
+	finalPoint = finalPoint;
+}
+
 void Sinbad::arma(bool left){
 	if (!swordL->isVisible() && !swordR->isVisible()) {
 		int i = Ogre::Math::RangeRandom(0, 1);

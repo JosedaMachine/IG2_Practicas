@@ -4,6 +4,8 @@
 #include <OgreTimer.h>
 #include <OgreEntity.h>
 
+using namespace Ogre;
+
 class Sinbad : public EntityIG
 {
 public:
@@ -19,12 +21,14 @@ private:
 	void EL_TRUCO(float const& degrees);
 	void getAnimationNames(Ogre::Entity* ent);
 	void gira();
+	void setRoute(Vector3 const& intial, Vector3 const& final);
 
 	void arma(bool has);
 	void cambiaEspada();
 
 	bool isStopped, hasSwords, isDancing;
 
+	Vector3 initalPoint, finalPoint;
 	Ogre::Entity* cuerpo, *swordL, * swordR;
 	Ogre::Timer myTimer, myTimerStopped;
 	Ogre::AnimationState* runBase = nullptr, *runTop = nullptr, *dance = nullptr;
