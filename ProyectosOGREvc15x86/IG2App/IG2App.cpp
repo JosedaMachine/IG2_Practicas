@@ -91,12 +91,20 @@ void IG2App::sceneSix(){
 	entidades.push_back(b);
 
 	//! ESFERA
-	Ogre::SceneNode* planeta;
-	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
 	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
 	sphere->setMaterialName("Practica1/happyCursed");
-	planeta->attachObject(sphere);
-	planeta->setScale(32, 32, 32);
+	Ogre::SceneNode*  happyCursed_ = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	happyCursed_->attachObject(sphere);
+	happyCursed_->translate(Vector3(385, 50, -250));
+	happyCursed_->setScale(Vector3(0.3f));
+
+	//! AVION
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	a->getMainNode()->setScale(Vector3(0.3f));
+	a->getMainNode()->setPosition(0, 500, -500);
+	a->setPlaneAction(Avion::OVERFLY);
+	addInputListener(a);
+	entidades.push_back(a);
 
 	//! PLANO
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), 
@@ -109,30 +117,21 @@ void IG2App::sceneSix(){
 	//! Plano Amarillo
 	Plano* pAmarillo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
 		"mPlane1080x800_3", { 300 , 300 }, { 100, 80 });
-
 	pAmarillo->setMaterial("Practica1/Yellow");
-
 	pAmarillo->getMainNode()->translate(Vector3(-385, 10, 250));
-
 	entidades.push_back(pAmarillo);
 
 	//! Plano Rojo
 	Plano* pRojo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
 		"mPlane1080x800_4", { 300 , 300 }, { 100, 80 });
-
 	pRojo->setMaterial("Practica1/Red");
-
 	pRojo->getMainNode()->translate(Vector3(385, 10, -250));
-
 	entidades.push_back(pRojo);
 
 	//! Sinbad
 	Sinbad* elOgroMaloliente = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
-
 	elOgroMaloliente->arma();
-
 	elOgroMaloliente->getMainNode()->scale(Vector3(10, 10, 10));
-
 	elOgroMaloliente->getMainNode()->translate(Vector3(-385, 62, 250));
 }
 
@@ -269,6 +268,7 @@ void IG2App::sceneFour() {
 	//! AVION
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
 	a->getMainNode()->setPosition(0, 3700, 0);
+	a->setPlaneAction(Avion::ORBITATE);
 	addInputListener(a);
 	entidades.push_back(a);
 

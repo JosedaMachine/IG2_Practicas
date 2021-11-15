@@ -4,17 +4,23 @@
 #include <OgreSceneNode.h>
 #include "AspasMolino.h"
 
-class Avion: public EntityIG
-{
+class Avion: public EntityIG{
 public:
+	enum ACTION{
+		OVERFLY,
+		ORBITATE
+	};
 	Avion(Ogre::SceneNode * mNode_);
-
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 
 	virtual void frameRendered(Ogre::FrameEvent const& evt);
 
-	void EL_TRUCO(float const& degrees);
+	void EL_TRUCO_Vertical(float const& degrees);
+
+	void EL_TRUCO_Horizontal(float const& degrees);
+
+	void setPlaneAction(ACTION act);
 
 private:
 	//No se como se hace, asique hay que preguntar el proximo dia
@@ -35,9 +41,9 @@ private:
 	int clockWise;
 	float gradesToAdd;
 	unsigned int maxTime = 2000, timeLimit = 0;
+	ACTION planeAction;
 	Ogre::Timer myTimer, myTimerStopped;
 
-	//!? JEJE LES CAMBIE EL NOMBRE Y ENCIMA COMENTO EN MORADO PARA QUE TE JODA MAS
 	void ToLeft();
 	void ToRight();
 	void Front();
@@ -46,6 +52,10 @@ private:
 	void createLight();
 
 	void restablishTextures();
+
+	void orbitate();
+
+	void overflyOgre();
 	
 protected:
 	virtual void receiveEvent(Message mes,EntityIG* entidad);

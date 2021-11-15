@@ -10,8 +10,10 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 
 	Ogre::Entity* cuerpo = mSM->createEntity("sphere.mesh");
 	cuerpoAux = cuerpo;
-	//cuerpo->setMaterialName("Practica1/Red");
+	cuerpo->setMaterialName("Practica1/Red");
 	cuerpoNode->attachObject(cuerpo);
+
+	planeAction = ORBITATE;
 
 	helices();
 
@@ -41,12 +43,53 @@ void Avion::createLight()
 	light->attachObject(luz);
 }
 
-void Avion::restablishTextures()
-{
+void Avion::restablishTextures() {
 	//material por defecto
 	cuerpoAux->setMaterialName("BaseWhite");
 	alaIAux->setMaterialName("Practica1/Wings");
 	alaDAux->setMaterialName("Practica1/Wings");
+}
+
+void Avion::orbitate(){
+	if (!manuallyStopped) {
+		if (myTimer.getMilliseconds() > maxTime && !isStopped) {
+			isStopped = true;
+			myTimerStopped.reset();
+			clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
+
+			timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
+			gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
+
+		}
+		else if (!isStopped) {
+			EL_TRUCO_Vertical(0.5f);
+			for (auto h : heliceNodes) {
+				h->rotate();
+			}
+		}
+
+		if (isStopped) {
+			mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
+			if (myTimerStopped.getMilliseconds() > timeLimit) {
+				isStopped = false;
+				myTimerStopped.reset();
+				myTimer.reset();
+			}
+		}
+	}
+	else {
+		for (auto h : heliceNodes) {
+			h->rotate();
+		}
+	}
+}
+
+void Avion::overflyOgre(){
+	EL_TRUCO_Horizontal(1.0f);
+
+	for (auto h : heliceNodes) {
+		h->rotate();
+	}
 }
 
 void Avion::receiveEvent(Message mes,EntityIG* entidad)
@@ -70,7 +113,6 @@ void Avion::receiveEvent(Message mes,EntityIG* entidad)
 }
 
 void Avion::helices() {
-
 	Ogre::SceneNode* aspa1 = mNode->createChildSceneNode();
 	AspasMolino* a1 = new AspasMolino(aspa1, false, 6);
 	a1->getMainNode()->scale(0.15, 0.15, 0.15);
@@ -82,7 +124,6 @@ void Avion::helices() {
 	Ogre::SceneNode* aspa2 = mNode->createChildSceneNode();
 	AspasMolino* a2 = new AspasMolino(aspa2, false, 6);
 
-	
 	a2->getMainNode()->scale(0.15, 0.15, 0.15);
 	a2->getMainNode()->translate(Ogre::Vector3(-30, 0, -300));
 	a2->getMainNode()->yaw(Ogre::Degree(90.0));
@@ -111,8 +152,7 @@ void Avion::Front()
 	fernteNode->scale(10, 1, 10);
 }
 
-void Avion::ToRight()
-{
+void Avion::ToRight() {
 	alaDNode = mNode->createChildSceneNode();
 	Ogre::Entity* alaDerecha = mSM->createEntity("cube.mesh");
 	alaDAux = alaDerecha;
@@ -123,8 +163,7 @@ void Avion::ToRight()
 	alaDNode->scale(1.2, 0.2, 4);
 }
 
-void Avion::ToLeft()
-{
+void Avion::ToLeft() {
 	alaINode = mNode->createChildSceneNode();
 	Ogre::Entity* alaIzquierda = mSM->createEntity("cube.mesh");
 	alaIAux = alaIzquierda;
@@ -146,42 +185,26 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Avion::frameRendered(Ogre::FrameEvent const& evt) {
-	if (!manuallyStopped) {
-
-		if (myTimer.getMilliseconds() > maxTime && !isStopped) {
-			isStopped = true;
-			myTimerStopped.reset();
-			clockWise = Ogre::Math::RangeRandom(-1, 1) < 0 ? 1 : -1;
-
-			timeLimit = Ogre::Math::RangeRandom(1000, maxTime);
-			gradesToAdd = 180.0 / ((float)timeLimit * 0.6);
-
-		}
-		else if (!isStopped) {
-			EL_TRUCO(0.5f);
-			for (auto h : heliceNodes) {
-				h->rotate();
-			}
-		}
-
-		if (isStopped) {
-			mNode->yaw(Ogre::Degree(gradesToAdd * clockWise));
-			if (myTimerStopped.getMilliseconds() > timeLimit) {
-				isStopped = false;
-				myTimerStopped.reset();
-				myTimer.reset();
-			}
-		}
+	if (planeAction == OVERFLY) {
+		overflyOgre();
 	}
 	else {
-		for (auto h : heliceNodes) {
-			h->rotate();
-		}
+		orbitate();
 	}
 }
 
-void Avion::EL_TRUCO(float const& degrees){
+void Avion::EL_TRUCO_Vertical(float const& degrees){
 	mNode->translate(0.0, -3600, 0.0, Ogre::Node::TS_LOCAL);
 	mNode->roll(Ogre::Degree(degrees));
 	mNode->translate(0.0, 3600, 0.0, Ogre::Node::TS_LOCAL);
+}
+
+void Avion::EL_TRUCO_Horizontal(float const& degrees){
+	mNode->translate(0.0, -500, 500, Ogre::Node::TS_LOCAL);
+	mNode->yaw(Ogre::Degree(degrees));
+	mNode->translate(0.0, 500, -500, Ogre::Node::TS_LOCAL);
+}
+
+void Avion::setPlaneAction(ACTION act){
+	planeAction = act;
 }
