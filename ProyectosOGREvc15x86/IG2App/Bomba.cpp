@@ -7,9 +7,6 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
     Ogre::Entity* bomba = mSM->createEntity("Barrel.mesh");
     bomba->setMaterialName("Practica1/Wings");
 
-	timer = Ogre::Timer();
-	timer.reset();
-
 	animationNode = mNode->createChildSceneNode();
     animationNode->attachObject(bomba);
 
@@ -51,11 +48,6 @@ Bomba::~Bomba(){
 void Bomba::frameRendered(Ogre::FrameEvent const& evt)
 {
 	if(!stopped)animationState->addTime(evt.timeSinceLastFrame);
-
-	if (stopped && timer.getMilliseconds() >= stopTime ) {
-		stopped = false;
-		timer.reset();
-	}
 }
 
 bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt)

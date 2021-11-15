@@ -1,9 +1,7 @@
 #include "EntityIG.h"
-#include <OgreTimer.h>
 
 #pragma once
 class Bomba : public EntityIG {
-	const float stopTime = 5000;
 
 public:
 	Bomba(Ogre::SceneNode* _node);
@@ -12,8 +10,6 @@ public:
 private:
 	Ogre::AnimationState* animationState;
 	Ogre::SceneNode* animationNode;
-
-	Ogre::Timer timer;
 
 	bool stopped = false;
 

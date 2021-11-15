@@ -14,13 +14,19 @@ Plano::Plano(Ogre::SceneNode* mNode_, std::string const& name, std::pair<int, in
 
 	mNode->attachObject(e);
 
+
+	timer = Ogre::Timer();
+	timer.reset();
 }
 
 bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_t) {
-		e->setMaterialName("Practica1/LaPiedraJhonson");
+		dry = true;
 	}
+
+	if(dry && timer.getMilliseconds() >= stopTime)
+		e->setMaterialName("Practica1/LaPiedraJhonson");
 
 	return false;
 }
