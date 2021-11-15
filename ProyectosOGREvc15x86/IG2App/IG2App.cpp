@@ -112,7 +112,7 @@ void IG2App::sceneSix(){
 
 	pAmarillo->setMaterial("Practica1/Yellow");
 
-	pAmarillo->getMainNode()->translate(Vector3(-250,10,250));
+	pAmarillo->getMainNode()->translate(Vector3(-385, 10, 250));
 
 	entidades.push_back(pAmarillo);
 
@@ -122,7 +122,7 @@ void IG2App::sceneSix(){
 
 	pRojo->setMaterial("Practica1/Red");
 
-	pRojo->getMainNode()->translate(Vector3(250, 10, -250));
+	pRojo->getMainNode()->translate(Vector3(385, 10, -250));
 
 	entidades.push_back(pRojo);
 
@@ -133,7 +133,7 @@ void IG2App::sceneSix(){
 
 	elOgroMaloliente->getMainNode()->scale(Vector3(10, 10, 10));
 
-	elOgroMaloliente->getMainNode()->translate(Vector3(-250, 62, 250));
+	elOgroMaloliente->getMainNode()->translate(Vector3(-385, 62, 250));
 }
 
 
