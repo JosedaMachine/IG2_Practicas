@@ -10,36 +10,40 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
 	animationNode = mNode->createChildSceneNode();
     animationNode->attachObject(bomba);
 
-	float duracion = 1;
+	float duracion = 1.f;
+	float longDesplazamiento = 20.f;
+
+	//TODO Animation
 	Ogre::Animation* animation = mSM->createAnimation("animVV", duracion);
 	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
 	track->setAssociatedNode(animationNode);
-	Ogre::Vector3 keyframePos(-10., 0., 100.);
-	Ogre::Real durPaso = duracion / 4.0;  // uniformes
-	Ogre::TransformKeyFrame* kf;              // 5 keyFrames: origen(0), arriba, origen, abajo, origen(4)
-	kf = track->createNodeKeyFrame(durPaso * 0);  // Keyframe 0: origen
-	kf->setTranslate(keyframePos); // Origen: Vector3
-	//... // -> ->
-	animationState = mSM->createAnimationState("animVV");
-	animationState->setLoop(true);
-	animationState->setEnabled(true);
-
-	//! Continuacion no se que sube y baja como la marea y gira gira
-	float longDesplazamiento = 20;
-
+	//TODO Pos Inicial , Orientacion y duraciones
 	Ogre::Vector3 keyframePosAux(0.0); 
 	Ogre::Vector3 src(0, 0, 1); // posición y orientación iniciales
+	Ogre::Real durPaso = duracion / 4.0;  // uniformes
+
+	//TODO KEYFRAMES -> Usaremos un solo keyframe para settear la pos y rot en cada momento
 	Ogre::TransformKeyFrame* kfAux;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
-	kfAux = track->createNodeKeyFrame(durPaso * 0);   // Keyframe 0: origen
-	kfAux = track->createNodeKeyFrame(durPaso * 1);   // Keyframe 1: abajo
+	//! Keyframe 0: origen
+	kfAux = track->createNodeKeyFrame(durPaso * 0);  
+	kfAux->setTranslate(keyframePosAux);
+	//! Keyframe 0: Abajo
+	kfAux = track->createNodeKeyFrame(durPaso * 1);
 	keyframePosAux += Ogre::Vector3::NEGATIVE_UNIT_Y * longDesplazamiento;
 	kfAux->setTranslate(keyframePosAux);  // Abajo  
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, 1))); // Yaw(45) 
-	kfAux = track->createNodeKeyFrame(durPaso * 3); // Keyframe 2: arriba
+	//! Keyframe 2: Arriba
+	kfAux = track->createNodeKeyFrame(durPaso * 3);
 	keyframePosAux += Ogre::Vector3::UNIT_Y * longDesplazamiento * 2;
 	kfAux->setTranslate(keyframePosAux);  // Arriba
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1))); // Yaw(-45)
-	kfAux = track->createNodeKeyFrame(durPaso * 4);  // Keyframe 3: origen
+	//! Keyframe 3: origen
+	kfAux = track->createNodeKeyFrame(durPaso * 4); //durPaso = duracion/4.0 -> durPaso * 4 = 1.0
+
+	//TODO Relacionar la animación con un Estado 
+	animationState = mSM->createAnimationState("animVV");
+	animationState->setLoop(true);
+	animationState->setEnabled(true);
 }
 
 Bomba::~Bomba(){
