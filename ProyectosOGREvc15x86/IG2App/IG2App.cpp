@@ -81,78 +81,6 @@ void IG2App::BallClock(float rad) {
 
 }
 
-void IG2App::sceneSix(){
-	//! BOMBA
-	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
-	//a->getMainNode()->setPosition(0, 3700, 0);
-	//Hay que hacer otro nodo fuera
-	b->getMainNode()->setScale(Vector3(10.0));
-	addInputListener(b);
-	entidades.push_back(b);
-
-	//! ESFERA
-	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
-	sphere->setMaterialName("Practica1/happyCursed");
-	Ogre::SceneNode*  happyCursed_ = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
-	happyCursed_->attachObject(sphere);
-	happyCursed_->translate(Vector3(385, 50, -250));
-	happyCursed_->setScale(Vector3(0.3f));
-
-	//! AVION
-	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
-	a->getMainNode()->setScale(Vector3(0.3f));
-	a->getMainNode()->setPosition(0, 500, -500);
-	a->setPlaneAction(Avion::OVERFLY);
-	addInputListener(a);
-	entidades.push_back(a);
-
-	//! PLANO
-	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), 
-		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
-
-	p->setMaterial("Practica1/Jaja");
-	addInputListener(p);
-	entidades.push_back(p);
-
-	//! Plano Amarillo
-	Plano* pAmarillo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
-		"mPlane1080x800_3", { 300 , 300 }, { 100, 80 });
-	pAmarillo->setMaterial("Practica1/Yellow");
-	pAmarillo->getMainNode()->translate(Vector3(-385, 10, 250));
-	entidades.push_back(pAmarillo);
-
-	//! Plano Rojo
-	Plano* pRojo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
-		"mPlane1080x800_4", { 300 , 300 }, { 100, 80 });
-	pRojo->setMaterial("Practica1/Red");
-	pRojo->getMainNode()->translate(Vector3(385, 10, -250));
-	entidades.push_back(pRojo);
-
-	//! Sinbad
-	Sinbad* elOgroMaloliente = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
-	elOgroMaloliente->arma();
-	elOgroMaloliente->getMainNode()->scale(Vector3(10, 10, 10));
-	elOgroMaloliente->getMainNode()->translate(Vector3(-385, 62, 250));
-}
-
-
-void IG2App::sceneOne() {
-	//Reloj
-	BallClock(1000);
-	//Dron
-
-	aspas = new AspasMolino(mSM->getRootSceneNode()->createChildSceneNode(), 12);
-	molino = new Molino(mSM->getRootSceneNode()->createChildSceneNode());
-	entidades.push_back(new Molino(mSM->getRootSceneNode()->createChildSceneNode()));
-	entidades.push_back(new RotorDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
-	entidades.push_back(new BrazoDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
-	Dron* dron = new Dron(mSM->getRootSceneNode()->createChildSceneNode(), 8, 12);
-	entidades.push_back(dron);
-	float scale = 0.5;
-	dron->getMainNode()->translate(700, 500, 400);
-	dron->getMainNode()->setScale(scale, scale, scale);
-}
-
 void IG2App::setCamNLight() {
 	// create the camera
 	Camera* cam = mSM->createCamera("Cam");
@@ -225,9 +153,7 @@ void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	setCamNLight();
 
-	//sceneFour();
-	//sceneFive();
-	sceneSix();
+	scene6();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
@@ -237,8 +163,71 @@ void IG2App::setupScene(void) {
 	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 }
 
+void IG2App::scene6() {
+	//! BOMBA
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
+	//a->getMainNode()->setPosition(0, 3700, 0);
+	//Hay que hacer otro nodo fuera
+	b->getMainNode()->setScale(Vector3(10.0));
+	addInputListener(b);
+	entidades.push_back(b);
 
-void IG2App::sceneFive() {
+	//! AVION
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	a->getMainNode()->setScale(Vector3(0.3f));
+	a->getMainNode()->setPosition(0, 500, -500);
+	a->setPlaneAction(Avion::OVERFLY);
+	addInputListener(a);
+	entidades.push_back(a);
+
+	//! PLANO
+	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
+	p->setMaterial("Practica1/Jaja");
+	addInputListener(p);
+	entidades.push_back(p);
+
+	Vector3 iniPos = { -385, 10, 250 }, finalPos = { 385, 10, -250 };
+
+	//! Plano Amarillo
+	Plano* pAmarillo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_3", { 300 , 300 }, { 100, 80 });
+	pAmarillo->setMaterial("Practica1/Yellow");
+	pAmarillo->getMainNode()->translate(Vector3(iniPos));
+	entidades.push_back(pAmarillo);
+
+	//! Plano Rojo
+	Plano* pRojo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_4", { 300 , 300 }, { 100, 80 });
+	pRojo->setMaterial("Practica1/Red");
+	pRojo->getMainNode()->translate(finalPos);
+	entidades.push_back(pRojo);
+
+	//! Sinbad
+	Sinbad* sinBad = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
+	addInputListener(sinBad);
+	entidades.push_back(sinBad);
+
+	sinBad->arma();
+	sinBad->getMainNode()->scale(Vector3(10));
+	Vector3 posOgreIni = iniPos, posOgreFin = finalPos;
+	posOgreIni.y = posOgreFin.y = 62;
+	sinBad->getMainNode()->translate(posOgreIni);
+	sinBad->setRoute(posOgreIni, posOgreFin);
+	
+
+	//! ESFERA
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	sphere->setMaterialName("Practica1/happyCursed");
+	Ogre::SceneNode* happyCursed_ = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	happyCursed_->attachObject(sphere);
+	Vector3 pos = finalPos;
+	pos.y = 50;
+	happyCursed_->translate(pos);
+	happyCursed_->setScale(Vector3(0.3f));
+}
+
+void IG2App::scene5() {
 	//! PLANETA
 	Ogre::SceneNode* planeta;
 	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
@@ -256,7 +245,7 @@ void IG2App::sceneFive() {
 	addInputListener(conBad);
 }
 
-void IG2App::sceneFour() {
+void IG2App::scene4() {
 	//! PLANETA
 	Ogre::SceneNode* planeta;
 	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
@@ -296,14 +285,14 @@ void IG2App::sceneFour() {
 	p->getMainNode()->setPosition(0, 0, -3600);
 }
 
-void IG2App::sceneThree() {
+void IG2App::scene3() {
 	//Avion
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
 	addInputListener(a);
 	entidades.push_back(a);
 }
 
-void IG2App::sceneTwo() {
+void IG2App::scene2() {
 	//Planeta
 	Ogre::SceneNode* planeta;
 	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -318,3 +307,21 @@ void IG2App::sceneTwo() {
 	dron->getMainNode()->setPosition(0, 3600, 0);
 	entidades.push_back(dron);
 }
+
+void IG2App::scene1() {
+	//Reloj
+	BallClock(1000);
+	//Dron
+
+	aspas = new AspasMolino(mSM->getRootSceneNode()->createChildSceneNode(), 12);
+	molino = new Molino(mSM->getRootSceneNode()->createChildSceneNode());
+	entidades.push_back(new Molino(mSM->getRootSceneNode()->createChildSceneNode()));
+	entidades.push_back(new RotorDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
+	entidades.push_back(new BrazoDron(mSM->getRootSceneNode()->createChildSceneNode(), 6));
+	Dron* dron = new Dron(mSM->getRootSceneNode()->createChildSceneNode(), 8, 12);
+	entidades.push_back(dron);
+	float scale = 0.5;
+	dron->getMainNode()->translate(700, 500, 400);
+	dron->getMainNode()->setScale(scale, scale, scale);
+}
+

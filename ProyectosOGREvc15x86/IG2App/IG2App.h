@@ -34,18 +34,18 @@ protected:
   //Metodos de pulsar
   void BallClock(float rad);
   
-  void sceneSix();
+  void scene6();
   
-  void sceneFive();
+  void scene5();
 
-  void sceneFour();
+  void scene4();
 
-  void sceneOne();
+  void scene1();
 
-  void sceneTwo();
+  void scene2();
 
   //Scene de pruebas
-  void sceneThree();
+  void scene3();
   
   void setCamNLight();
       

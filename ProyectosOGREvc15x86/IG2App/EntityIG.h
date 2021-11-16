@@ -7,6 +7,9 @@
 #include <OgreSceneNode.h>
 #include "Messages.h"
 
+#include <OgreAnimation.h>
+#include <OgreKeyFrame.h>
+
 class EntityIG : public OgreBites::InputListener {
 
 public:

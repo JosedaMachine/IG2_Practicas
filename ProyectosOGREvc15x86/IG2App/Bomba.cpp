@@ -1,8 +1,7 @@
 #include "Bomba.h"
 #include <OgreEntity.h>
-#include <OgreAnimation.h>
-#include <OgreKeyFrame.h>
 
+//TODO: El rio no se detiene 5s despues de darle a la T
 Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
     Ogre::Entity* bomba = mSM->createEntity("Barrel.mesh");
     bomba->setMaterialName("Practica1/Wings");
@@ -10,7 +9,7 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
 	animationNode = mNode->createChildSceneNode();
     animationNode->attachObject(bomba);
 
-	float duracion = 1.f;
+	float duracion = 2.f;
 	float longDesplazamiento = 20.f;
 
 	//TODO Animation
@@ -27,7 +26,7 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
 	//! Keyframe 0: origen
 	kfAux = track->createNodeKeyFrame(durPaso * 0);  
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 0: Abajo
+	//! Keyframe 1: Abajo
 	kfAux = track->createNodeKeyFrame(durPaso * 1);
 	keyframePosAux += Ogre::Vector3::NEGATIVE_UNIT_Y * longDesplazamiento;
 	kfAux->setTranslate(keyframePosAux);  // Abajo  
