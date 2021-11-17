@@ -180,6 +180,15 @@ void IG2App::scene6() {
 	addInputListener(a);
 	entidades.push_back(a);
 
+	//Ogre::SceneNode* pointsNode = mSM->getRootSceneNode()->createChildSceneNode();
+
+	//Ogre::BillboardSet* points = mSM->createBillboardSet("Se como Jose", 1);
+	//points->setDefaultDimensions(20, 20);
+	//points->setMaterialName("Practica1/Points");
+
+	//pointsNode->attachObject(points);
+	//Ogre::Billboard* bb = points->createBillboard(Ogre::Vector3(0, 40, 0));
+
 	//! PLANO
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });

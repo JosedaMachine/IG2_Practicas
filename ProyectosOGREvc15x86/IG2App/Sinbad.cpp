@@ -91,11 +91,8 @@ void Sinbad::gira(){
 }
 
 void Sinbad::routeAnim(){
-	float duracion = 7.f;
-	float longDesplazamiento = 20.f;
-
+	float duracion = 17.f;
 	Vector3 scale = mNode->getScale();
-
 	//TODO Animation
 	Ogre::Animation* animation = mSM->createAnimation("Ruta", duracion);
 	Ogre::NodeAnimationTrack* track = animation->createNodeTrack(0);
@@ -103,39 +100,38 @@ void Sinbad::routeAnim(){
 	//TODO Pos Inicial , Orientacion y duraciones
 	Ogre::Vector3 keyframePosAux(0.0);
 	Ogre::Vector3 src(0, 0, 1); // posición y orientación iniciales
-	Ogre::Real durPaso = duracion / 9.0;  // uniformes
-
+	Ogre::Real durPaso = duracion / 6.0;  // uniformes
 	//TODO KEYFRAMES -> Usaremos un solo keyframe para settear la pos y rot en cada momento
 	Ogre::TransformKeyFrame* kfAux;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
-	//! Keyframe 0: origen
-	//kfAux = track->createNodeKeyFrame(durPaso * 0);
-	//kfAux->setTranslate(keyframePosAux);
-	//kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
+	//! Keyframe 1: origen
 	kfAux = track->createNodeKeyFrame(durPaso * 0);
+	kfAux->setTranslate(keyframePosAux);
+	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
+	//! Keyframe 2
+	kfAux = track->createNodeKeyFrame(durPaso * 0.5);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, -1)));
-	//! Keyframe 1
+	//! Keyframe 2
 	kfAux = track->createNodeKeyFrame(durPaso * 1);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, -1)));
 	Vector3 posX = Ogre::Vector3::NEGATIVE_UNIT_X * initalPoint.x + Ogre::Vector3::UNIT_X * finalPoint.x;
 	Vector3 posZ = Ogre::Vector3::NEGATIVE_UNIT_Z * initalPoint.z + Ogre::Vector3::UNIT_Z * finalPoint.z;
 	keyframePosAux += posX * (scale.x / 50.f) + posZ * (scale.z / 50.f);
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 2 
-	kfAux = track->createNodeKeyFrame(durPaso * 2);
+	//! Keyframe 3 
+	kfAux = track->createNodeKeyFrame(durPaso * 4);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1)));
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 3
-	kfAux = track->createNodeKeyFrame(durPaso * 4);
+	//! Keyframe 4
+	kfAux = track->createNodeKeyFrame(durPaso * 4.5);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1)));
 	posX = Ogre::Vector3::UNIT_X * initalPoint.x  + Ogre::Vector3::NEGATIVE_UNIT_X * finalPoint.x;
 	posZ = Ogre::Vector3::UNIT_Z * initalPoint.z  + Ogre::Vector3::NEGATIVE_UNIT_Z * finalPoint.z;
 	keyframePosAux += posX * (scale.x / 50.f)  + posZ * (scale.z / 50.f);
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 4
-	kfAux = track->createNodeKeyFrame(durPaso * 5.5);
+	//! Keyframe 5
+	kfAux = track->createNodeKeyFrame(durPaso * 6);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
 	kfAux->setTranslate(keyframePosAux);
-
 	//TODO Relacionar la animación con un Estado 
 	route = mSM->createAnimationState("Ruta");
 	route->setLoop(true);

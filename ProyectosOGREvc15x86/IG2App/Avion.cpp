@@ -26,10 +26,13 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	NinjaPilot();
 
 	createLight(); 
+
+	createBillBoard();
+
+	setParticleSys();
 }
 
-void Avion::createLight()
-{
+void Avion::createLight(){
 	light = mNode->createChildSceneNode();
 
 	Ogre::Light* luz = mSM->createLight();
@@ -41,6 +44,16 @@ void Avion::createLight()
 	luz->setSpotlightFalloff(0.1f);
 
 	light->attachObject(luz);
+}
+
+void Avion::createBillBoard(){
+	points = mSM->createBillboardSet("Se como Jose", 1);
+	float size = 150;
+	points->setDefaultDimensions(size, size);
+	points->setMaterialName("Practica1/Points");
+
+	cuerpoNode->attachObject(points);
+	Ogre::Billboard* bb = points->createBillboard(Ogre::Vector3(10 + size, 0, 0));
 }
 
 void Avion::restablishTextures() {
@@ -85,7 +98,7 @@ void Avion::orbitate(){
 }
 
 void Avion::overflyOgre(){
-	EL_TRUCO_Horizontal(1.0f);
+	EL_TRUCO_Horizontal(0.2f);
 
 	for (auto h : heliceNodes) {
 		h->rotate();
@@ -180,7 +193,6 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 			h->keyPressed(evt);
 		}
 	}
-
 	return true;
 }
 
@@ -207,4 +219,10 @@ void Avion::EL_TRUCO_Horizontal(float const& degrees){
 
 void Avion::setPlaneAction(ACTION act){
 	planeAction = act;
+}
+
+void Avion::setParticleSys(){
+	pSys = mSM->createParticleSystem("psSmoke", "IG2App/Smoke");
+	pSys->setEmitting(true);
+	cuerpoNode->attachObject(pSys);
 }

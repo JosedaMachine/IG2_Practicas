@@ -4,6 +4,8 @@
 #include "IG2ApplicationContext.h"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+#include <OgreBillboardSet.h>
+#include <OgreBillboard.h>
 
 //Entitdades
 #include "Aspas.h"

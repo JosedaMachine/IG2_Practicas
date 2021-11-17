@@ -152,11 +152,40 @@ material Practica1/LaPiedraJhonson
     {
         pass
         {
-            diffuse 1 1 1
-
-            texture_unit
-            {
+            diffuse 0.2 0.2 0.2
+            
+            texture_unit{
                 texture BeachStones.jpg
+            }
+        }
+    }
+}
+
+material Practica1/Points
+{
+    technique
+    {
+        pass {
+            lighting off
+
+            texture_unit{
+                texture 10points.png
+            }
+        }
+    }
+}
+
+material Practica1/Smoke {
+    technique {
+        pass {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off   
+            diffuse vertexcolour
+    
+            texture_unit {
+                texture smoke.png
+                tex_address_mode clamp
             }
         }
     }
