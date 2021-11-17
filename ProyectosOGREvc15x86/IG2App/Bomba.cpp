@@ -55,7 +55,14 @@ void Bomba::frameRendered(Ogre::FrameEvent const& evt)
 
 bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_t) stopped = true;
+	if (evt.keysym.sym == SDLK_t) {
+		stopped = true;
+
+		ex = mSM->createParticleSystem("PedroPicaPiedra2", "IG2App/bombSmoke");
+		ex->setEmitting(true);
+		mNode->attachObject(ex);
+		ex->setVisible(true);
+	}
 
     return false;
 }

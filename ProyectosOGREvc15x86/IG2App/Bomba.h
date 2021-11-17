@@ -1,4 +1,5 @@
 #include "EntityIG.h"
+#include <OgreParticleSystem.h>
 
 #pragma once
 class Bomba : public EntityIG {
@@ -10,6 +11,8 @@ public:
 private:
 	Ogre::AnimationState* animationState;
 	Ogre::SceneNode* animationNode;
+
+	Ogre::ParticleSystem* ex = nullptr;
 
 	bool stopped = false;
 
