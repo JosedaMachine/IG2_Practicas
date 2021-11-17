@@ -17,6 +17,7 @@
 #include "Sinbad.h"
 #include "Enjambre.h"
 #include "Bomba.h"
+#include "Fog.h"
 
 #include "EntityIG.h"
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 

@@ -13,7 +13,8 @@ class Avion: public EntityIG{
 public:
 	enum ACTION{
 		OVERFLY,
-		ORBITATE
+		ORBITATE,
+		NOTHING
 	};
 	Avion(Ogre::SceneNode * mNode_);
 
@@ -44,6 +45,7 @@ private:
 	std::vector<AspasMolino*> heliceNodes;
 
 	Ogre::ParticleSystem* pSys;
+	Ogre::ParticleSystem* ex = nullptr;
 
 	Ogre::SceneNode* light = nullptr;
 					//Para pararlo con la R

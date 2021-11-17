@@ -234,6 +234,11 @@ void IG2App::scene6() {
 	pos.y = 50;
 	happyCursed_->translate(pos);
 	happyCursed_->setScale(Vector3(0.3f));
+
+	//! Niebla
+	entidades.push_back(new Fog(mSM->getRootSceneNode()->createChildSceneNode(),
+		std::pair<float, float>(800, 800)));
+	entidades.back()->getMainNode()->translate(Vector3(200, 200, 200));
 }
 
 void IG2App::scene5() {

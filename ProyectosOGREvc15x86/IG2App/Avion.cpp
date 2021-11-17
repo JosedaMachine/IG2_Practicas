@@ -193,6 +193,16 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 			h->keyPressed(evt);
 		}
 	}
+
+	if (evt.keysym.sym == SDLK_s && ex == nullptr) {
+		mNode->setVisible(false);
+
+		ex = mSM->createParticleSystem("PedroPicaPiedra","IG2App/ExplosionSmoke");
+		ex->setEmitting(true);
+		cuerpoNode->attachObject(ex);
+		ex->setVisible(true);
+		setPlaneAction(NOTHING);
+	}
 	return true;
 }
 
@@ -200,7 +210,7 @@ void Avion::frameRendered(Ogre::FrameEvent const& evt) {
 	if (planeAction == OVERFLY) {
 		overflyOgre();
 	}
-	else {
+	else if(planeAction == ORBITATE){
 		orbitate();
 	}
 }
