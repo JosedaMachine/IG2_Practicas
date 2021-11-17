@@ -21,12 +21,16 @@ Plano::Plano(Ogre::SceneNode* mNode_, std::string const& name, std::pair<int, in
 
 bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_t) {
+	if (evt.keysym.sym == SDLK_t && !dry) {
 		dry = true;
+		timer.reset();
 	}
 
-	if(dry && timer.getMilliseconds() >= stopTime)
-		e->setMaterialName("Practica1/LaPiedraJhonson");
-
 	return false;
+}
+
+void Plano::frameRendered(Ogre::FrameEvent const& evt)
+{
+	if (dry && timer.getMilliseconds() >= stopTime)
+		e->setMaterialName("Practica1/LaPiedraJhonson");
 }

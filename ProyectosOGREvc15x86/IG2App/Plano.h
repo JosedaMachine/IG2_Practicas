@@ -17,6 +17,7 @@ public:
 
 	void setMaterial(std::string name) { e->setMaterialName(name); }
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) override;
+	virtual void frameRendered(Ogre::FrameEvent const& evt);
 private:
 	Entity* e;
 
