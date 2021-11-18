@@ -29,13 +29,24 @@ Sinbad::Sinbad(Ogre::SceneNode* _node) : EntityIG(_node){
 	runTop = cuerpo->getAnimationState("RunTop");
 	runTop->setEnabled(true);
 	runTop->setLoop(true);
+	
+	cMuerexDArribaJaja = cuerpo->getAnimationState("IdleTop");
+	cMuerexDArribaJaja->setEnabled(true);
+	cMuerexDArribaJaja->setLoop(true);
+
+	cMuerexDAbajoJaja = cuerpo->getAnimationState("IdleBase");
+	cMuerexDAbajoJaja->setEnabled(true);
+	cMuerexDAbajoJaja->setLoop(true);
 
 	getAnimationNames(cuerpo);
 
 	//Timer
 	myTimer = Ogre::Timer();
 	myTimer.reset();
+	myTimerCMuereSalu2 = Ogre::Timer();
+
 	isStopped = false;
+	isRunning = true;
 }
 
 Sinbad::~Sinbad() {
@@ -54,15 +65,26 @@ void Sinbad::getAnimationNames(Ogre::Entity* ent){
 }
 
 void Sinbad::frameRendered(Ogre::FrameEvent const& evt) {
-	if (!isDancing) {
-		runBase->addTime(evt.timeSinceLastFrame);
-		runTop->addTime(evt.timeSinceLastFrame);
+	if (isRunning) {
+		if (route) route->addTime(evt.timeSinceLastFrame);
+
+		if (!isDancing) {
+			runBase->addTime(evt.timeSinceLastFrame);
+			runTop->addTime(evt.timeSinceLastFrame);
+		}
+		else {
+			dance->addTime(evt.timeSinceLastFrame);
+		}
 	}
 	else {
-		dance->addTime(evt.timeSinceLastFrame);
+		if (cMuerexDArribaJaja && cMuerexDAbajoJaja) {
+			cMuerexDArribaJaja->addTime(evt.timeSinceLastFrame);
+			cMuerexDAbajoJaja->addTime(evt.timeSinceLastFrame);
+		}
+		if (myTimerCMuereSalu2.getMilliseconds() > timeDead) {
+			sendEvent(Message(Messages::SamirExplota));
+		}
 	}
-
-	if(route) route->addTime(evt.timeSinceLastFrame);
 	//gira();
 }
 
@@ -174,6 +196,15 @@ void Sinbad::cambiaEspada(){
 	else {
 		swordL->setVisible(true);
 		swordR->setVisible(false);
+	}
+}
+
+void Sinbad::receiveEvent(Message mes, EntityIG* entidad){
+	if (mes.m == Messages::Samir) {
+		if (isRunning) {
+			isRunning = false;
+			myTimerCMuereSalu2.reset();
+		}
 	}
 }
 

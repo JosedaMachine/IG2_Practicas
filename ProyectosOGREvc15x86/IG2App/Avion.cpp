@@ -194,7 +194,7 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		}
 	}
 
-	if (evt.keysym.sym == SDLK_s && ex == nullptr) {
+	if (evt.keysym.sym == SDLK_r && ex == nullptr) {
 		mNode->setVisible(false);
 
 		ex = mSM->createParticleSystem("PedroPicaPiedra","IG2App/ExplosionSmoke");
@@ -202,6 +202,8 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		cuerpoNode->attachObject(ex);
 		ex->setVisible(true);
 		setPlaneAction(NOTHING);
+
+		sendEvent(Message(Messages::Samir));
 	}
 	return true;
 }

@@ -19,5 +19,6 @@ private:
 	// Heredado vía EntityIG
 	virtual void frameRendered(Ogre::FrameEvent const& evt) override;
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) override;
+	virtual void receiveEvent(Message mes, EntityIG* entidad = nullptr) override;
 };
 

@@ -15,6 +15,8 @@ public:
 
 	void setRoute(Vector3 const& intial, Vector3 const& final);
 
+protected:
+	virtual void receiveEvent(Message mes, EntityIG* entidad = nullptr) override;
 private:
 	// Heredado vía EntityIG
 	virtual void frameRendered(Ogre::FrameEvent const& evt) override;
@@ -29,17 +31,19 @@ private:
 	void arma(bool has);
 	void cambiaEspada();
 
-	bool isStopped, hasSwords, isDancing;
+	bool isStopped, hasSwords, isDancing, isRunning;
 
 	Vector3 initalPoint, finalPoint;
 	Ogre::Entity* cuerpo, *swordL, * swordR;
-	Ogre::Timer myTimer, myTimerStopped;
-	Ogre::AnimationState* runBase = nullptr, * runTop = nullptr, * dance = nullptr, *route = nullptr;
+	Ogre::Timer myTimer, myTimerStopped, myTimerCMuereSalu2;
+	Ogre::AnimationState* runBase = nullptr, * runTop = nullptr, 
+						* dance = nullptr, *route = nullptr,
+						* cMuerexDArribaJaja = nullptr, * cMuerexDAbajoJaja;
 
 	Ogre::SceneNode* animationNode; //Para poder escalar a SinBad independientemente de las animaciones
 
 	int clockWise;
 	float gradesToAdd;
-	unsigned int maxTime = 2000, timeLimit = 0;
+	unsigned int maxTime = 2000, timeLimit = 0, timeDead = 1000;
 };
 
