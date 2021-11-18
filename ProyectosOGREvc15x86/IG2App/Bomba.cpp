@@ -19,7 +19,7 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
 	track->setAssociatedNode(animationNode);
 	//TODO Pos Inicial , Orientacion y duraciones
 	Ogre::Vector3 keyframePosAux(0.0);
-	Ogre::Vector3 src(0, 0, 1); // posición y orientación iniciales
+	Ogre::Vector3 src(0, 0, 1); // posiciï¿½n y orientaciï¿½n iniciales
 	Ogre::Real durPaso = duracion / 4.0;  // uniformes
 
 	//TODO KEYFRAMES -> Usaremos un solo keyframe para settear la pos y rot en cada momento
@@ -40,7 +40,7 @@ Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
 	//! Keyframe 3: origen
 	kfAux = track->createNodeKeyFrame(durPaso * 4); //durPaso = duracion/4.0 -> durPaso * 4 = 1.0
 
-	//TODO Relacionar la animación con un Estado 
+	//TODO Relacionar la animaciï¿½n con un Estado 
 	animationState = mSM->createAnimationState("animVV");
 	animationState->setLoop(true);
 	animationState->setEnabled(true);

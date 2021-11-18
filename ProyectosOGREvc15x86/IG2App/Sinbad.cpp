@@ -113,7 +113,7 @@ void Sinbad::gira(){
 }
 
 void Sinbad::routeAnim(){
-	float duracion = 17.f;
+	float duracion = 17.0f;
 	Vector3 scale = mNode->getScale();
 	//TODO Animation
 	Ogre::Animation* animation = mSM->createAnimation("Ruta", duracion);
@@ -130,28 +130,28 @@ void Sinbad::routeAnim(){
 	kfAux->setTranslate(keyframePosAux);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
 	//! Keyframe 2
-	kfAux = track->createNodeKeyFrame(durPaso * 0.5);
-	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, -1)));
-	//! Keyframe 2
 	kfAux = track->createNodeKeyFrame(durPaso * 1);
+	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, -1)));
+	//! Keyframe 3
+	kfAux = track->createNodeKeyFrame(durPaso * 2);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(1, 0, -1)));
 	Vector3 posX = Ogre::Vector3::NEGATIVE_UNIT_X * initalPoint.x + Ogre::Vector3::UNIT_X * finalPoint.x;
 	Vector3 posZ = Ogre::Vector3::NEGATIVE_UNIT_Z * initalPoint.z + Ogre::Vector3::UNIT_Z * finalPoint.z;
 	keyframePosAux += posX * (scale.x / 50.f) + posZ * (scale.z / 50.f);
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 3 
-	kfAux = track->createNodeKeyFrame(durPaso * 4);
+	//! Keyframe 4 
+	kfAux = track->createNodeKeyFrame(durPaso * 3);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1)));
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 4
-	kfAux = track->createNodeKeyFrame(durPaso * 4.5);
+	//! Keyframe 5
+	kfAux = track->createNodeKeyFrame(durPaso * 4);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1)));
 	posX = Ogre::Vector3::UNIT_X * initalPoint.x  + Ogre::Vector3::NEGATIVE_UNIT_X * finalPoint.x;
 	posZ = Ogre::Vector3::UNIT_Z * initalPoint.z  + Ogre::Vector3::NEGATIVE_UNIT_Z * finalPoint.z;
 	keyframePosAux += posX * (scale.x / 50.f)  + posZ * (scale.z / 50.f);
 	kfAux->setTranslate(keyframePosAux);
-	//! Keyframe 5
-	kfAux = track->createNodeKeyFrame(durPaso * 6);
+	//! Keyframe 6
+	kfAux = track->createNodeKeyFrame(durPaso * 5);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
 	kfAux->setTranslate(keyframePosAux);
 	//TODO Relacionar la animación con un Estado 
