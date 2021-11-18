@@ -30,6 +30,7 @@ public:
 
 	void setParticleSys();
 
+	void setFinalSceneConfig();
 private:
 	//No se como se hace, asique hay que preguntar el proximo dia
 	Ogre::Entity* cuerpoAux,

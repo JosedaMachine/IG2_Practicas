@@ -8,16 +8,9 @@
 #include <iostream>
 
 using namespace Ogre;
-//! Guacamole
-//? Guacamole
-//x Guacamole
-//TODO: Guacamole
-//!? Guacamole
 //! Ahora a las entidades les pasamos : mSM->getRootSceneNode()->createChildSceneNode()
 //! porque heredan de entityIg y este solo recibe un nodo. Si queremos que sea hijo de P, le pasamos el nodo 
 //! de P
-//! 
-//TODO: Comprobar que los eventos de teclado funcionan en todas las entidades 
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_ESCAPE) getRoot()->queueEndRendering();
@@ -26,7 +19,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		if (centroEsferas)centroEsferas->roll(Ogre::Degree(2));
 	}
 	else if (evt.keysym.sym == SDLK_r) {
-		//entidades[0]->sendEvent(Message(Messages::R));
+		entidades[0]->sendEvent(Message(Messages::R));
 	}
 	//! ONgo bongo Buga Buga Bo 
 	return true;
@@ -52,7 +45,6 @@ void IG2App::BallClock(float rad) {
 		ang += pro;
 
 		//Hacer m�s peque�as las pares
-		//No lo hago as� porque Antonio dice que es de feos
 		//if(i%2 == 0) mHourNode[i]->setScale(0.5, 0.5, 0.5);
 	}
 
@@ -178,17 +170,9 @@ void IG2App::scene6() {
 	a->getMainNode()->setScale(Vector3(0.3f));
 	a->getMainNode()->setPosition(0, 500, -500);
 	a->setPlaneAction(Avion::OVERFLY);
+	a->setFinalSceneConfig();
 	addInputListener(a);
 	entidades.push_back(a);
-
-	//Ogre::SceneNode* pointsNode = mSM->getRootSceneNode()->createChildSceneNode();
-
-	//Ogre::BillboardSet* points = mSM->createBillboardSet("Se como Jose", 1);
-	//points->setDefaultDimensions(20, 20);
-	//points->setMaterialName("Practica1/Points");
-
-	//pointsNode->attachObject(points);
-	//Ogre::Billboard* bb = points->createBillboard(Ogre::Vector3(0, 40, 0));
 
 	//! PLANO
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
@@ -226,7 +210,6 @@ void IG2App::scene6() {
 	sinBad->getMainNode()->translate(posOgreIni);
 	sinBad->setRoute(posOgreIni, posOgreFin);
 	
-
 	//! ESFERA
 	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
 	sphere->setMaterialName("Practica1/happyCursed");

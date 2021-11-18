@@ -28,7 +28,10 @@ private:
 
 	void routeAnim();
 
+	void deadAnim();
+
 	void arma(bool has);
+
 	void cambiaEspada();
 
 	bool isStopped, hasSwords, isDancing, isRunning;
@@ -38,12 +41,13 @@ private:
 	Ogre::Timer myTimer, myTimerStopped, myTimerCMuereSalu2;
 	Ogre::AnimationState* runBase = nullptr, * runTop = nullptr, 
 						* dance = nullptr, *route = nullptr,
-						* cMuerexDArribaJaja = nullptr, * cMuerexDAbajoJaja;
+						* deadTop = nullptr, * deadBase = nullptr,
+						* deadAnimation = nullptr;
 
 	Ogre::SceneNode* animationNode; //Para poder escalar a SinBad independientemente de las animaciones
-
+	Ogre::Real gradeToRotateDead = 90, gradesRotate = 0;
 	int clockWise;
 	float gradesToAdd;
-	unsigned int maxTime = 2000, timeLimit = 0, timeDead = 1000;
+	unsigned int maxTime = 2000, timeLimit = 0, timeDead = 5000;
 };
 

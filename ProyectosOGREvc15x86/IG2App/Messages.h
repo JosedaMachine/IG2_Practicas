@@ -1,5 +1,5 @@
 #pragma once
-enum Messages { R, Samir, SamirExplota };
+enum Messages { R, PlaneExplodes, SinBadDies };
 
 struct Message{
 	Message(Messages mensaje) {

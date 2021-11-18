@@ -26,10 +26,6 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 	NinjaPilot();
 
 	createLight(); 
-
-	createBillBoard();
-
-	setParticleSys();
 }
 
 void Avion::createLight(){
@@ -203,7 +199,7 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		ex->setVisible(true);
 		setPlaneAction(NOTHING);
 
-		sendEvent(Message(Messages::Samir));
+		sendEvent(Message(Messages::PlaneExplodes));
 	}
 	return true;
 }
@@ -237,4 +233,9 @@ void Avion::setParticleSys(){
 	pSys = mSM->createParticleSystem("psSmoke", "IG2App/Smoke");
 	pSys->setEmitting(true);
 	cuerpoNode->attachObject(pSys);
+}
+
+void Avion::setFinalSceneConfig(){
+	createBillBoard();
+	setParticleSys();
 }

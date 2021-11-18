@@ -55,13 +55,11 @@ void Bomba::frameRendered(Ogre::FrameEvent const& evt)
 }
 
 bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt) {
-
 	return false;
 }
 
 void Bomba::receiveEvent(Message mes, EntityIG* entidad) {
-	if (mes.m == Messages::SamirExplota && !stopped) {
-		std::cout << "Pasaaaaaaaaaaaaa\n";
+	if (mes.m == Messages::SinBadDies && !stopped) {
 		ex = mSM->createParticleSystem("PedroPicaPiedra2", "IG2App/bombSmoke");
 		ex->setEmitting(true);
 		animationNode->attachObject(ex);

@@ -30,13 +30,13 @@ Sinbad::Sinbad(Ogre::SceneNode* _node) : EntityIG(_node){
 	runTop->setEnabled(true);
 	runTop->setLoop(true);
 	
-	cMuerexDArribaJaja = cuerpo->getAnimationState("IdleTop");
-	cMuerexDArribaJaja->setEnabled(true);
-	cMuerexDArribaJaja->setLoop(true);
+	deadTop = cuerpo->getAnimationState("IdleTop");
+	deadTop->setEnabled(true);
+	deadTop->setLoop(true);
 
-	cMuerexDAbajoJaja = cuerpo->getAnimationState("IdleBase");
-	cMuerexDAbajoJaja->setEnabled(true);
-	cMuerexDAbajoJaja->setLoop(true);
+	deadBase = cuerpo->getAnimationState("IdleBase");
+	deadBase->setEnabled(true);
+	deadBase->setLoop(true);
 
 	getAnimationNames(cuerpo);
 
@@ -77,13 +77,27 @@ void Sinbad::frameRendered(Ogre::FrameEvent const& evt) {
 		}
 	}
 	else {
-		if (cMuerexDArribaJaja && cMuerexDAbajoJaja) {
-			cMuerexDArribaJaja->addTime(evt.timeSinceLastFrame);
-			cMuerexDAbajoJaja->addTime(evt.timeSinceLastFrame);
+		if (deadTop && deadBase) {
+			deadTop->addTime(evt.timeSinceLastFrame);
+			deadBase->addTime(evt.timeSinceLastFrame);
 		}
 		if (myTimerCMuereSalu2.getMilliseconds() > timeDead) {
-			sendEvent(Message(Messages::SamirExplota));
+			sendEvent(Message(Messages::SinBadDies));
+		
 		}
+	
+		if (deadAnimation) {
+			deadAnimation->addTime(evt.timeSinceLastFrame);
+		}
+
+		//if (gradeToRotateDead - gradesRotate > 0) {
+
+		//	float rotate = 1.0f;
+		//	//mNode->translate({0, 0.1f, 0});
+		//	animationNode->roll(Ogre::Degree(rotate));
+		//	gradesRotate += rotate;
+		//}
+
 	}
 	//gira();
 }
@@ -112,8 +126,31 @@ void Sinbad::gira(){
 	}
 }
 
-void Sinbad::routeAnim(){
-	float duracion = 17.0f;
+void Sinbad::deadAnim(){
+	float duracion = 4.f;
+	Vector3 scale = mNode->getScale();
+	//TODO Animation
+	Ogre::Animation* anim = mSM->createAnimation("Dead", duracion);
+	Ogre::NodeAnimationTrack* track = anim->createNodeTrack(0);
+	track->setAssociatedNode(animationNode);
+	//TODO Pos Inicial , Orientacion y duraciones
+	Ogre::Vector3 src(0, 0, 1); // posiciï¿½n y orientaciï¿½n iniciales
+	Ogre::Vector3 keyframePosAux({ 0.0, -5, 0.0 });
+	Ogre::Real durPaso = duracion / 2.0;  // uniformes
+	//TODO KEYFRAMES -> Usaremos un solo keyframe para settear la pos y rot en cada momento
+	Ogre::TransformKeyFrame* kfAux;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
+	//! Keyframe 1: origen
+	kfAux = track->createNodeKeyFrame(durPaso * 0);
+	kfAux->setTranslate(keyframePosAux);
+	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 1, 0)));
+	//TODO Relacionar la animaciï¿½n con un Estado 
+	deadAnimation = mSM->createAnimationState("Dead");
+	deadAnimation->setLoop(false);
+	deadAnimation->setEnabled(true);
+}
+
+void Sinbad::routeAnim() {
+	float duracion = 17.f;
 	Vector3 scale = mNode->getScale();
 	//TODO Animation
 	Ogre::Animation* animation = mSM->createAnimation("Ruta", duracion);
@@ -121,7 +158,7 @@ void Sinbad::routeAnim(){
 	track->setAssociatedNode(animationNode);
 	//TODO Pos Inicial , Orientacion y duraciones
 	Ogre::Vector3 keyframePosAux(0.0);
-	Ogre::Vector3 src(0, 0, 1); // posición y orientación iniciales
+	Ogre::Vector3 src(0, 0, 1); // posiciï¿½n y orientaciï¿½n iniciales
 	Ogre::Real durPaso = duracion / 6.0;  // uniformes
 	//TODO KEYFRAMES -> Usaremos un solo keyframe para settear la pos y rot en cada momento
 	Ogre::TransformKeyFrame* kfAux;  // 4 keyFrames: origen(0), abajo, arriba, origen(3)
@@ -146,15 +183,15 @@ void Sinbad::routeAnim(){
 	//! Keyframe 5
 	kfAux = track->createNodeKeyFrame(durPaso * 4);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(-1, 0, 1)));
-	posX = Ogre::Vector3::UNIT_X * initalPoint.x  + Ogre::Vector3::NEGATIVE_UNIT_X * finalPoint.x;
-	posZ = Ogre::Vector3::UNIT_Z * initalPoint.z  + Ogre::Vector3::NEGATIVE_UNIT_Z * finalPoint.z;
-	keyframePosAux += posX * (scale.x / 50.f)  + posZ * (scale.z / 50.f);
+	posX = Ogre::Vector3::UNIT_X * initalPoint.x + Ogre::Vector3::NEGATIVE_UNIT_X * finalPoint.x;
+	posZ = Ogre::Vector3::UNIT_Z * initalPoint.z + Ogre::Vector3::NEGATIVE_UNIT_Z * finalPoint.z;
+	keyframePosAux += posX * (scale.x / 50.f) + posZ * (scale.z / 50.f);
 	kfAux->setTranslate(keyframePosAux);
 	//! Keyframe 6
 	kfAux = track->createNodeKeyFrame(durPaso * 5);
 	kfAux->setRotation(src.getRotationTo(Ogre::Vector3(0, 0, 1)));
 	kfAux->setTranslate(keyframePosAux);
-	//TODO Relacionar la animación con un Estado 
+	//TODO Relacionar la animaciï¿½n con un Estado 
 	route = mSM->createAnimationState("Ruta");
 	route->setLoop(true);
 	route->setEnabled(true);
@@ -200,10 +237,11 @@ void Sinbad::cambiaEspada(){
 }
 
 void Sinbad::receiveEvent(Message mes, EntityIG* entidad){
-	if (mes.m == Messages::Samir) {
+	if (mes.m == Messages::PlaneExplodes) {
 		if (isRunning) {
 			isRunning = false;
 			myTimerCMuereSalu2.reset();
+			deadAnim();
 		}
 	}
 }
