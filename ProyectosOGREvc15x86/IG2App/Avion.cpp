@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <OgreEntity.h>
-Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
+Avion::Avion(Ogre::SceneNode * mNode_, bool hasLight): EntityIG(mNode_) {
 	cuerpoNode = mNode->createChildSceneNode();
 	manuallyStopped = false;
 	myTimer = Ogre::Timer();
@@ -25,7 +25,7 @@ Avion::Avion(Ogre::SceneNode * mNode_): EntityIG(mNode_) {
 
 	NinjaPilot();
 
-	createLight(); 
+	if(hasLight) createLight(); 
 }
 
 void Avion::createLight(){

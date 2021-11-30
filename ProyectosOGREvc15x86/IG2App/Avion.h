@@ -16,7 +16,7 @@ public:
 		ORBITATE,
 		NOTHING
 	};
-	Avion(Ogre::SceneNode * mNode_);
+	Avion(Ogre::SceneNode * mNode_, bool hasLight = false);
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 

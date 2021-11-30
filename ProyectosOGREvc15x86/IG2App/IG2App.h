@@ -37,18 +37,25 @@ protected:
   //Metodos de pulsar
   void BallClock(float rad);
   
-  void scene6();
-  
-  void scene5();
+#pragma region P2
+  void scene1_2();
 
-  void scene4();
+#pragma endregion
 
-  void scene1();
 
-  void scene2();
+  #pragma region P1
+  void scene6_1();
 
-  //Scene de pruebas
-  void scene3();
+  void scene5_1();
+
+  void scene4_1();
+
+  void scene1_1();
+
+  void scene2_1();
+
+  void scene3_1();
+#pragma endregion
   
   void setCamNLight();
       

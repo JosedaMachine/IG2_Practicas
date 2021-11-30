@@ -84,9 +84,9 @@ void IG2App::setCamNLight() {
 	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
 	mCamNode->attachObject(cam);
 
-	mCamNode->setPosition(0, 0, 160);
+	mCamNode->setPosition(0, 0, 1660);
 	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
-	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
+	mCamNode->setDirection(Ogre::Vector3(0, 1, -1));  
 
 	// and tell it to render into the main window
 	Viewport* vp = getRenderWindow()->addViewport(cam);
@@ -97,7 +97,9 @@ void IG2App::setCamNLight() {
 
 	Light* luz = mSM->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	float color = 1.0f;
+	luz->setDiffuseColour(color, color, color);
+	luz->setDirection(Ogre::Vector3(0, -1, -1));
 
 	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
@@ -145,17 +147,85 @@ void IG2App::setupScene(void) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	setCamNLight();
 
-	scene6();
+	scene1_2();
 
 	mCamMgr = new OgreBites::CameraMan(mCamNode);
 	addInputListener(mCamMgr);
 	mCamMgr->setStyle(OgreBites::CS_ORBIT);
-
-	//mCamMgr->setTarget(mSinbadNode);  
-	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 }
 
-void IG2App::scene6() {
+#pragma region PRACTICA2
+//TODO:Configurar bien las teclas
+//TODO:Vaiven de la bomba mucho
+//TODO:mezclado movimiento sinbad
+//TODO:no para la bomba con la tecla
+//TODO:No mezcla textura mostaza
+void IG2App::scene1_2(){
+
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "Practica1/space", 1, 1, true, 1.0, 100, 100);
+
+	Vector3 iniPos = { -385, 10, 250 }, finalPos = { 385, 10, -250 };
+
+	//! BOMBA
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
+	//a->getMainNode()->setPosition(0, 3700, 0);
+	//Hay que hacer otro nodo fuera
+	b->getMainNode()->setScale(Vector3(10.0));
+	addInputListener(b);
+	b->addListener(b);
+	entidades.push_back(b);
+
+	//! AVION
+	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
+	a->getMainNode()->setScale(Vector3(0.3f));
+	a->getMainNode()->setPosition(0, 500, -500);
+	a->setPlaneAction(Avion::OVERFLY);
+	a->setFinalSceneConfig();
+	addInputListener(a);
+	entidades.push_back(a);
+
+	//! AGUA
+	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
+	p->setMaterial("Practica1/Jaja");
+	addInputListener(p);
+	entidades.push_back(p);
+
+	//! Plano Amarillo
+	Plano* pAmarillo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_3", { 300 , 300 }, { 100, 80 });
+	pAmarillo->setMaterial("Practica1/Yellow");
+	pAmarillo->getMainNode()->translate(Vector3(iniPos));
+	entidades.push_back(pAmarillo);
+
+	//! Sinbad
+	Sinbad* sinBad = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
+	addInputListener(sinBad);
+	sinBad->addListener(sinBad);
+	entidades.push_back(sinBad);
+
+	sinBad->arma();
+	sinBad->getMainNode()->scale(Vector3(10));
+	Vector3 posOgreIni = iniPos, posOgreFin = finalPos;
+	posOgreIni.y = posOgreFin.y = 62;
+	sinBad->getMainNode()->translate(posOgreIni);
+	sinBad->setRoute(posOgreIni, posOgreFin);
+
+	//! ESFERA
+	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
+	sphere->setMaterialName("Practica1/happyCursed");
+	Ogre::SceneNode* happyCursed_ = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
+	happyCursed_->attachObject(sphere);
+	Vector3 pos = finalPos;
+	pos.y = 50;
+	happyCursed_->translate(pos);
+	happyCursed_->setScale(Vector3(0.3f));
+}
+#pragma endregion
+
+
+#pragma region PRACTICA1
+void IG2App::scene6_1() {
 	//! BOMBA
 	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
 	//a->getMainNode()->setPosition(0, 3700, 0);
@@ -209,7 +279,7 @@ void IG2App::scene6() {
 	posOgreIni.y = posOgreFin.y = 62;
 	sinBad->getMainNode()->translate(posOgreIni);
 	sinBad->setRoute(posOgreIni, posOgreFin);
-	
+
 	//! ESFERA
 	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
 	sphere->setMaterialName("Practica1/happyCursed");
@@ -226,7 +296,7 @@ void IG2App::scene6() {
 	entidades.back()->getMainNode()->translate(Vector3(200, 200, 200));
 }
 
-void IG2App::scene5() {
+void IG2App::scene5_1() {
 	//! PLANETA
 	Ogre::SceneNode* planeta;
 	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
@@ -236,7 +306,7 @@ void IG2App::scene5() {
 	planeta->setScale(32, 32, 32);
 
 	Sinbad* conBad = new Sinbad(mSM->getRootSceneNode()->createChildSceneNode());
-	
+
 	float size = 60;
 	conBad->getMainNode()->setScale(size, size, size);
 	conBad->getMainNode()->setPosition(0, 3490, 0);
@@ -244,7 +314,7 @@ void IG2App::scene5() {
 	addInputListener(conBad);
 }
 
-void IG2App::scene4() {
+void IG2App::scene4_1() {
 	//! PLANETA
 	Ogre::SceneNode* planeta;
 	planeta = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
@@ -264,7 +334,7 @@ void IG2App::scene4() {
 	Ogre::SceneNode* swarm = mSM->getRootSceneNode()->createChildSceneNode();
 	Enjambre* enj = new Enjambre(swarm, a->getMainNode());
 	addInputListener(enj);
-	
+
 	entidades.push_back(enj);
 
 	////! DRON
@@ -275,23 +345,23 @@ void IG2App::scene4() {
 	dron->getMainNode()->setPosition(0, 3700, 0);
 	entidades.push_back(dron);
 	EntityIG::addListener(dron);
-	
+
 	EntityIG::addListener(a);
 	//! PLANO
-	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), "mPlane1080x800", {1080 , 800}, {100, 80});
+	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(), "mPlane1080x800", { 1080 , 800 }, { 100, 80 });
 	p->getMainNode()->pitch(Ogre::Degree(90.));
 	p->getMainNode()->scale(10, 10, 10);
 	p->getMainNode()->setPosition(0, 0, -3600);
 }
 
-void IG2App::scene3() {
+void IG2App::scene3_1() {
 	//Avion
 	Avion* a = new Avion(mSM->getRootSceneNode()->createChildSceneNode());
 	addInputListener(a);
 	entidades.push_back(a);
 }
 
-void IG2App::scene2() {
+void IG2App::scene2_1() {
 	//Planeta
 	Ogre::SceneNode* planeta;
 	ficticioDroneNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -300,14 +370,14 @@ void IG2App::scene2() {
 	planeta->attachObject(sphere);
 	planeta->setScale(32, 32, 32);
 	dron = new Dron(ficticioDroneNode, 6, 12);
-	
+
 	addInputListener(dron);
 	dron->getMainNode()->scale(0.5, 0.5, 0.5);
 	dron->getMainNode()->setPosition(0, 3600, 0);
 	entidades.push_back(dron);
 }
 
-void IG2App::scene1() {
+void IG2App::scene1_1() {
 	//Reloj
 	BallClock(1000);
 	//Dron
@@ -323,4 +393,7 @@ void IG2App::scene1() {
 	dron->getMainNode()->translate(700, 500, 400);
 	dron->getMainNode()->setScale(scale, scale, scale);
 }
+#pragma endregion
+
+
 

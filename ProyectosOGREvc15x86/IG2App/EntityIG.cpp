@@ -11,8 +11,7 @@ EntityIG::~EntityIG() {
 	delete mNode;
 }
 
-void EntityIG::sendEvent(Message mes, EntityIG* entidad)
-{
+void EntityIG::sendEvent(Message mes, EntityIG* entidad) {
 	for (EntityIG* e : appListeners)
 		e->receiveEvent(mes);
 }
