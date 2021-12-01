@@ -184,11 +184,18 @@ void IG2App::scene1_2(){
 	addInputListener(a);
 	entidades.push_back(a);
 
+
 	//! AGUA
+	Camera* camRef = mSM->createCamera("RefCam");
+	camRef->setNearClipDistance(1);
+	camRef->setFarClipDistance(50000);
+	mCamNode->attachObject(camRef);
+
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
 	p->setMaterial("Practica1/Jaja");
 	addInputListener(p);
+	p->setReflejo(camRef);
 	entidades.push_back(p);
 
 	//! Plano Amarillo
