@@ -184,8 +184,8 @@ void IG2App::scene1_2(){
 	addInputListener(a);
 	entidades.push_back(a);
 
-
 	//! AGUA
+	//Nueva camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
 	camRef->setNearClipDistance(1);
 	camRef->setFarClipDistance(50000);
@@ -195,7 +195,7 @@ void IG2App::scene1_2(){
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
 	p->setMaterial("Practica1/Jaja");
 	addInputListener(p);
-	p->setReflejo(camRef);
+	p->setReflejo(camRef, 0.f);
 	entidades.push_back(p);
 
 	//! Plano Amarillo

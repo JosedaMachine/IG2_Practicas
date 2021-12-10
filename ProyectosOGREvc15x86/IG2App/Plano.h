@@ -4,28 +4,38 @@
 #include "EntityIG.h"
 #include <OgreEntity.h>
 #include <OgreTimer.h>
+#include <OgreTextureManager.h>
+#include <OgreRenderTexture.h>
+#include <OgreViewport.h>
+#include <OgreHardwarePixelBuffer.h>
 
+#include <OgreMovablePlane.h>
+#include <OgreSubEntity.h>
+#include <OgreTechnique.h>
+#include <OgreRenderTargetListener.h>
 #pragma once
 using namespace Ogre;
 
-class Plano : public EntityIG
+class Plano : public EntityIG, RenderTargetListener
 {
 	const float stopTime = 5000;
 public:
 	Plano(Ogre::SceneNode* mNode_, std::string const& name, std::pair<int, int > size, std::pair<int, int> cuts, Vector3 normal = Vector3::UNIT_Y);
 	virtual ~Plano() {};
 
-	void setMaterial(std::string name) { e->setMaterialName(name); }
+	void setMaterial(std::string name) { plano->setMaterialName(name); }
 	void setEspejo(Camera* cam);
-	void setReflejo(Camera* cam);
+	void setReflejo(Camera* cam, Ogre::Real distance);
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) override;
 	virtual void frameRendered(Ogre::FrameEvent const& evt);
 private:
-	Entity* e;
+	Entity* plano;
 	Vector3 normal;
 	bool dry;
 
-	Ogre::Timer timer;
+	Ogre::Timer timer; 
+	std::pair<int, int> size_;
+	MovablePlane* mpRef;
 };
 
