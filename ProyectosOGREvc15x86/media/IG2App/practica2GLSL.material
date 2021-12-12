@@ -1,22 +1,16 @@
-material Practica2/Bomb
-{
-    technique
-    {
-        pass
-        {
+material Practica2/Bomb {
+    technique {
+        pass {
             diffuse 1 1 1
-            
-            texture_unit
-            {
+            texture_unit {
                 texture checker.png
             }
         }
     }
 }
-
+//_______________________________BOMBA TESELEADA____________________________________________
 //nombre para el shader
-vertex_program BombaTeseladaVS glsl 
-{
+vertex_program BombaTeseladaVS glsl  {
     // nombre del archivo del código
     source BombaTeseladaVS.glsl 
     // valores para las variable uniform
@@ -25,62 +19,143 @@ vertex_program BombaTeseladaVS glsl
         param_named_auto modelViewProjMat worldviewproj_matrix
     }
 }
-
 //nombre para el shader
-fragment_program BombaTeseladaFS glsl 
-{
+fragment_program BombaTeseladaFS glsl  {
     // nombre del archivo del código
     source BombaTeseladaFS.glsl 
     // valores para las variable uniform
-    default_params 
-    {
+    default_params {
         // 1º unidad de textura ‐> 
         param_named texturaL int 0
         // 2º unidad de textura ‐> *
         param_named texturaM int 1
         param_named texturaK int 2 
-        param_named BF float 1
-        param_named intLuzAmb float 1.0
     }
 }
 
-material Practica2/Bomba {  
+material Practica2/BombaTeseleada {  
     technique {
         pass { 
-            vertex_program_ref BombaTeseladaVS
-            {  // params ‐> default_params
+            vertex_program_ref BombaTeseladaVS {  // params ‐> default_params
             
             } 
-            fragment_program_ref BombaTeseladaFS
-            {  // params ‐> default_params
+            fragment_program_ref BombaTeseladaFS {  // params ‐> default_params
             
             }
-            texture_unit 
-            { 
-                //* ‐> int 0
+            texture_unit { //0
                 // archivo
                 texture checker.png 2d 
-                // sólo configuración  
-                tex_address_mode clamp 
-                // de acceso al texel
-                filtering bilinear 
             }
-            texture_unit { 
-            // * ‐> int 1
-            // archivo
-            texture BumpyMetal.jpg 2d
-            // sólo configuración 
-            tex_address_mode wrap  
-            } // de acceso al texel
+            texture_unit { // 1
+                texture BumpyMetal.jpg 2d
+            } 
+            texture_unit { // 2
+                texture spaceSky.jpg 2d
+            }
+        }  
+    }  
+}
+//_______________________________SPACESKY____________________________________________
+//nombre para el shader
+vertex_program SpaceSkyVS glsl  {
+    source SpaceSkyVS.glsl 
+    default_params {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+    }
+}
+//nombre para el shader
+fragment_program SpaceSkyFS glsl  {
+    source SpaceSkyFS.glsl 
+    default_params {
+        param_named texturaLight int 0
+        param_named texturaAlbedo int 1
+    }
+}
 
-            texture_unit { 
-            // * ‐> int 2
-            // archivo
-            texture spaceSky.jpg 2d
-            // sólo configuración 
-            tex_address_mode wrap  
-            filtering bilinear             
-            } // de acceso al texel
+material Practica2/SpaceSky {  
+    technique {
+        pass { 
+            vertex_program_ref SpaceSkyVS {  // params ‐> default_params
+            
+            } 
+            fragment_program_ref SpaceSkyFS {  // params ‐> default_params
+            
+            }
+            texture_unit { //0
+                texture lightMap.jpg 2d 
+            }
+            texture_unit { // 1
+                texture spaceSky.jpg 2d
+            } 
+        }  
+    }  
+}
+//_______________________________SPACE ANIM____________________________________________
+vertex_program SpaceVS glsl  {
+    source SpaceVS.glsl 
+    default_params {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+        // param_named_auto st time_0_1 5
+        param_named_auto st sintime_0_2pi 5
+        // param_named_auto st 0.4
+    }
+}
+//nombre para el shader
+fragment_program SpaceFS glsl  {
+    source SpaceFS.glsl 
+    default_params {
+        param_named texturaLight int 0
+        param_named texturaAlbedo int 1
+    }
+}
+
+material Practica2/SpaceAnim {  
+    technique {
+        pass { 
+            vertex_program_ref SpaceVS {  // params ‐> default_params
+            
+            } 
+            fragment_program_ref SpaceFS {  // params ‐> default_params
+            
+            }
+            texture_unit { //0
+                texture lightMap.jpg 2d 
+            }
+            texture_unit { // 1
+                texture spaceSky.jpg 2d
+            } 
+        }  
+    }  
+}
+//_______________________________HOLES____________________________________________
+fragment_program HolesFS glsl  {
+    source HolesFS.glsl 
+    default_params {
+        param_named texturaCorrosion int 0
+        param_named texturaRiverBack int 1
+        param_named texturaMetalFront int 2
+    }
+}
+
+material Practica2/BombaHoles {  
+    technique {
+        pass { 
+            cull_software none
+            cull_hardware none
+            vertex_program_ref BombaTeseladaVS {  //Reutilizamos el de la bomba
+            
+            } 
+            fragment_program_ref HolesFS {              
+            }
+            texture_unit { //0
+                texture corrosion.jpg 2d 
+            }
+            texture_unit { // 1
+                texture BeachStones.jpg 2d
+            } 
+            texture_unit { // 2
+                texture BumpyMetal.jpg 2d
+            }
         }  
     }  
 }

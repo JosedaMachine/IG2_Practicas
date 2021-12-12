@@ -84,8 +84,8 @@ void IG2App::setCamNLight() {
 	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
 	mCamNode->attachObject(cam);
 
-	mCamNode->setPosition(0, 0, 1660);
-	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	mCamNode->setPosition(0, -100, 1660);
+	mCamNode->lookAt(Ogre::Vector3(0, -500, 0), Ogre::Node::TS_WORLD);
 	mCamNode->setDirection(Ogre::Vector3(0, 1, -1));  
 
 	// and tell it to render into the main window
@@ -162,12 +162,12 @@ void IG2App::setupScene(void) {
 //TODO:No mezcla textura mostaza
 void IG2App::scene1_2(){
 
-	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "Practica1/space", 1, 1, true, 1.0, 100, 100);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20), "Practica2/SpaceAnim", 1.f, 1, true, 1.0, 100, 100);
 
 	Vector3 iniPos = { -385, 10, 250 }, finalPos = { 385, 10, -250 };
 
 	//! BOMBA
-	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "uv_sphere.mesh", "Practica2/Bomba");
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "uv_sphere.mesh", "Practica2/BombaHoles");
 	//a->getMainNode()->setPosition(0, 3700, 0);
 	//Hay que hacer otro nodo fuera
 	b->getMainNode()->setScale(Vector3(0.4));
@@ -185,7 +185,6 @@ void IG2App::scene1_2(){
 	entidades.push_back(a);
 
 	//! AGUA
-
 	//Nueva camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
 	camRef->setNearClipDistance(1);
