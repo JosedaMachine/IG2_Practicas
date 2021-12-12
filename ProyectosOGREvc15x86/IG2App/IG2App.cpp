@@ -99,7 +99,7 @@ void IG2App::setCamNLight() {
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
 	float color = 1.0f;
 	luz->setDiffuseColour(color, color, color);
-	luz->setDirection(Ogre::Vector3(0, -1, -1));
+	luz->setDirection(Ogre::Vector3(0, 0, -1));
 
 	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
@@ -167,10 +167,10 @@ void IG2App::scene1_2(){
 	Vector3 iniPos = { -385, 10, 250 }, finalPos = { 385, 10, -250 };
 
 	//! BOMBA
-	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "uv_sphere.mesh", "Practica2/Bomba");
 	//a->getMainNode()->setPosition(0, 3700, 0);
 	//Hay que hacer otro nodo fuera
-	b->getMainNode()->setScale(Vector3(10.0));
+	b->getMainNode()->setScale(Vector3(0.4));
 	addInputListener(b);
 	b->addListener(b);
 	entidades.push_back(b);
@@ -185,14 +185,36 @@ void IG2App::scene1_2(){
 	entidades.push_back(a);
 
 	//! AGUA
+
 	//Nueva camara para el reflejo
 	Camera* camRef = mSM->createCamera("RefCam");
 	camRef->setNearClipDistance(1);
 	camRef->setFarClipDistance(50000);
 	mCamNode->attachObject(camRef);
 
+	Camera* camMirror = mSM->createCamera("MirrorCam");
+	camRef->setNearClipDistance(1);
+	camRef->setFarClipDistance(50000);
+	mCamNode->attachObject(camMirror);
+
+	//Plano agua
 	Plano* p = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
 		"mPlane1080x800_2", { 1080 , 800 }, { 100, 80 });
+
+	Plano* espejo = new Plano(mSM->getRootSceneNode()->createChildSceneNode(),
+		"mPlane1080x800_Espejo",
+		{ 800 , 800 },
+		{mSM->getCamera("Cam")->getViewport()->getActualWidth(),
+		mSM->getCamera("Cam")->getViewport()->getActualHeight()});
+
+	espejo->setMaterial("Practica1/Brown");
+
+	espejo->getMainNode()->roll(Ogre::Degree(90));
+	espejo->getMainNode()->translate(Vector3(1080 / 2, 400, 0));
+
+	espejo->setEspejo(camMirror);
+	entidades.push_back(espejo);
+
 	p->setMaterial("Practica1/Jaja");
 	addInputListener(p);
 	p->setReflejo(camRef, 0.f);
@@ -234,7 +256,7 @@ void IG2App::scene1_2(){
 #pragma region PRACTICA1
 void IG2App::scene6_1() {
 	//! BOMBA
-	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode());
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "barrel", "Practica1/Wings");
 	//a->getMainNode()->setPosition(0, 3700, 0);
 	//Hay que hacer otro nodo fuera
 	b->getMainNode()->setScale(Vector3(10.0));

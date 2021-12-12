@@ -5,7 +5,7 @@
 class Bomba : public EntityIG {
 
 public:
-	Bomba(Ogre::SceneNode* _node);
+	Bomba(Ogre::SceneNode* _node, std::string mesh, std::string material);
 	virtual	~Bomba();
 
 private:

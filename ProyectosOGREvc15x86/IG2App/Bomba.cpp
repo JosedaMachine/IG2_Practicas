@@ -3,10 +3,9 @@
 #include <iostream>
 
 //TODO: El rio no se detiene 5s despues de darle a la T
-Bomba::Bomba(Ogre::SceneNode* _node) : EntityIG(_node) {
-	Ogre::Entity* bomba = mSM->createEntity("Barrel.mesh");
-	bomba->setMaterialName("Practica1/Wings");
-
+Bomba::Bomba(Ogre::SceneNode* _node, std::string mesh, std::string material) : EntityIG(_node) {
+	Ogre::Entity* bomba = mSM->createEntity(mesh);
+	bomba->setMaterialName(material);
 	animationNode = mNode->createChildSceneNode();
 	animationNode->attachObject(bomba);
 

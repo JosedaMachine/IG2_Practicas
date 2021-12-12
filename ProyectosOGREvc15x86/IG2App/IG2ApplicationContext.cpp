@@ -321,6 +321,7 @@ namespace OgreBites {
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
 							Ogre::FileSystemLayer::resolveBundlePath(mSolutionPath + "\\media"), 
 							"FileSystem", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+
 		}
 
 		Ogre::String sec, type, arch;

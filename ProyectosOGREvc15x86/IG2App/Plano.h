@@ -20,7 +20,11 @@ class Plano : public EntityIG, RenderTargetListener
 {
 	const float stopTime = 5000;
 public:
-	Plano(Ogre::SceneNode* mNode_, std::string const& name, std::pair<int, int > size, std::pair<int, int> cuts, Vector3 normal = Vector3::UNIT_Y);
+	Plano(Ogre::SceneNode* mNode_,
+		std::string const& name, 
+		std::pair<int, int > size,
+		std::pair<int, int > sizeVp = {0,0},
+		Vector3 normal = Vector3::UNIT_Y);
 	virtual ~Plano() {};
 
 	void setMaterial(std::string name) { plano->setMaterialName(name); }
@@ -36,6 +40,9 @@ private:
 
 	Ogre::Timer timer; 
 	std::pair<int, int> size_;
+	std::pair<int, int> sizeVp_;
+	//MovablePlanreReflejo, bastante poco intuitivo Joseda
 	MovablePlane* mpRef;
+	MovablePlane* movablePlaneMirror;
 };
 
