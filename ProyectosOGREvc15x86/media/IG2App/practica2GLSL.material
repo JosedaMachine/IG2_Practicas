@@ -137,7 +137,7 @@ fragment_program HolesFS glsl  {
     }
 }
 
-material Practica2/BombaHoles {  
+material Practica2/BombHoles {  
     technique {
         pass { 
             cull_software none
@@ -146,6 +146,54 @@ material Practica2/BombaHoles {
             
             } 
             fragment_program_ref HolesFS {              
+            }
+            texture_unit { //0
+                texture corrosion.jpg 2d 
+            }
+            texture_unit { // 1
+                texture BeachStones.jpg 2d
+            } 
+            texture_unit { // 2
+                texture BumpyMetal.jpg 2d
+            }
+        }  
+    }  
+}
+//_______________________________HOLES ILUMINATED____________________________________________
+vertex_program HolesAndLightingVS glsl  {
+    source HolesAndLightingVS.glsl 
+    default_params {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+        //coordenadas mundiales
+        param_named_auto normalMat inverse_transpose_world_matrix 
+    }
+}
+
+fragment_program HolesAndLightingFS glsl  {
+    source HolesAndLightingFS.glsl 
+    default_params {
+        param_named texturaCorrosion int 0
+        param_named texturaRiverBack int 1
+        param_named texturaMetalFront int 2
+
+        param_named colorBack float3 0.0 0.6 0.83
+        param_named colorFront float3 0.72 0.57 0.35
+
+        // el auto es para parametros que van cambiando a la largo de la ejecucion 
+        param_named_auto lightPos light_position 0 
+        param_named_auto intLuz light_diffuse_colour 0
+    }
+}
+
+material Practica2/BombHolesLight {  
+    technique {
+        pass { 
+            cull_software none
+            cull_hardware none
+            vertex_program_ref HolesAndLightingVS {  //Reutilizamos el de la bomba
+            
+            } 
+            fragment_program_ref HolesAndLightingFS {              
             }
             texture_unit { //0
                 texture corrosion.jpg 2d 

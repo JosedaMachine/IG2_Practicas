@@ -97,7 +97,7 @@ void IG2App::setCamNLight() {
 
 	Light* luz = mSM->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	float color = 1.0f;
+	float color = 1.0f; //LUZ BLANCA
 	luz->setDiffuseColour(color, color, color);
 	luz->setDirection(Ogre::Vector3(0, 0, -1));
 
@@ -167,7 +167,7 @@ void IG2App::scene1_2(){
 	Vector3 iniPos = { -385, 10, 250 }, finalPos = { 385, 10, -250 };
 
 	//! BOMBA
-	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "uv_sphere.mesh", "Practica2/BombaHoles");
+	Bomba* b = new Bomba(mSM->getRootSceneNode()->createChildSceneNode(), "uv_sphere.mesh", "Practica2/BombHolesLight");
 	//a->getMainNode()->setPosition(0, 3700, 0);
 	//Hay que hacer otro nodo fuera
 	b->getMainNode()->setScale(Vector3(0.4));
