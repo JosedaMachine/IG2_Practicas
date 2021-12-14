@@ -9,8 +9,8 @@ Bomba::Bomba(Ogre::SceneNode* _node, std::string mesh, std::string material) : E
 	animationNode = mNode->createChildSceneNode();
 	animationNode->attachObject(bomba);
 
-	float duracion = 2.f;
-	float longDesplazamiento = 20.f;
+	float duracion = 4.f;
+	float longDesplazamiento = 200.f;
 
 	//TODO Animation
 	Ogre::Animation* animation = mSM->createAnimation("animVV", duracion);

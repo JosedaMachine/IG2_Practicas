@@ -191,6 +191,7 @@ void IG2App::scene1_2(){
 	camRef->setFarClipDistance(50000);
 	mCamNode->attachObject(camRef);
 
+	//! Espejo Para que se vea linea 215
 	Camera* camMirror = mSM->createCamera("MirrorCam");
 	camRef->setNearClipDistance(1);
 	camRef->setFarClipDistance(50000);
@@ -211,7 +212,7 @@ void IG2App::scene1_2(){
 	espejo->getMainNode()->roll(Ogre::Degree(90));
 	espejo->getMainNode()->translate(Vector3(1080 / 2, 400, 0));
 
-	espejo->setEspejo(camMirror);
+	//espejo->setEspejo(camMirror);
 	entidades.push_back(espejo);
 
 	p->setMaterial("Practica1/Jaja");
@@ -240,7 +241,7 @@ void IG2App::scene1_2(){
 	sinBad->setRoute(posOgreIni, posOgreFin);
 
 	//! ESFERA
-	HappyCursedSatanicFace* hp = new HappyCursedSatanicFace(mSM->getRootSceneNode()->createChildSceneNode(), { 385, 0, -250 });
+	HappyCursedSatanicFace* hp = new HappyCursedSatanicFace(mSM->getRootSceneNode()->createChildSceneNode(), { 385, 30, -250 });
 	hp->addListener(hp);
 	entidades.push_back(hp);
 }
