@@ -12,11 +12,12 @@
 #include <OgreMovablePlane.h>
 #include <OgreSubEntity.h>
 #include <OgreTechnique.h>
+#include <OgreViewport.h>
 #include <OgreRenderTargetListener.h>
 #pragma once
 using namespace Ogre;
 
-class Plano : public EntityIG, RenderTargetListener
+class Plano : public EntityIG, RenderTargetListener, Viewport::Listener
 {
 	const float stopTime = 5000;
 public:
@@ -33,6 +34,11 @@ public:
 
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt) override;
 	virtual void frameRendered(Ogre::FrameEvent const& evt);
+
+	virtual void preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
+
+	virtual void postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
+
 private:
 	Entity* plano;
 	Vector3 normal;

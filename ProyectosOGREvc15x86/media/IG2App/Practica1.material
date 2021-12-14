@@ -113,6 +113,23 @@ material Practica1/happyCursed
     }
 }
 
+material Practica1/happyCursed_Inv
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1 1 1
+
+            texture_unit
+            {
+                texture  spotlight_imageReflex.png
+                env_map spherical
+            }
+        }
+    }
+}
+
 material Practica1/armDron
 {
     technique
@@ -141,6 +158,12 @@ material Practica1/Jaja
             {
                 texture  Water02.jpg
                 scroll_anim -0.1 0.0
+            }
+
+            texture_unit
+            {
+                texture  BeachStones.jpg
+                color_op modulate
             }
         }
     }

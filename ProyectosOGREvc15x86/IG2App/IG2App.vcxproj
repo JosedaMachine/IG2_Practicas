@@ -129,6 +129,7 @@
     <ClInclude Include="Enjambre.h" />
     <ClInclude Include="EntityIG.h" />
     <ClInclude Include="Fog.h" />
+    <ClInclude Include="HappyCursedSatanicFace.h" />
     <ClInclude Include="IG2ApplicationContext.h" />
     <ClInclude Include="IG2App.h" />
     <ClInclude Include="Messages.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Enjambre.cpp" />
     <ClCompile Include="EntityIG.cpp" />
     <ClCompile Include="Fog.cpp" />
+    <ClCompile Include="HappyCursedSatanicFace.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />
     <ClCompile Include="IG2Main.cpp" />
     <ClCompile Include="IG2App.cpp" />

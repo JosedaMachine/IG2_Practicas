@@ -72,6 +72,9 @@
     <ClInclude Include="Fog.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="HappyCursedSatanicFace.h">
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IG2ApplicationContext.cpp">
@@ -120,6 +123,9 @@
       <Filter>Archivos de código fuente\Entidades</Filter>
     </ClCompile>
     <ClCompile Include="Fog.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="HappyCursedSatanicFace.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

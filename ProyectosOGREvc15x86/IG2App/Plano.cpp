@@ -48,7 +48,7 @@ void Plano::setEspejo(Camera* cam){
 		getTechniques()[0]->getPasses()[0]->createTextureUnitState("rttEspejo");
 	// LBO_ADD / LBO_ALPHA_BLEND / LBO_REPLACE
 	tu->setColourOperation(LBO_REPLACE); // black background
-	tu->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
+	tu->setTextureAddressingMode(TextureUnitState::TAM_WRAP); //SOLUCIONAR EL PROBLEMA DEL ESPEJO
 
 	tu->setProjectiveTexturing(true, cam);
 
@@ -84,8 +84,7 @@ void Plano::setReflejo(Camera* camRef, Ogre::Real distance){
 	renderTexture->addListener(this);
 }
 
-bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
-{
+bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_t && !dry) {
 		dry = true;
 		timer.reset();
@@ -94,8 +93,15 @@ bool Plano::keyPressed(const OgreBites::KeyboardEvent& evt)
 	return false;
 }
 
-void Plano::frameRendered(Ogre::FrameEvent const& evt)
-{
+void Plano::frameRendered(Ogre::FrameEvent const& evt) {
 	if (dry && timer.getMilliseconds() >= stopTime)
 		plano->setMaterialName("Practica1/LaPiedraJhonson");
+}
+
+void Plano::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
+	sendEvent(Message(Messages::HappyInvBeing));
+}
+
+void Plano::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
+	sendEvent(Message(Messages::HappyInvFinal));
 }

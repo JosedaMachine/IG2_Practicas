@@ -240,14 +240,9 @@ void IG2App::scene1_2(){
 	sinBad->setRoute(posOgreIni, posOgreFin);
 
 	//! ESFERA
-	Ogre::Entity* sphere = mSM->createEntity("sphere.mesh");
-	sphere->setMaterialName("Practica1/happyCursed");
-	Ogre::SceneNode* happyCursed_ = mSM->getRootSceneNode()->createChildSceneNode("Planeta");
-	happyCursed_->attachObject(sphere);
-	Vector3 pos = finalPos;
-	pos.y = 50;
-	happyCursed_->translate(pos);
-	happyCursed_->setScale(Vector3(0.3f));
+	HappyCursedSatanicFace* hp = new HappyCursedSatanicFace(mSM->getRootSceneNode()->createChildSceneNode(), { 385, 0, -250 });
+	hp->addListener(hp);
+	entidades.push_back(hp);
 }
 #pragma endregion
 
